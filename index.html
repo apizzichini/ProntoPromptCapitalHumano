@@ -34,6 +34,26 @@
 
             <div class="sparkle-container" id="sparkle-suggestion"></div>
 
+            <div id="preview-container" class="preview-card">
+                <span class="preview-label">Vista Previa del Objetivo:</span>
+                <p id="objective-preview">Completa los campos para previsualizar el objetivo...</p>
+                <div class="preview-actions">
+                    <button id="view-malla-btn" class="magic-btn secondary-magic"><i class="fas fa-sitemap"></i> Ver Estructura del Curso (Malla)</button>
+                </div>
+            </div>
+
+            <!-- Modal para Malla Curricular -->
+            <div id="malla-modal" class="malla-modal hidden">
+                <div class="malla-content">
+                    <div class="malla-header">
+                        <h3><i class="fas fa-project-diagram"></i> Mapa Mental del Curso</h3>
+                        <button id="close-malla" class="close-btn">&times;</button>
+                    </div>
+                    <div id="malla-tree" class="malla-tree"></div>
+                    <p class="malla-footer">Esta estructura se incluirá automáticamente en tu prompt para guiar a la IA.</p>
+                </div>
+            </div>
+
             <!-- Sección 1: Identidad -->
             <div class="form-card">
                 <h3 class="section-title"><i class="fas fa-id-card"></i> 1. Identidad del Proyecto</h3>
@@ -45,6 +65,7 @@
                                 un ejemplo</button>
                         </div>
                         <input type="text" id="course-name" placeholder="Ej: Introducción a la IA Generativa" required>
+                        <div id="compliance-alert" class="compliance-alert hidden"></div>
                     </div>
                     <div class="input-group">
                         <label for="audience">Público Objetivo</label>
@@ -58,6 +79,7 @@
                             <option value="jóvenes en búsqueda laboral">Jóvenes en búsqueda laboral</option>
                             <option value="emprendedores locales">Emprendedores locales</option>
                             <option value="adultos mayores">Adultos mayores</option>
+                            <option value="ATP (Apto para Todo Público)">ATP (Apto para Todo Público)</option>
                         </select>
                     </div>
                 </div>
@@ -71,11 +93,10 @@
                         <label for="eje-base">Eje Base Institucional</label>
                         <select id="eje-base" required>
                             <option value="">Selecciona un eje base...</option>
-                            <option value="primera-infancia">Primera infancia</option>
-                            <option value="ninez-adolescencia">Niñez, adolescencia y juventud</option>
-                            <option value="promocion-humana">Promoción humana</option>
-                            <option value="adultos-mayores">Adultos mayores</option>
-                            <option value="alimentacion-nutricion">Alimentación y nutrición</option>
+                            <option value="promocion-humana">Desarrollo Personal / Promoción humana</option>
+                            <option value="comercializacion">Comercialización / Habilidades emprendedoras</option>
+                            <option value="habilidades-digitales">Habilidades digitales</option>
+                            <option value="ia">Inteligencia Artificial (IA)</option>
                         </select>
                     </div>
 
@@ -91,7 +112,6 @@
                         <div id="keyword-container" class="keyword-container">
                             <span class="keyword-tag" data-value="Innovador">Innovador</span>
                             <span class="keyword-tag" data-value="Práctico">Práctico</span>
-                            <span class="keyword-tag" data-value="Inclusivo">Inclusivo</span>
                             <span class="keyword-tag" data-value="Dinámico">Dinámico</span>
                             <span class="keyword-tag" data-value="Certificable">Certificable</span>
                             <span class="keyword-tag" data-value="Sostenible">Sostenible</span>
@@ -144,8 +164,26 @@
                             <label for="tone-technical">Técnico</label>
                             <input type="radio" id="tone-motivational" name="tone" value="claro, motivador y cercano">
                             <label for="tone-motivational">Motivacional</label>
-                            <input type="radio" id="tone-agile" name="tone" value="ágil y práctico">
-                            <label for="tone-agile">Ágil</label>
+                            <input type="radio" id="tone-agile" name="tone" value="accesible y dinámico">
+                            <label for="tone-agile">Accesible y Dinámico</label>
+                        </div>
+                    </div>
+
+                    <div class="input-group full-width">
+                        <label>Niveles del Curso (Puedes elegir varios)</label>
+                        <div class="level-selector">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="level-basic" name="level" value="Básico">
+                                <label for="level-basic">Básico</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="level-intermediate" name="level" value="Intermedio">
+                                <label for="level-intermediate">Intermedio</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="level-advanced" name="level" value="Avanzado">
+                                <label for="level-advanced">Avanzado</label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -251,9 +289,8 @@
                     <p>Abrir y Pegar en:</p>
                     <div class="links-grid">
                         <a href="https://chat.openai.com" target="_blank" class="ai-link-btn gpt">ChatGPT</a>
-                        <a href="https://gemini.google.com" target="_blank" class="ai-link-btn gemini">Gemini</a>
-                        <a href="https://mistral.ai" target="_blank" class="ai-link-btn mistral">Mistral</a>
-                        <a href="https://claude.ai" target="_blank" class="ai-link-btn claude">Claude</a>
+                        <a href="https://gemini.google.com" target="_blank" id="copy-gemini-btn"
+                            class="ai-link-btn gemini">Gemini</a>
                         <a href="https://www.perplexity.ai" target="_blank"
                             class="ai-link-btn perplexity">Perplexity</a>
                     </div>
