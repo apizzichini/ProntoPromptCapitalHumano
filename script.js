@@ -32,32 +32,114 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Categorization Data - EXTENDED INSTITUTIONAL MAPPING
     const thematicAreas = {
-        'promocion-humana': ['Habilidades para aprender', 'Alfabetización digital', 'Inteligencia artificial', 'Habilidades digitales + Inteligencia artificial', 'Inclusión laboral', 'Género y diversidad', 'Discapacidad e inclusión', 'Salud y bienestar'],
-        'comercializacion': ['Habilidades para emprender', 'Marketing digital', 'Costos y precios', 'Propuesta de valor', 'E-commerce', 'Ventas y atención al cliente'],
-        'habilidades-digitales': ['Alfabetización digital', 'Herramientas de oficina (Office)', 'Ciudadanía virtual', 'Navegación segura', 'Gestión de archivos'],
-        'ia': ['Inteligencia artificial básica', 'Prompt engineering', 'IA para el empleo', 'Ética y herramientas de IA', 'Automatización de tareas']
+        'promocion-humana': ['Desarrollo Personal', 'Habilidades Digitales + IA', 'Nuevos Aprendizajes', 'Habilidades para Emprender'],
+        'primera-infancia': ['Etapas del Desarrollo', 'Cuidados', 'Habilidades Digitales + IA', 'Nuevos Aprendizajes'],
+        'adolescencia-juventud': ['Etapas del Desarrollo', 'Cuidados', 'Habilidades Digitales + IA', 'Nuevos Aprendizajes', 'Habilidades para Emprender'],
+        'adultos-mayores': ['Desarrollo Personal', 'Cuidados', 'Habilidades Digitales + IA', 'Nuevos Aprendizajes', 'Habilidades para Emprender']
     };
 
     const keywordsByArea = {
-        'transversal': ['Innovador', 'Práctico', 'Dinámico', 'Certificable', 'Sostenible', 'Orientado al Empleo', 'Basado en Proyectos', 'Empoderador', 'Accesible'],
-        'Inclusión laboral': ['Búsqueda de empleo', 'CV y entrevista', 'Soft skills', 'Derechos laborales'],
-        'Marketing digital': ['Redes sociales', 'Ads', 'Contenido creativo', 'SEO'],
-        'Prompt engineering': ['Instrucciones claras', 'Iteración', 'Modelos LLM', 'Contexto'],
-        'Alfabetización digital': ['Uso de mouse/teclado', 'Internet básico', 'Correo electrónico'],
-        'IA para el empleo': ['Productividad', 'Automatización', 'Nuevos perfiles'],
-        'Habilidades para emprender': ['Modelo de negocios', 'Marketing digital', 'Costos y precios', 'Propuesta de valor'],
-        'Habilidades para aprender': ['Técnicas de estudio', 'Aprendizaje autónomo', 'Gestión del tiempo', 'Metacognición'],
-        'Inteligencia artificial': ['Modelos LLM', 'Automatización', 'Productividad', 'Ética y sesgos'],
-        'Habilidades digitales + Inteligencia artificial': ['Integración tecnológica', 'Productividad con IA', 'Ética digital', 'Herramientas híbridas']
+        'transversal': ['Innovador', 'Práctico', 'Dinámico', 'Certificable', 'Sostenido', 'Accesible', 'Participativo', 'Territorial', 'Comunitario'],
+        'Desarrollo Personal': ['Autonomía', 'Bienestar emocional', 'Identidad', 'Autogestión', 'Habilidades blandas'],
+        'Habilidades Digitales + IA': ['Alfabetización digital', 'Herramientas IA', 'Productividad', 'Ciudadanía digital', 'Prompt engineering'],
+        'Nuevos Aprendizajes': ['Aprendizaje activo', 'Metacognición', 'Adaptabilidad', 'Curiosidad', 'Aprendizaje autónomo'],
+        'Habilidades para Emprender': ['Emprendimiento social', 'Autogestión económica', 'Modelo de negocios', 'Marketing digital'],
+        'Etapas del Desarrollo': ['Desarrollo integral', 'Vínculo afectivo', 'Crianza positiva', 'Enfoque de derechos', 'Acompañamiento familiar'],
+        'Cuidados': ['Cuidado comunitario', 'Redes de apoyo', 'Crianza saludable', 'Corresponsabilidad', 'Salud y bienestar']
     };
 
     const forbiddenTerms = {
-        'justicia social': 'Formación ciudadana / Desarrollo profesional',
-        'juventudes': 'Población joven / Beneficiarios',
-        'lenguaje inclusivo': 'Comunicación accesible / Lenguaje neutro',
-        'educación popular': 'Capacitación comunitaria / Educación no formal',
-        'educación comunitaria': 'Fortalecimiento territorial / Capacitación local',
-        'economía popular': 'Desarrollo socio-productivo / Economía social'
+        'justicia social': 'Derechos y Ciudadanía / Equidad Institucional',
+        'juventudes': 'Población Joven / Sector Joven',
+        'lenguaje inclusivo': 'Comunicación Accesible / Lenguaje Neutro',
+        'educación popular': 'Capacitación Comunitaria / Educación No Formal',
+        'educación comunitaria': 'Fortalecimiento Territorial / Capacitación Local',
+        'economía popular': 'Desarrollo Socio-productivo / Economía Social',
+        'economía social': 'Desarrollo Socio-productivo / Economía Colaborativa',
+        'economía solidaria': 'Desarrollo Socio-productivo / Economía Colaborativa',
+        'militancia': 'Compromiso cívico / Participación comunitaria',
+        'empoderamiento': 'Fortalecimiento de capacidades / Autonomía',
+        'vulnerables': 'Población bajo protección / Grupos de atención prioritaria',
+        'chicos': 'Participantes / Niños y niñas',
+        'abuelos': 'Personas mayores / Adultos mayores',
+        'discapacitados': 'Personas con discapacidad',
+        'pobres': 'Población en situación de vulnerabilidad',
+        'política': 'Gestión institucional / Desarrollo cívico',
+        'solidaridad': 'Cooperación comunitaria / Apoyo mutuo',
+        'explotación': 'Vulneración de derechos / Informalidad laboral',
+        'clase obrera': 'Sector trabajador / Fuerza laboral',
+        'pueblo': 'Ciudadanía / Comunidad / Territorio',
+        'trabajadores': 'Personal / Equipo / Fuerza de trabajo',
+        'despido': 'Desvinculación / Cese laboral',
+        'huelga': 'Conflicto gremial / Medida lícita de acción directa',
+        'pobreza estructural': 'Situación de alta vulnerabilidad social',
+        'redistribución de la riqueza': 'Equidad en la asignación de recursos',
+        'nacionalización': 'Gestión pública / Administración estatal',
+        'estatización': 'Gestión pública / Administración estatal',
+        'sindicato': 'Asociación gremial / Representación de trabajadores',
+        'lucha gremial': 'Gestión colectiva / Negociación sectorial',
+        'subsidio': 'Asistencia técnica / Apoyo económico directo',
+        'proteccionismo': 'Fortalecimiento de la industria local / Fomento interno',
+        'soberanía económica': 'Autonomía productiva / Independencia financiera',
+        'imperialismo': 'Influencia hegemónica externa / Intervención extranjera',
+        'lucha de clases': 'Tensiones sectoriales / Conflictivity social',
+        'reforma agraria': 'Reordenamiento territorial rural / Desarrollo agrícola',
+        'bien común': 'Interés general / Bienestar colectivo',
+        'derechos laborales': 'Marco normativo del trabajo / Marco legal laboral',
+        'obrero': 'Trabajador / Personal operativo',
+        'patrón': 'Empleador / Parte empleadora',
+        'reivindicación histórica': 'Reconocimiento institucional / Reparación simbólica',
+        'conciencia de clase': 'Identidad sectorial / Sentido de pertenencia',
+        'propiedad colectiva': 'Gestión comunitaria / Propiedad social'
+    };
+
+    const modelGuidelines = {
+        'gemini': `[OPTIMIZACIÓN GEMINI]: Aprovecha la amplia ventana de contexto. Genera respuestas estructuradas y detalladas. Prioriza la claridad conceptual y la integración de todos los componentes de la SD.`,
+        'chatgpt': `[OPTIMIZACIÓN GPT-4]: Utiliza un razonamiento paso a paso (Chain of Thought). Estructura la salida con Markdown riguroso. Asegura que cada sección cumpla con los límites de palabras establecidos.`,
+        'perplexity': `[OPTIMIZACIÓN PERPLEXITY]: Prioriza la investigación en tiempo real y la citación de fuentes actualizadas. Busca datos estadísticos y referencias bibliográficas recientes en la web para enriquecer el contenido.`
+    };
+
+    const expertLayers = {
+        'standard': `[MODO: PROFESOR SENIOR]: Actúa como un experto docente con años de experiencia en la temática. Tu enfoque es la claridad pedagógica y la estructura lógica.`,
+        'pedagogical': `[MODO: COMITÉ PEDAGÓGICO]: Simula un diálogo interno entre:
+1. UN PEDAGOGO: Enfocado en la transposición didáctica.
+2. UN ARQUITECTO DE CONTENIDOS: Enfocado en la jerarquía y el ritmo.
+El resultado final debe ser el consenso de ambos expertos para maximizar el aprendizaje.`,
+        'full': `[MODO: DEEP-AGENTIC ADVISORY]: Simula un comité de alto nivel compuesto por:
+1. EXPERTO PEDAGÓGICO: Valida la didáctica.
+2. DISEÑADOR UX EDUCATIVO: Asegura la navegación y el engagement.
+3. CORRECTOR DE ESTILO INSTITUCIONAL: Garantiza que el tono sea impecable.
+INSTRUCCIÓN CRÍTICA: Cada sección de la respuesta debe ser revisada por los tres agentes bajo un "Marco de Crítica Interna" antes de mostrarse al usuario.`,
+        'director': `[MODO: COMITÉ DIRECTIVO]: Actúa como una mesa de Directores Estratégicos. Tu enfoque es la Visión Institucional y el Impacto Social. Asegura que el curso no solo enseñe, sino que transforme la realidad del participante alineado al Plan 2026.`,
+        'coordination': `[MODO: MESA DE COORDINACIÓN]: Simula la articulación entre Coordinadores de área. Tu enfoque es la factibilidad operativa, la estandarización institucional y la coherencia entre todos los bloques de la SD.`,
+        'agentes': `[MODO: AGENTES DE CAMBIO]: Actúa como un colectivo de Agentes de Innovación. Tu enfoque es la mentalidad de crecimiento, la disrupción creativa y el empoderamiento del capital humano a través de herramientas modernas.`
+    };
+
+    const oerResources = {
+        'Desarrollo Personal': [
+            { title: 'Habilidades para la Vida (UNESCO)', url: 'https://unesdoc.unesco.org/', source: 'UNESCO' },
+            { title: 'Recursos de Bienestar Emocional', url: '#', source: 'Educ.ar' }
+        ],
+        'Habilidades Digitales + IA': [
+            { title: 'Marco de Competencias IA (UNESCO)', url: 'https://unesdoc.unesco.org/ark:/48223/pf0000385202', source: 'UNESCO' },
+            { title: 'Guía de IA para Docentes', url: '#', source: 'Portal Educativo' }
+        ],
+        'Nuevos Aprendizajes': [
+            { title: 'Metodologías Activas OER', url: '#', source: 'OER Commons' },
+            { title: 'Aprendizaje Basado en Proyectos', url: '#', source: 'Eduteka' }
+        ],
+        'Habilidades para Emprender': [
+            { title: 'Guía de Emprendimiento Social', url: '#', source: 'Ashoka' },
+            { title: 'Recursos para Microemprendedores', url: '#', source: 'Economía Social' }
+        ],
+        'Etapas del Desarrollo': [
+            { title: 'Guía de Desarrollo Infantil Temprano', url: '#', source: 'UNICEF' },
+            { title: 'Recursos de Crianza Positiva', url: '#', source: 'Red Primeros Años' }
+        ],
+        'Cuidados': [
+            { title: 'Manual de Cuidados Comunitarios', url: '#', source: 'Desarrollo Social' },
+            { title: 'Redes de Apoyo Local', url: '#', source: 'Territorio' }
+        ]
     };
 
     const ejeBaseSelect = document.getElementById('eje-base');
@@ -77,10 +159,37 @@ document.addEventListener('DOMContentLoaded', () => {
             span.textContent = kw;
             span.addEventListener('click', () => {
                 span.classList.toggle('active');
+                updateHealthScore(); // Update health on keyword change
             });
             keywordContainer.appendChild(span);
         });
+
+        // Update OER Suggestions
+        updateOERSuggestions(area);
     };
+
+    const oerContainer = document.getElementById('oer-container');
+    const oerList = document.getElementById('oer-list');
+    const oerBadge = document.getElementById('oer-badge');
+
+    function updateOERSuggestions(area) {
+        const resources = oerResources[area] || [];
+        
+        if (resources.length > 0) {
+            oerContainer.classList.remove('hidden');
+            oerBadge.classList.remove('hidden');
+            
+            oerList.innerHTML = resources.map(res => `
+                <a href="${res.url}" target="_blank" class="oer-item">
+                    <span class="oer-item-title">${res.title}</span>
+                    <span class="oer-item-source"><i class="fas fa-external-link-alt"></i> ${res.source}</span>
+                </a>
+            `).join('');
+        } else {
+            oerContainer.classList.add('hidden');
+            oerBadge.classList.add('hidden');
+        }
+    }
 
     // Hierarchical Dropdown Logic
     ejeBaseSelect.addEventListener('change', () => {
@@ -159,41 +268,77 @@ document.addEventListener('DOMContentLoaded', () => {
         
         for (const [term, suggestion] of Object.entries(forbiddenTerms)) {
             if (val.includes(term)) {
-                complianceAlert.innerHTML = `<i class="fas fa-exclamation-triangle"></i> <strong>Pauta Institucional:</strong> Se sugiere evitar "${term}". <br><span>💡 Probá con: ${suggestion}</span>`;
-                complianceAlert.classList.remove('hidden');
+                complianceAlert.innerHTML = `<i class="fas fa-exclamation-triangle"></i> <strong>Pauta Institucional:</strong> Se sugiere evitar "${term}". <br><span>💡 Sugerencia: ${suggestion}</span>`;
                 found = true;
                 break;
             }
         }
         
-        if (!found) {
+        if (found) {
+            complianceAlert.innerHTML += `<br><button id="open-glossary" class="glossary-link-btn">Ver Pauta Institucional Completa</button>`;
+            // Add listener after small delay to ensure DOM is ready
+            setTimeout(() => {
+                const btn = document.getElementById('open-glossary');
+                if (btn) btn.addEventListener('click', openGlossary);
+            }, 0);
+            complianceAlert.classList.remove('hidden');
+        } else {
             complianceAlert.classList.add('hidden');
         }
     }
+
+    // Glossary Modal Logic
+    const glossaryModal = document.getElementById('glossary-modal');
+    const closeGlossary = document.getElementById('close-glossary');
+    const glossaryContent = document.getElementById('glossary-list');
+
+    function openGlossary() {
+        populateGlossary();
+        glossaryModal.classList.remove('hidden');
+    }
+
+    function populateGlossary() {
+        let html = '<div class="glossary-grid">';
+        html += '<div class="glossary-header-row"><span>Término a evitar</span><span>Sugerencia Institucional</span></div>';
+        for (const [term, suggestion] of Object.entries(forbiddenTerms)) {
+            html += `<div class="glossary-row">
+                <span class="bad-term">${term}</span>
+                <span class="good-term"><i class="fas fa-arrow-right"></i> ${suggestion}</span>
+            </div>`;
+        }
+        html += '</div>';
+        glossaryContent.innerHTML = html;
+    }
+
+    closeGlossary.addEventListener('click', () => glossaryModal.classList.add('hidden'));
+    
+    window.addEventListener('click', (e) => {
+        if (e.target === glossaryModal) glossaryModal.classList.add('hidden');
+    });
 
     // Magic Fill Functionality
     const examples = [
         {
             name: "Introducción a la Inteligencia Artificial",
             audience: "estudiantes",
-            eje: "ia",
-            area: "Prompt engineering",
+            eje: "promocion-humana",
+            area: "Habilidades Digitales + IA",
             block: "estructura-completa",
-            levels: ["Básico", "Intermedio"],
+            level: "Intermedio",
             pedagogy: "práctico y basado en talleres",
             tone: "claro, motivador y cercano",
-            keywords: ["Prompt engineering", "Certificable", "Innovador"]
+            keywords: ["Certificable", "Innovador", "Dinámico"]
         },
         {
-            name: "Habilidades Digitales para el Empleo (ATP)",
-            audience: "ATP (Apto para Todo Público)",
-            eje: "habilidades-digitales",
-            area: "Alfabetización digital",
+            name: "Habilidades para el Empleo",
+            audience: "beneficiarios de programas sociales",
+            eje: "adultos-mayores",
+            area: "Habilidades para Emprender",
             block: "bloque-1",
-            levels: ["Básico"],
+            level: "Básico",
             pedagogy: "vivencial y reflexivo",
             tone: "accesible y dinámico",
-            keywords: ["Alfabetización digital", "Orientado al Empleo", "Accesible"]
+            keywords: ["Accesible", "Comunitario", "Práctico"]
         }
     ];
 
@@ -215,10 +360,9 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('pedagogy').value = ex.pedagogy;
             document.querySelector(`input[name="tone"][value="${ex.tone}"]`).checked = true;
 
-            // Levels
-            document.querySelectorAll('input[name="level"]').forEach(cb => {
-                cb.checked = ex.levels.includes(cb.value);
-            });
+            // Level (now radio button, single value)
+            const levelRadio = document.querySelector(`input[name="level"][value="${ex.level}"]`);
+            if (levelRadio) levelRadio.checked = true;
 
             // Keywords
             setTimeout(() => {
@@ -330,7 +474,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateHealthScore() {
-        const courseNameValue = courseNameInput.value.trim();
+        const courseNameValue = document.getElementById('course-name').value.trim();
         const audienceEl = document.getElementById('audience');
         const audienceVal = audienceEl.value;
         const ejeVal = ejeBaseSelect.value;
@@ -417,12 +561,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        updateLivePreview();
+        updateObjectivePreview();
     }
 
     initRadar();
     updateHealthScore();
-    updateLivePreview();
 
     // Wire up listeners
     document.getElementById('audience').addEventListener('change', updateHealthScore);
@@ -434,38 +577,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     document.getElementById('keyword-container').addEventListener('click', () => setTimeout(updateHealthScore, 50));
 
-    function updateLivePreview() {
-        const courseName = document.getElementById('course-name').value.trim() || '[Nombre del Curso]';
-        const block = document.getElementById('block').value;
-        const objectiveEl = document.getElementById('objective-preview');
-        
-        const activeLevels = Array.from(document.querySelectorAll('input[name="level"]:checked')).map(cb => cb.value);
-        const levelTag = activeLevels.length > 0 ? ` [Nivel: ${activeLevels.join(' + ')}]` : '';
-
-        let previewText = '';
-        switch (block) {
-            case 'presentacion':
-                previewText = `Generar la "Presentación y Guía SD"${levelTag} para el curso "${courseName}".`;
-                break;
-            case 'bloque-1':
-                const isIntermediate = activeLevels.includes('Intermedio');
-                previewText = isIntermediate 
-                    ? `Desarrollar el "Bloque I: Contenidos" (3 módulos PDF)${levelTag} para el curso "${courseName}".`
-                    : `Desarrollar el "Bloque I: Contenidos" (2 módulos PDF - 2500 pal/mód)${levelTag} para el curso "${courseName}".`;
-                break;
-            case 'bloque-2':
-                previewText = `Crear el "Bloque II: Módulo Audiovisual"${levelTag} para el curso "${courseName}".`;
-                break;
-            case 'evaluacion':
-                previewText = `Generar la "Evaluación Integradora"${levelTag} para el curso "${courseName}".`;
-                break;
-            default:
-                previewText = `Generar la Estructura Completa de Secuencia Didáctica (SD)${levelTag} para el curso "${courseName}".`;
-        }
-        objectiveEl.textContent = previewText;
-    }
 
     // ===== END SALUD DEL PROMPT =====
+
+    // Multi-Agent Selection Limit
+    const expertCheckboxes = document.querySelectorAll('input[name="expert-layer"]');
+    const expertWarning = document.getElementById('expert-limit-warning');
+    
+    expertCheckboxes.forEach(cb => {
+        cb.addEventListener('change', () => {
+            const checkedCount = document.querySelectorAll('input[name="expert-layer"]:checked').length;
+            
+            if (checkedCount > 3) {
+                cb.checked = false; // Prevent selection
+                expertWarning.classList.remove('hidden');
+                expertWarning.classList.add('visible');
+                
+                // Hide warning after 3 seconds
+                setTimeout(() => {
+                    expertWarning.classList.remove('visible');
+                    setTimeout(() => expertWarning.classList.add('hidden'), 300);
+                }, 3000);
+            } else {
+                expertWarning.classList.remove('visible');
+                setTimeout(() => expertWarning.classList.add('hidden'), 300);
+            }
+        });
+    });
 
     const copyGeminiBtn = document.getElementById('copy-gemini-btn');
 
@@ -480,74 +618,329 @@ document.addEventListener('DOMContentLoaded', () => {
         const toneElement = document.querySelector('input[name="tone"]:checked');
         const tone = toneElement ? toneElement.value : 'profesional';
 
-        const activeKeywords = Array.from(document.querySelectorAll('.keyword-tag.active')).map(tag => tag.getAttribute('data-value'));
-        const activeLevels = Array.from(document.querySelectorAll('input[name="level"]:checked')).map(cb => cb.value);
+        const activeLevel = document.querySelector('input[name="level"]:checked')?.value || 'Básico';
+        
+        // AI Model Optimization
+        const selectedModel = document.querySelector('input[name="ai-model"]:checked')?.value || 'gemini';
+        const modelGuideline = modelGuidelines[selectedModel] || '';
 
-        if (!courseName || !audience || ejeBase === 'Selecciona un eje base...' || !areaTematica) {
-            alert('Por favor, completa los campos obligatorios: Nombre, Público, Eje y Área.');
-            return;
+        // Multi-Agent expert layer (up to 3)
+        const selectedExperts = Array.from(document.querySelectorAll('input[name="expert-layer"]:checked')).map(cb => cb.value);
+        let expertLayer = '';
+        if (selectedExperts.length === 0) {
+            expertLayer = expertLayers['standard']; // Fallback
+        } else {
+            const combinedInstructions = selectedExperts.map(val => expertLayers[val]).join('\n\n');
+            expertLayer = `[COMITÉ MULTI-AGENTE APLICADO]\nEl siguiente contenido debe ser generado simulando un consenso entre los siguientes roles expertos:\n\n${combinedInstructions}\n\nINSTRUCCIÓN CRÍTICA: Cada sección de tu respuesta debe reflejar la integración de estas perspectivas antes de ser presentada.`;
         }
 
-        const isIntermediate = activeLevels.includes('Intermedio');
+        const isIntermediate = activeLevel === 'Intermedio';
+        const isAdvanced = activeLevel === 'Avanzado';
 
         let objectiveText = '';
         let stepText = '';
         let knowledgeBaseAddons = '';
         let executionMandates = '';
 
-        if (isIntermediate) {
-            // INTERMEDIATE LEVEL STRUCTURE
+        if (isAdvanced) {
+            // ADVANCED LEVEL STRUCTURE - Lineamientos Institucionales Oficiales
+            switch (block) {
+                case 'presentacion':
+                    objectiveText = `Generar la "Presentación y Guía SD" (NIVEL AVANZADO) para el curso "${courseName}".`;
+                    stepText = `1. PALABRAS DE BIENVENIDA (Unidad General):
+   - Lenguaje claro, NO INCLUSIVO, sencillo y sin modismos, en neutro.
+   - Puede incluir una breve recuperación de los niveles Básico e Intermedio si corresponde.
+   - Extensión máxima: 100 palabras.
+
+2. PRESENTACIÓN DEL CURSO:
+   - Introducción y desarrollo breve de los módulos/temas del recorrido del curso.
+   - Extensión máxima: 250 palabras.
+
+3. OBJETIVOS DE APRENDIZAJE:
+   - "Al finalizar este encuentro, serás capaz de..."
+   - Este nivel agrega actividades de mayor complejidad: análisis y aplicación más detallada.
+   - Respetar la gradualidad de aprendizajes: cada Unidad-Módulo se corresponde con un objetivo.
+   - Verbos sugeridos: Definir, Reconocer, Identificar, Comprender, Valorar. Entre 4 y 5 objetivos.
+
+4. MAPA CONCEPTUAL (instrucciones para equipo de producción):
+   - Tema Principal: [Especifica el tema central. Debe tener relación con los Niveles Básico e Intermedio.]
+   - Subtemas: [Subtema 1], [Subtema 2], [Subtema 3]
+   - Indicar: "Dibujar a mano alzada o insertar imagen del mapa conceptual con las ideas más importantes y el recorrido similar a la estructura de pensamiento."
+
+5. CRONOGRAMA / PLAN DE TRABAJO:
+   - Completar en archivo Word aparte dentro de la carpeta del curso.
+   - Etiqueta: "CRONOGRAMA Y NOMBRE DEL CURSO" (ej: PLAN DE TRABAJO DE MARKETING PARA EMPRENDEDORES).`;
+                    break;
+                case 'bloque-1':
+                    objectiveText = `Desarrollar los "Módulos Escritos (PDF)" NIVEL AVANZADO para el curso "${courseName}".`;
+                    stepText = `1. ESTRUCTURA: 6 módulos escritos en .doc (el equipo de gráfica convertirá a PDF).
+   - MÓDULO 1 al 6: [Nombre del módulo] - Extensión: 4 a 5 páginas cada uno.
+   - No superar 24 a 30 carillas TOTALES del curso.
+
+2. PASO A PASO PARA CADA MÓDULO:
+   a) Página de Introducción a la Clase: objetivos del módulo, contenidos y recomendaciones para el estudio.
+   b) Contenidos: explicación más detallada para el armado de las placas/PDF (equipo de producción).
+   c) Video interactivo/integrador (ver sección audiovisual): actividades de mayor complejidad como soporte para las evaluaciones.
+   d) Archivos de Práctica: ejercicios descargables o cuestionarios básicos. NO pedir entregas extensas. Actividades sumatorias a lo largo de los 4 módulos.
+
+3. ACTIVIDADES PARCIALES:
+   - Al cierre de los Módulos 1, 2 y 3: proponer 2 a 3 ejercicios o cuestionarios que recuperen lo visto.
+   - Al cierre de los Módulos 4, 5 y 6: proponer 2 a 3 ejercicios o cuestionarios integradores.
+   - Estas actividades NO conllevan devolución.
+
+4. FORMATO: Calibri 11, interlineado sencillo, A4. Imágenes sin derechos de autor, licencia abierta o Creative Commons. Articular con equipo de gráfica.
+
+5. CITAS Y BIBLIOGRAFÍA (Normas APA 7 - https://normas-apa.org/):
+   - Cita directa: entre comillas + (Autor, Año, p. X). Ej: Rodríguez (2016) plantea: "..." (p. 437).
+   - Cita indirecta/paráfrasis: citar (Autor, Año). Ej: Según Rodríguez (2016), ...
+   - Bibliografía al final: alfabética, Normas APA. Ej: Fernández, J. (2019). Girasol de la mañana. Ediciones de la Banda Oriental.`;
+                    break;
+                case 'bloque-2':
+                    objectiveText = `Crear los "Módulos Audiovisuales" (NIVEL AVANZADO) para "${courseName}".`;
+                    stepText = `1. CANTIDAD Y DURACIÓN:
+   - 2 videos integradores por curso.
+   - Duración mínima: 90 segundos. Duración máxima: 3 minutos cada uno.
+   - VIDEO 1: integra los contenidos de los Módulos 1, 2 y 3.
+   - VIDEO 2: integra los contenidos de los Módulos 4, 5 y 6.
+   - En línea con las actividades prácticas parciales.
+
+2. FORMATO DEL GUION:
+   - Tipografía: Arial o Calibri. Tamaño: 12. Interlineado: 1.5.
+   - 1 minuto = 1 carilla (extensión máxima 3 carillas por video).
+   - Pueden adjuntarse links de videos de referencia (solo orientación artística para el equipo de edición).
+   - Recursos visuales: Creative Commons únicamente.
+
+3. ESTRUCTURA DE CADA GUION (modelo orientativo):
+   a) Introducción (10 segundos): Logo/Visual institucional + Locución de presentación del tema.
+   b) Presentación del Tema (15 segundos): Imagen contextual + Locución motivadora que introduzca el concepto.
+   c) Desarrollo I (15 segundos): Lista o imagen + Locución explicativa del subtema 1.
+   d) Desarrollo II (15 segundos): Visual con diagrama o imagen + Locución del subtema 2.
+   e) Desarrollo III (15 segundos): Visual con dato o imagen de impacto + Locución del subtema 3.
+   f) Desarrollo IV-VII según extensión del video: continuar con imágenes descriptivas + locución paso a paso.
+   g) Cierre (10 segundos): Visual/Logo institucional + Locución de síntesis e invitación a continuar.
+   h) Despedida (5 segundos): Imagen de saludo + Locución de agradecimiento.
+
+4. PAUTAS DE ESTILO:
+   - Lenguaje claro, sin jerga técnica. Subtítulos para accesibilidad auditiva.
+   - El guion debe ser redactado por el equipo responsable del curso, sugiriendo imágenes del repositorio.
+   - Ofrecer enlaces a recursos adicionales (Creative Commons).`;
+                    break;
+                case 'evaluacion':
+                    objectiveText = `Generar la "Evaluación Integradora Final" NIVEL AVANZADO para "${courseName}".`;
+                    stepText = `1. EVALUACIÓN FINAL INTEGRADORA: formativa e integradora de todo el curso.
+2. CANTIDAD: Entre 15 y 20 ítems.
+3. FORMATO: Preguntas de Verdadero/Falso o Múltiple Choice.
+4. CARÁCTER: Formulario descriptivo con imágenes. Integración que complemente lo desarrollado en los 4 módulos. "Pequeñas pistas" o palabras clave pensadas de modo sumatorio.
+5. Incluir: respuestas correctas, aclaraciones y/o respuestas autoguardadas para cada ítem.
+
+NOTA: Previamente, al cierre de Módulos 1-2 y Módulos 3-4, proponer actividades parciales de 2 a 3 ejercicios cada una (sin devolución).`;
+                    break;
+                default:
+                    objectiveText = `Generar la Estructura Completa de Secuencia Didáctica (SD) NIVEL AVANZADO para "${courseName}".`;
+                    stepText = `1. UNIDAD GENERAL - PRESENTACIÓN:
+   - Bienvenida (máx. 100 pal, lenguaje neutro, NO inclusivo). Recuperar niveles previos si corresponde.
+   - Presentación del Curso (máx. 250 pal): introducción y desarrollo breve de módulos.
+   - Objetivos (4-5): "Al finalizar, serás capaz de..." Verbos: Definir, Reconocer, Identificar, Comprender, Valorar.
+   - Mapa Conceptual: Tema Principal vinculado a niveles anteriores + Subtemas 1 al 6.
+   - Cronograma: archivo Word aparte etiquetado con nombre del curso.
+
+2. MÓDULOS (6 escritos en .doc, PDF final):
+   - Módulos 1 al 6: 4 a 5 páginas cada uno. Total: máx. 24-30 carillas.
+   - Cada módulo: Introducción → Contenidos para PDF → Video integrador → Práctica sumatoria.
+   - Actividades parciales: 2-3 ejercicios al cierre M1+M2+M3 y al cierre M4+M5+M6 (sin devolución).
+   - Calibri 11, imágenes Creative Commons. Bibliografía APA 7 al final.
+
+3. AUDIOVISUAL: 2 videos (90s-3min c/u). VIDEO 1: integra M1, M2 y M3. VIDEO 2: integra M4, M5 y M6.
+   - Guion: Arial/Calibri 12, interlineado 1.5. Estructura: Intro (10s) → Presentación (15s) → Desarrollos x5 (15s c/u) → Cierre (10s) → Despedida (5s).
+
+4. EVALUACIÓN FINAL: 15-20 ítems (V/F o Múltiple Choice) integradores. ES OBLIGATORIO incluir la respuesta correcta y una breve aclaración pedagógica para cada ítem.`;
+            }
+            knowledgeBaseAddons = `6. **Bibliografía y Citas (APA 7)**: Cita directa entre comillas (Autor, Año, p. X). Paráfrasis: citar (Autor, Año). Lista bibliográfica alfabética al final. Recursos visuales: Creative Commons.`;
+            executionMandates = `- **FORMATO .DOC → PDF**: Calibri 11, A4. No superar 24-30 carillas totales del curso.
+- **ESTILO**: Lenguaje claro, NO INCLUSIVO, sencillo, sin modismos, en neutro.
+- **GRADUALIDAD**: Cada módulo se corresponde con un objetivo de aprendizaje.
+- **ACTIVIDADES PARCIALES**: 2-3 ejercicios al cierre de M1+M2+M3 y M4+M5+M6 (sin devolución).
+- **IMÁGENES Y VIDEOS**: Sin derechos de autor, Creative Commons. Articular con equipo de gráfica y producción.
+- **EXTENSIÓN CRÍTICA**: Módulos de 4 a 5 páginas. Se exige la MÁXIMA EXTENSIÓN posible, desarrollando cada concepto con profundidad pedagógica experta y profesional.`;
+        } else if (isIntermediate) {
+            // INTERMEDIATE LEVEL STRUCTURE - Lineamientos Institucionales Oficiales
             switch (block) {
                 case 'presentacion':
                     objectiveText = `Generar la "Presentación y Guía SD" (NIVEL INTERMEDIO) para el curso "${courseName}".`;
-                    stepText = `1. BIENVENIDA: Máx 100 palabras. Lenguaje claro, NO INCLUSIVO, sencillo, sin modismos. Pronombre "Nosotros". Mencionar recuperación del nivel Básico.\n2. PRESENTACIÓN: Máx 200 palabras. Introducción y desarrollo breve de módulos.\n3. OBJETIVOS: Estructura "Al finalizar este encuentro, serás capaz de...". Usar verbos: Definir, Reconocer, Identificar, Comprender, Valorar.\n4. MAPA CONCEPTUAL: Definir Tema Principal y Subtemas.\n5. CRONOGRAMA: Instrucción para completar plan de trabajo separado.`;
+                    stepText = `1. PALABRAS DE BIENVENIDA (Unidad General):
+   - Lenguaje claro, NO INCLUSIVO, sencillo y sin modismos, en neutro.
+   - Puede incluir una breve recuperación del nivel Básico si corresponde.
+   - Extensión máxima: 100 palabras.
+
+2. PRESENTACIÓN DEL CURSO:
+   - Introducción y desarrollo breve de los módulos/temas del recorrido del curso.
+   - Extensión máxima: 200 palabras.
+
+3. OBJETIVOS DE APRENDIZAJE:
+   - "Al finalizar este encuentro, serás capaz de..."
+   - Incluir actividades de análisis y aplicación más detallada que permitan profundizar conceptos.
+   - Respetar la gradualidad de aprendizajes: cada Unidad-Módulo debe corresponderse con un objetivo.
+   - Verbos sugeridos: Definir, Reconocer, Identificar, Comprender, Valorar. Entre 4 y 5 objetivos.
+
+4. MAPA CONCEPTUAL (instrucciones para equipo de producción):
+   - Tema Principal: [Especifica el tema central del curso]
+   - Subtemas: [Subtema 1], [Subtema 2], [Subtema 3]
+   - Indicar: "Dibujar a mano alzada o insertar imagen del mapa conceptual con ideas principales y recorrido similar a estructura de pensamiento."
+
+5. CRONOGRAMA / PLAN DE TRABAJO:
+   - Indicar que se completa en archivo Word aparte dentro de la carpeta del curso.
+   - Etiqueta: "CRONOGRAMA Y NOMBRE DEL CURSO" (ej: PLAN DE TRABAJO DE MARKETING PARA EMPRENDEDORES).`;
                     break;
                 case 'bloque-1':
-                    objectiveText = `Desarrollar el "Bloque I: Contenidos" (3 módulos PDF - NIVEL INTERMEDIO) para "${courseName}".`;
-                    stepText = `1. Estructura de 3 MÓDULOS específicos.\n2. EXTENSIÓN: Cada módulo debe tener exactamente 2 a 3 PÁGINAS (aprox 1000-1500 palabras).\n3. CONTENIDO: Introducción a la clase (objetivos y recomendaciones), explicación detallada para armado de PDF y materiales de práctica (ejercicios descargables/cuestionarios).\n4. FORMATO: Texto descriptivo para equipo de gráfica (no superar 12 carillas totales).`;
+                    objectiveText = `Desarrollar los "Módulos Escritos (PDF)" NIVEL INTERMEDIO para el curso "${courseName}".`;
+                    stepText = `1. ESTRUCTURA: 4 módulos escritos en .doc (el equipo de gráfica convertirá a PDF).
+   - MÓDULO 1 al 4: [Nombre del módulo] - Extensión: 2 a 3 páginas.
+   - No superar 12 a 15 carillas TOTALES del curso.
+
+2. CADA MÓDULO DEBE INCLUIR:
+   a) Página de Introducción a la Clase: objetivos del módulo, contenidos y recomendaciones para el estudio.
+   b) Contenidos: explicación detallada para el armado de las placas/PDF.
+   c) Archivos de Práctica (optativo): ejercicios descargables o cuestionarios básicos para aplicar los conceptos. NO pedir entregas extensas. Pensar en actividades sumatorias a lo largo de los 4 módulos.
+
+3. FORMATO: Calibri 11, interlineado sencillo, A4. Cuidar imágenes: sin derechos de autor, licencia abierta o Creative Commons. Listar comentarios descriptivos para equipo de gráfica.
+
+4. CITAS Y BIBLIOGRAFÍA (Normas APA 7 - https://normas-apa.org/):
+   - Cita directa: entre comillas + (Autor, Año, p. X). Ej: Rodríguez (2016) plantea: "..." (p. 437).
+   - Cita indirecta/paráfrasis: citar (Autor, Año). Ej: Según Rodríguez (2016), ...
+   - Bibliografía al final: alfabética, Normas APA. Ej: Fernández, J. (2019). Girasol de la mañana. Ediciones de la Banda Oriental.`;
                     break;
                 case 'bloque-2':
-                    objectiveText = `Crear el "Bloque II: Módulo Audiovisual" (NIVEL INTERMEDIO) para "${courseName}".`;
-                    stepText = `1. GUION PARA VIDEO: Puede ser 1 video de 3 MINUTOS o 2 videos de 90 SEGUNDOS.\n2. ESTRUCTURA: Introducción (10s), Presentación (15s), Desarrollo (25s con visuales técnicos), Cierre (10s) y Despedida (5s).\n3. PAUTAS: Lenguaje claro, subtítulos, Arial/Calibri 12, interlineado 1.5.`;
+                    objectiveText = `Crear el "Módulo Audiovisual" (NIVEL INTERMEDIO) para "${courseName}".`;
+                    stepText = `1. CANTIDAD Y DURACIÓN:
+   - Opción A: 2 videos integradores de máximo 90 segundos cada uno.
+   - Opción B: 1 video de máximo 3 minutos.
+   - Son videos interactivos, integradores y complementarios de actividades de mayor complejidad.
+
+2. FORMATO DEL GUION:
+   - Tipografía: Arial o Calibri. Tamaño: 12. Interlineado: 1.5.
+   - 1 minuto = 1 carilla (respetar extensión máxima).
+   - Pueden adjuntarse links de videos de referencia para el equipo de producción.
+
+3. ESTRUCTURA DE CADA GUION:
+   a) Introducción (10 segundos): Visual + Locución de bienvenida al tema.
+   b) Presentación del Tema (15 segundos): Mostrar contexto o página/pantalla principal. Locución motivadora.
+   c) Desarrollo (25 segundos): Grabación de pantalla o visuales técnicos. Paso a paso claro.
+   d) Cierre (10 segundos): Visual de bienvenida o logo. Locución de felicitación e invitación a continuar.
+   e) Despedida (5 segundos): Logo + Locución de cierre.
+
+4. PAUTAS DE ESTILO:
+   - Lenguaje claro, sin jerga técnica. Subtítulos para accesibilidad.
+   - Ofrecer enlaces a tutoriales adicionales o soporte si corresponde.`;
                     break;
                 case 'evaluacion':
-                    objectiveText = `Generar la "Evaluación Interactiva" (NIVEL INTERMEDIO) para "${courseName}".`;
-                    stepText = `1. CUESTIONARIO: 8 a 10 ítems (V/F o Múltiple Choice).\n2. CARÁCTER: Formativa e integradora, basada en "pequeñas pistas" o palabras clave sumatorias. Incluir respuestas correctas y aclaraciones.`;
+                    objectiveText = `Generar la "Evaluación Interactiva" NIVEL INTERMEDIO para "${courseName}".`;
+                    stepText = `1. CUESTIONARIO formativo e integrador del curso.
+2. CANTIDAD: Entre 8 y 10 ítems.
+3. FORMATO: Preguntas de Verdadero/Falso o Múltiple Choice.
+4. CARÁCTER: Formulario descriptivo con imágenes, integración desarrollada en "pequeñas pistas" o palabras clave que se piensen de modo sumatorio a lo largo de los módulos.
+5. Incluir: ES OBLIGATORIO incluir la respuesta correcta y una breve aclaración pedagógica para cada ítem.`;
                     break;
                 default:
-                    objectiveText = `Generar Estructura Completa de Secuencia Didáctica (INTERMEDIO) para "${courseName}".`;
-                    stepText = `1. Bienvenida (100 pal) y Presentación (200 pal).\n2. Bloque I: 3 Módulos PDF (2-3 págs cada uno) con PDF de práctica.\n3. Bloque II: Guion Audiovisual (1 video de 3min o 2 de 90s).\n4. Evaluación (8-10 consignas Choice/VF).\n5. Bibliografía APA 7 (Citas directas e indirectas).`;
+                    objectiveText = `Generar la Estructura Completa de Secuencia Didáctica (SD) NIVEL INTERMEDIO para "${courseName}".`;
+                    stepText = `1. UNIDAD GENERAL - PRESENTACIÓN:
+   - Bienvenida (máx. 100 pal, lenguaje claro, neutro, sin lenguaje inclusivo). Recuperar nivel Básico si corresponde.
+   - Presentación del Curso (máx. 200 pal): introducción y desarrollo breve de módulos.
+   - Objetivos (4-5): "Al finalizar, serás capaz de..." Verbos: Definir, Reconocer, Identificar, Comprender, Valorar.
+   - Mapa Conceptual: Tema Principal + Subtemas 1 al 4.
+   - Cronograma: archivo Word aparte, etiquetado con nombre del curso.
+
+2. MÓDULOS (4 escritos en .doc, PDF final):
+   - Módulo 1 al 4: 2 a 3 páginas cada uno. Total: máx. 12-15 carillas.
+   - Cada módulo: Introducción a la clase → Contenidos para PDF → Archivo de práctica (optativo).
+   - Calibri 11, imágenes sin derechos de autor. Bibliografía APA 7 al final.
+
+3. AUDIOVISUAL: 2 videos (máx 90s c/u) o 1 video (máx 3min). Guion: Arial/Calibri 12, interlineado 1.5. Estructura: Intro (10s) → Presentación (15s) → Desarrollo (25s) → Cierre (10s) → Despedida (5s).
+   - Video 1: sintetiza M1 y M2.
+   - Video 2: sintetiza M3 y M4.
+
+4. EVALUACIÓN: 8 a 10 ítems (V/F o Múltiple Choice). ES OBLIGATORIO incluir la respuesta correcta y una breve aclaración pedagógica para cada ítem.`;
             }
-            knowledgeBaseAddons = `6. **Bibliografía y Citas**: Obligatorio usar NORMAS APA 7. Incluir lista alfabética al final. Diferenciar citas directas (entre comillas, Autor, Año, p. X) de indirectas/paráfrasis.`;
-            executionMandates = `- **EXTENSIÓN INTERMEDIA**: Módulos PDF de 2 a 3 páginas. No exceder 12 carillas totales para el curso.\n- **ESTILO**: Lenguaje NETRAL, NO INCLUSIVO, sin modismos tecnicistas innecesarios.`;
+            knowledgeBaseAddons = `6. **Bibliografía y Citas (APA 7)**: Cita directa entre comillas (Autor, Año, p. X). Paráfrasis: citar (Autor, Año). Lista bibliográfica alfabética al final.`;
+            executionMandates = `- **FORMATO .DOC → PDF**: Calibri 11, A4. No superar 10-12 carillas totales del curso.\n- **ESTILO**: Lenguaje claro, NO INCLUSIVO, sencillo, sin modismos, en neutro.\n- **GRADUALIDAD**: Cada módulo correspond a un objetivo de aprendizaje.\n- **IMÁGENES**: Sin derechos de autor, licencia abierta o Creative Commons. Articular con equipo de gráfica.\n- **EXTENSIÓN CRÍTICA**: Módulos de 2 a 3 páginas. Se exige la MÁXIMA EXTENSIÓN posible, con alto detalle en explicaciones y ejemplos.`;
         } else {
-            // BASIC LEVEL STRUCTURE (OR DEFAULT)
+            // BASIC LEVEL STRUCTURE - Lineamientos Institucionales Oficiales
             switch (block) {
                 case 'presentacion':
-                    objectiveText = `Generar la "Presentación y Guía SD" para el curso "${courseName}".`;
-                    stepText = `1. Bienvenida (a la plataforma y al curso): 1er párrafo con pronombre "VOS", 2do párrafo con "NOSOTROS".\n2. Guía del curso: Nombre (corto, conciso, atractivo), Nivel, Objetivos y Plan de Trabajo.\n3. Referencia al Mapa del Curso (espejo fiel de contenidos).`;
+                    objectiveText = `Generar la "Presentación y Guía SD" (NIVEL BÁSICO) para el curso "${courseName}".`;
+                    stepText = `1. PALABRAS DE BIENVENIDA (pestaña para equipo de carga):
+   - 1er párrafo: pronombre "VOS" (bienvenida a la plataforma).
+   - 2do párrafo: pronombre "NOSOTROS" (bienvenida al curso).
+
+2. GUÍA DEL CURSO (SD - PDF) con la siguiente estructura:
+   - Nombre del Curso: corto, conciso, atractivo y representativo del contenido.
+   - Nivel: Básico.
+   - Objetivos de Aprendizaje: "Al finalizar este curso, serás capaz de..." con 2 a 4 verbos en infinitivo (Identificar, Reconocer, Aplicar, Comprender, etc.).
+   - Plan de Trabajo: Bloque I (Módulo I y Módulo II), Bloque II (Audiovisual), Evaluación (tipo de consignas).
+   - Mapa del Curso: expresar gráficamente títulos y subtítulos de cada módulo (indicar que se genera como PPT separado).`;
                     break;
                 case 'bloque-1':
-                    objectiveText = `Desarrollar el "Bloque I: Contenidos" (1 o 2 módulos PDF) para el curso "${courseName}".\n\n### REGLA DE ORO INELUDIBLE:\nCada módulo/bloque DEBE tener una extensión EXACTA de 2500 PALABRAS. No se aceptan resúmenes ni textos breves.`;
-                    stepText = `1. Desarrollar contenido técnico con EXPLICACIONES PROFUNDAS (Obligatorio: 2500 palabras exactas por módulo).\n2. Incluir sugerencias de imágenes conceptuales, gráficos y tablas.\n3. Prohibido omitir detalles; cada subtema debe ser expandido exhaustivamente.`;
+                    objectiveText = `Desarrollar el "Bloque I: Módulos Escritos (PDF)" NIVEL BÁSICO para el curso "${courseName}".`;
+                    stepText = `1. CANTIDAD: 1 o 2 módulos escritos en PDF. Se puede agregar un 3er módulo si el tema lo requiere.
+2. EXTENSIÓN: Entre 3 y 5 carillas por módulo (incluyendo imágenes, gráficos, tablas).
+3. FORMATO: Calibri 11, Interlineado sencillo, página A4.
+
+4. ESTRUCTURA DE CADA MÓDULO:
+   a) TÍTULO (N1): Centrado, en negrita, palabras iniciando en mayúscula. Solo el nombre, sin indicaciones adicionales.
+   b) Introducción (N2): Alineado a la izquierda, negrita, mayúscula inicial. Párrafo de ≤50 palabras enunciando los contenidos básicos del módulo.
+   c) Desarrollo: Máx. 2 subtemas por tema central.
+      - Título N2: alineado a la izquierda, negrita.
+      - Título N3: alineado a la izquierda, negrita, cursiva.
+   d) Viñetas: oración comienza con mayúscula y termina en punto. Números solo cuando el orden es fundamental.
+   e) Párrafo de conclusión al finalizar el módulo.
+   f) Bibliografía: Normas APA 7ma edición (https://normas-apa.org/).
+
+5. CITAS (APA 7):
+   - Cita directa <40 palabras: entre comillas, con (Autor, Año, p. X).
+   - Cita directa >40 palabras: bloque independiente, sin comillas, con sangría de media pulgada.
+   - Cita indirecta/paráfrasis: siempre citar (Autor, Año). La IA NO es fuente citable.
+
+6. IMÁGENES: alta calidad, sin marcas de agua, sin derechos de propiedad. Articular con equipo de gráfica. Numerar correlativamente ("Imagen 1", "Imagen 2"...) e indicar ubicación en el texto.`;
                     break;
                 case 'bloque-2':
-                    objectiveText = `Crear el "Bloque II: Módulo Audiovisual" para "${courseName}".`;
-                    stepText = `1. Armar Guion (máx 4 min) con sugerencias de imágenes conceptuales para ilustrar.\n2. Carácter: ${courseName.toLowerCase().includes('habilidades digitales') ? 'Guía visual paso a paso.' : 'INTEGRADOR (si hay 2 módulos previos) o INTRODUCTORIO (si hay 1 módulo previo).'}\n3. Debe incluir sugerencias visuales técnicas.`;
+                    objectiveText = `Crear el "Bloque II: Módulo Audiovisual" (NIVEL BÁSICO) para "${courseName}".`;
+                    stepText = `1. GUION para video. Duración: máx. 4 minutos.
+2. CARÁCTER según Bloque I:
+   - Si Bloque I tiene 2 módulos: video INTEGRADOR que sintetice ambos contenidos.
+   - Si Bloque I tiene 1 módulo: video INTRODUCTORIO con nuevos contenidos complementarios.
+   - En cursos prácticos (Habilidades Digitales, Word, Excel, etc.): video como GUÍA VISUAL PASO A PASO.
+3. IMÁGENES: incluir sugerencias de imágenes conceptuales o indicaciones de qué ilustrar para el banco de imágenes o producción.
+4. NOTA: El guion debe pasar por el equipo contenidista correspondiente para su aprobación.`;
                     break;
                 case 'evaluacion':
-                    objectiveText = `Generar la "Evaluación Integradora" de 5 consignas para "${courseName}".`;
-                    stepText = `1. Formatos: Múltiple Choice (4-5 respuestas), Verdadero/Falso, Sopa de letras o Crucigrama.\n2. Alineada a objetivos centrales como instancia de aprendizaje.`;
+                    objectiveText = `Generar la "Evaluación Integradora" NIVEL BÁSICO (5 consignas) para "${courseName}".`;
+                    stepText = `1. CANTIDAD: 5 consignas en total.
+2. FORMATOS posibles: Verdadero/Falso, Múltiple Choice (4 a 5 opciones de respuesta), Sopa de letras, Crucigrama.
+3. Las consignas deben abordar los núcleos temáticos y estar alineadas con los objetivos del curso.
+4. La evaluación es una instancia de aprendizaje: apuntar a los conceptos centrales de cada módulo.
+5. ES OBLIGATORIO proporcionar la respuesta correcta y una breve explicación para cada consigna.`;
                     break;
                 default:
-                    objectiveText = `Generar Estructura Completa de Secuencia Didáctica (SD) para "${courseName}".`;
-                    stepText = `1. Presentación (Vos -> Nosotros).\n2. Bloque I (2 módulos PDF: EXIGENCIA DE 2500 PALABRAS EXACTAS POR CADA MÓDULO).\n3. Bloque II (Video de 4 min con guion e imágenes conceptuales).\n4. Evaluación (5 consignas variadas: Choice, V/F, Crucigrama).`;
+                    objectiveText = `Generar la Estructura Completa de Secuencia Didáctica (SD) NIVEL BÁSICO para "${courseName}".`;
+                    stepText = `1. PRESENTACIÓN: Bienvenida (VOS → NOSOTROS) + Guía SD (Nombre, Nivel, Objetivos 2-4 verbos infinitivo, Plan de Trabajo, Mapa del Curso).
+2. BLOQUE I: 2 módulos PDF (3-5 carillas, Calibri 11, A4). Estructura: Título N1, Introducción ≤50 pal, Desarrollo máx 2 subtemas, Conclusión, Bibliografía APA 7.
+3. BLOQUE II: Guion (máx 4 min). Video INTEGRADOR de los 2 módulos. Con sugerencias de imágenes.
+4. EVALUACIÓN: 5 consignas (V/F, Múltiple Choice 4-5 opciones, Sopa de letras o Crucigrama). Alineadas a objetivos. ES OBLIGATORIO incluir las respuestas correctas.`;
             }
-            executionMandates = `- **MANDATO "MODO IA"**: Utiliza tu capacidad de explorar conceptos nuevos y comparar opciones para expandir el texto. **DEBES escribir exactamente 2500 palabras por módulo**.`;
+            executionMandates = `- **FORMATO PDF**: Calibri 11, interlineado sencillo, A4. Extensión: 3 a 5 carillas por módulo.\n- **ESTRUCTURA MODULAR**: Título N1 centrado/negrita → Introducción ≤50 pal → Desarrollo (máx 2 subtemas) → Conclusión → Bibliografía APA 7.\n- **VIÑETAS**: mayúscula inicial, punto final. Numerar solo cuando el orden es esencial.\n- **CITAS APA 7**: Directa <40 pal entre comillas; >40 pal en bloque con sangría. Paráfrasis: citar autor+año. La IA NO es fuente citable.\n- **IMÁGENES**: alta calidad, sin marcas de agua. Articular con equipo de gráfica. Numerar correlativamente.\n- **EXTENSIÓN CRÍTICA**: Se exige la MÁXIMA EXTENSIÓN posible dentro del rango de 3 a 5 carillas, evitando resúmenes y profundizando en cada punto.`;
         }
 
-        const prompt = `### SYSTEM ROLE (R)
-Actúa como un Diseñador Instruccional Senior para Formando Capital Humano. Tu objetivo es transformar conceptos en recursos de nivel profesional siguiendo la Secuencia Didáctica (SD) institucional y las pautas de redacción oficiales.
+        const activeKeywords = Array.from(document.querySelectorAll('.keyword-tag.active')).map(tag => tag.getAttribute('data-value'));
+
+        if (!courseName || !audience || ejeBase === 'Selecciona un eje base...' || !areaTematica) {
+            alert('Por favor, completa los campos obligatorios: Nombre, Público, Eje y Área.');
+            return;
+        }
+
+        const prompt = `${modelGuideline}
+
+### SYSTEM ROLE (R)
+${expertLayer}
+Tu objetivo es transformar conceptos en recursos de nivel profesional siguiendo la Secuencia Didáctica (SD) institucional y las pautas de redacción oficiales. Es IMPERATIVO que el contenido sea lo más extenso y detallado posible, cumpliendo estrictamente con cada instrucción y pauta establecida.
 
 ### OBJECTIVE (O)
 ${objectiveText}
@@ -555,7 +948,7 @@ ${objectiveText}
 ### CONTEXT & PARAMETERS (C)
 - **Generado por:** Tutor Docente Profesional de Capital Humano (Coordinación de Alimentar).
 - **Curso:** ${courseName}
-- **Nivel(es):** ${activeLevels.length > 0 ? activeLevels.join(', ') : 'No especificado'}
+- **Nivel:** ${activeLevel}
 - **Referencia Institucional:** Formando Capital Humano.
 - **Área Temática:** ${areaTematica}
 - **Beneficiarios:** ${audience}
@@ -563,14 +956,16 @@ ${objectiveText}
 
 ### KNOWLEDGE BASE (K) - Pautas Institucionales & Estrategia "Modo IA"
 1. **Redacción de Presentación**: Bienvenida (Vos -> Nosotros). Pestaña para equipo de carga. Incluye Guía SD y referencia a Mapa (espejo contenido).
-2. **Bloque I (PDF)**: ${isIntermediate ? '3 módulos de 2-3 páginas cada uno.' : 'Estrategia de Ramificación (2500 palabras).'}
-3. **Bloque II (Video)**: ${isIntermediate ? '1 video (3 min) o 2 videos (90s).' : 'Guion máx 4 min.'} Guía paso a paso en cursos prácticos. Sugerir imágenes conceptuales.
-4. **Evaluación**: ${isIntermediate ? '8 a 10 consignas formats variados.' : '5 consignas (V/F, Choice, Sopa de letras, Crucigrama).'}
+2. **Bloque I (PDF)**: Desarrollar con MÁXIMA EXTENSIÓN. ${isAdvanced ? '6 módulos de 4-5 páginas cada uno.' : isIntermediate ? '4 módulos de 2-3 páginas cada uno.' : '2 módulos de 3-5 carillas cada uno.'}
+3. **Bloque II (Video)**: ${isAdvanced ? '2 videos integradores (M1-3 y M4-6).' : isIntermediate ? '2 videos integradores (M1-2 y M3-4).' : 'Video integrador global.'} Sugerir imágenes conceptuales.
+4. **Evaluación**: ${isAdvanced ? '15 a 20 consignas con rúbricas.' : isIntermediate ? '8 a 10 consignas variadas.' : '5 consignas fundamentales.'} Proponer formatos interactivos.
 5. **Verificación de Datos**: Comprobar información en múltiples fuentes (mínimo 3 sitios). Si hay ambigüedad, priorizar el contexto de Formando Capital Humano.
 ${knowledgeBaseAddons}
 6. **Restricciones Temáticas (EXCLUSIÓN CRÍTICA)**: Queda TERMINANTEMENTE PROHIBIDO incluir referencias, terminología o enfoques relacionados con: Justicia social, Juventudes, Lenguaje inclusivo, Educación popular o Educación comunitaria.
 
 ### EXECUTION STEPS (E)
+- **MANDATO DE CUMPLIMIENTO**: Es OBLIGATORIO seguir todos los "Tips" y lineamientos de este prompt. La falta de cumplimiento en la extensión o el formato será considerada un fallo en la tarea.
+- **MÁXIMA EXTENSIÓN**: Escribe de forma exhaustiva. Expande cada subtema, incluye ejemplos prácticos y detalles técnicos. El objetivo es alcanzar o superar los mínimos de carillas solicitados.
 ${stepText}
 ${executionMandates}
 - **RESTRICCIÓN DE CONTENIDO**: Ignora y excluye cualquier sesgo o tema vinculado a Justicia social, Juventudes, Lenguaje inclusivo, Educación popular o Educación comunitaria.
@@ -605,6 +1000,7 @@ Utiliza un tono ${tone}. Comunicación profesional y motivadora. Recursos sugeri
             aiActions.classList.remove('hidden');
             aiLinks.classList.remove('hidden');
             copyBtn.style.animation = 'pulseGlow 2s infinite';
+            updateComplianceScanner(prompt); // Scan the final prompt too
         });
 
         resultSection.scrollIntoView({ behavior: 'smooth' });
@@ -639,81 +1035,173 @@ Utiliza un tono ${tone}. Comunicación profesional y motivadora. Recursos sugeri
         });
     }
 
-    // Malla Curricular / Mental Map Logic
-    const viewMallaBtn = document.getElementById('view-malla-btn');
-    const mallaModal = document.getElementById('malla-modal');
-    const closeMalla = document.getElementById('close-malla');
-    const mallaTree = document.getElementById('malla-tree');
+    // Mapa del Curso Logic
+    const viewCourseMapBtn = document.getElementById('view-course-map-btn');
+    const courseMapModal = document.getElementById('course-map-modal');
+    const closeCourseMap = document.getElementById('close-course-map');
+    const courseMapTree = document.getElementById('course-map-tree');
 
-    viewMallaBtn.addEventListener('click', () => {
+    viewCourseMapBtn.addEventListener('click', () => {
         const courseName = document.getElementById('course-name').value.trim() || 'Curso Sin Nombre';
         const area = document.getElementById('area-tematica').value;
         const keywords = Array.from(document.querySelectorAll('.keyword-tag.active')).map(tag => tag.textContent);
         
-        generateMallaTree(courseName, area, keywords);
-        mallaModal.classList.remove('hidden');
+        generateCourseMapTree(courseName, area, keywords);
+        courseMapModal.classList.remove('hidden');
     });
 
-    closeMalla.addEventListener('click', () => {
-        mallaModal.classList.add('hidden');
+    closeCourseMap.addEventListener('click', () => {
+        courseMapModal.classList.add('hidden');
     });
 
     window.addEventListener('click', (e) => {
-        if (e.target === mallaModal) mallaModal.classList.add('hidden');
+        if (e.target === courseMapModal) courseMapModal.classList.add('hidden');
     });
 
-    function generateMallaTree(title, area, keywords) {
+    // Objective Preview Logic
+    function updateObjectivePreview() {
+        const courseName = document.getElementById('course-name').value.trim() || '[Nombre del Curso]';
+        const blockSelect = document.getElementById('block');
+        const blockVal = blockSelect.value;
+        const blockText = blockSelect.options[blockSelect.selectedIndex].text;
+        const levelRadio = document.querySelector('input[name="level"]:checked');
+        const level = levelRadio ? levelRadio.value : 'Básico';
+        
+        let detail = '';
+        if (level === 'Básico') detail = '2 módulos PDF (3-5 carillas c/u)';
+        else if (level === 'Intermedio') detail = '4 módulos PDF (2-3 páginas c/u)';
+        else if (level === 'Avanzado') detail = '6 módulos PDF (4-5 páginas c/u)';
+        
+        let previewText = '';
+        switch (blockVal) {
+            case 'presentacion':
+                previewText = `Generar la <strong>"Presentación y Guía SD"</strong> [Nivel: ${level}] para el curso <strong>"${courseName}"</strong>.`;
+                break;
+            case 'bloque-1':
+                previewText = `Desarrollar el <strong>"Bloque I: Contenidos"</strong> (${detail}) [Nivel: ${level}] para el curso <strong>"${courseName}"</strong>.`;
+                break;
+            case 'bloque-2':
+                const videos = level === 'Avanzado' ? '2 videos integradores' : (level === 'Intermedio' ? '2 videos (máx 90s) o 1 video (máx 3min)' : '1 video (máx 4min)');
+                previewText = `Crear el <strong>"Bloque II: Módulo Audiovisual"</strong> (${videos}) [Nivel: ${level}] para el curso <strong>"${courseName}"</strong>.`;
+                break;
+            case 'evaluacion':
+                const items = level === 'Avanzado' ? '15-20 ítems' : (level === 'Intermedio' ? '8-10 ítems' : '5 consignas');
+                previewText = `Generar la <strong>"Evaluación Integradora"</strong> (${items}) [Nivel: ${level}] para el curso <strong>"${courseName}"</strong>.`;
+                break;
+            default:
+                previewText = `Generar la <strong>"Estructura Completa de Secuencia Didáctica (SD)"</strong> (${detail}) [Nivel: ${level}] para el curso <strong>"${courseName}"</strong>.`;
+        }
+        
+        document.getElementById('objective-preview').innerHTML = previewText;
+    }
+
+    // Hook up preview updates
+    ['course-name', 'block', 'audience', 'eje-base', 'area-tematica'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('input', updateObjectivePreview);
+            el.addEventListener('change', updateObjectivePreview);
+        }
+    });
+
+    document.querySelectorAll('input[name="level"]').forEach(radio => {
+        radio.addEventListener('change', updateObjectivePreview);
+    });
+
+    function generateCourseMapTree(title, area, keywords) {
+        const levelRadio = document.querySelector('input[name="level"]:checked');
+        const level = levelRadio ? levelRadio.value : 'Básico';
+        
         let html = `
             <div class="tree-root">
-                <div class="node principal">
+                <div class="node principal level-${level.toLowerCase()}">
                     <i class="fas fa-graduation-cap"></i>
-                    <span>${title}</span>
+                    <span>${title} (${level.toUpperCase()})</span>
                 </div>
                 <div class="tree-branches">
         `;
 
-        // Bloque I: Contenidos
-        html += `
-            <div class="branch">
-                <div class="node category">Bloque I: Contenidos Técnicos</div>
-                <div class="node-children">
-        `;
+        let modulesCount = 2;
+        let videoLabels = [];
+        let pagesPerModule = "";
         
-        const subtopics = [...keywords];
-        if (subtopics.length === 0) subtopics.push('Fundamentos de ' + area, 'Aplicaciones Prácticas');
-        
-        subtopics.forEach(topic => {
-            html += `<div class="node leaf">${topic}</div>`;
+        if (level === 'Intermedio') {
+            modulesCount = 4;
+            videoLabels = ['VIDEO 1: M1 Y M2', 'VIDEO 2: M3 Y M4'];
+            pagesPerModule = "2-3 páginas";
+        } else if (level === 'Avanzado') {
+            modulesCount = 6;
+            videoLabels = ['VIDEO 1: M1, M2 Y M3', 'VIDEO 2: M4, M5 Y M6'];
+            pagesPerModule = "4-5 páginas";
+        } else {
+            modulesCount = 2;
+            videoLabels = ['VIDEO INTEGRADOR GLOBAL'];
+            pagesPerModule = "3-5 carillas";
+        }
+
+        // Generate Modules
+        html += `<div class="modules-grid-course-map">`;
+        for (let i = 1; i <= modulesCount; i++) {
+            html += `
+                <div class="branch" style="animation-delay: ${0.1 * i}s">
+                    <div class="node category">MÓDULO ${i}</div>
+                    <div class="node-children">
+                        <div class="node leaf">Escritura PDF (${pagesPerModule})</div>
+                        <div class="node leaf">Pautas APA 7</div>
+                        <div class="node leaf">Actividad Parcial</div>
+                    </div>
+                </div>
+            `;
+        }
+        html += `</div>`;
+
+        // Generate Videos
+        html += `<div class="videos-row-course-map" style="animation-delay: ${0.1 * (modulesCount + 1)}s">`;
+        videoLabels.forEach((label, idx) => {
+            html += `
+                <div class="node video-node" style="animation-delay: ${0.1 * (modulesCount + idx + 1)}s">
+                    <i class="fas fa-video"></i> ${label}
+                </div>
+            `;
         });
+        html += `</div>`;
+
+        // Generate Evaluation
+        const evalItems = level === 'Avanzado' ? '15-20 ítems' : (level === 'Intermedio' ? '8-10 ítems' : '5 consignas');
+        html += `
+            <div class="eval-node-container" style="animation-delay: ${0.1 * (modulesCount + videoLabels.length + 1)}s">
+                <div class="node eval-node">
+                    <i class="fas fa-check-double"></i> EVALUACIÓN INTEGRADORA (${evalItems})
+                </div>
+            </div>
+        `;
+
+        html += `</div></div>`;
+        courseMapTree.innerHTML = html;
         
-        html += `</div></div>`;
-
-        // Bloque II: Audiovisual
-        html += `
-            <div class="branch">
-                <div class="node category">Bloque II: Audiovisual</div>
-                <div class="node-children">
-                    <div class="node leaf">Video Tutorial / Integrador</div>
-                    <div class="node leaf">Guion Técnico</div>
-                </div>
-            </div>
-        `;
-
-        // Evaluación
-        html += `
-            <div class="branch">
-                <div class="node category">Evaluación final</div>
-                <div class="node-children">
-                    <div class="node leaf">Cuestionario de Desempeño</div>
-                </div>
-            </div>
-        `;
-
-        html += `</div></div>`;
-        mallaTree.innerHTML = html;
+        // Add specific styles for the course map grid if not present
+        if (!document.getElementById('course-map-extra-styles')) {
+            const style = document.createElement('style');
+            style.id = 'course-map-extra-styles';
+            style.innerHTML = `
+                .modules-grid-course-map { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-bottom: 30px; width: 100%; }
+                .videos-row-course-map { display: flex; gap: 20px; justify-content: center; width: 100%; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 25px; margin-bottom: 25px; flex-wrap: wrap; }
+                .eval-node-container { width: 100%; display: flex; justify-content: center; padding-top: 10px; }
+                .node.video-node { background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.4); color: #fff; font-size: 0.85rem; font-weight: 600; padding: 0.8rem 1.5rem; display: flex; align-items: center; gap: 10px; border-radius: 12px; }
+                .node.eval-node { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: #fff; min-width: 300px; box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.2); }
+                .node.principal.level-básico { background: linear-gradient(135deg, #2e7d32, #1b5e20); }
+                .node.principal.level-intermedio { background: linear-gradient(135deg, #1565c0, #01579b); }
+                .node.principal.level-avanzado { background: linear-gradient(135deg, #c62828, #b71c1c); }
+                .branch { animation: scaleUp 0.4s ease-out both; }
+                .node.video-node, .eval-node-container { animation: fadeInUp 0.5s ease-out both; }
+                @keyframes scaleUp { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+            `;
+            document.head.appendChild(style);
+        }
     }
 
-    // Initial Dashboard Sync
+    // Initial Sync
     updateHealthScore();
+    updateObjectivePreview();
 
 });
