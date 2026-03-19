@@ -727,13 +727,12 @@ INSTRUCCIÓN CRÍTICA: Cada sección de la respuesta debe ser revisada por los t
                     break;
                 case 'evaluacion':
                     objectiveText = `Generar la "Evaluación Integradora Final" NIVEL AVANZADO para "${courseName}".`;
-                    stepText = `1. EVALUACIÓN FINAL INTEGRADORA: formativa e integradora de todo el curso.
+                    stepText = `1. EVALUACIÓN FINAL INTEGRADORA: de alta complejidad técnica, enfocada en la toma de decisiones y análisis experto.
 2. CANTIDAD: Entre 15 y 20 ítems.
-3. FORMATO: Preguntas de Verdadero/Falso o Múltiple Choice.
-4. CARÁCTER: Formulario descriptivo con imágenes. Integración que complemente lo desarrollado en los 4 módulos. "Pequeñas pistas" o palabras clave pensadas de modo sumatorio.
-5. Incluir: respuestas correctas, aclaraciones y/o respuestas autoguardadas para cada ítem.
-
-NOTA: Previamente, al cierre de Módulos 1-2 y Módulos 3-4, proponer actividades parciales de 2 a 3 ejercicios cada una (sin devolución).`;
+3. FORMATO: Múltiple Choice con 4 a 5 opciones de respuesta posibles por ítem.
+4. CARÁCTER: Utilizar TABLAS profesionales para presentar las consignas y opciones.
+5. MANDATO: ES OBLIGATORIO incluir la respuesta correcta (o respuestas si aplica) y una profunda aclaración pedagógica para cada ítem.`;
+                    break;
                     break;
                 default:
                     objectiveText = `Generar la Estructura Completa de Secuencia Didáctica (SD) NIVEL AVANZADO para "${courseName}".`;
@@ -753,7 +752,7 @@ NOTA: Previamente, al cierre de Módulos 1-2 y Módulos 3-4, proponer actividade
 3. AUDIOVISUAL: 2 videos (90s-3min c/u). VIDEO 1: integra M1, M2 y M3. VIDEO 2: integra M4, M5 y M6.
    - Guion: Arial/Calibri 12, interlineado 1.5. Estructura: Intro (10s) → Presentación (15s) → Desarrollos x5 (15s c/u) → Cierre (10s) → Despedida (5s).
 
-4. EVALUACIÓN FINAL: 15-20 ítems (V/F o Múltiple Choice) integradores. ES OBLIGATORIO incluir la respuesta correcta y una breve aclaración pedagógica para cada ítem.`;
+4. EVALUACIÓN FINAL: 15-20 ítems (Múltiple Choice con 4-5 opciones) integradores. ES OBLIGATORIO incluir la respuesta correcta y una aclaración pedagógica para cada ítem en formato de TABLA.`;
             }
             knowledgeBaseAddons = `6. **Bibliografía y Citas (APA 7)**: Cita directa entre comillas (Autor, Año, p. X). Paráfrasis: citar (Autor, Año). Lista bibliográfica alfabética al final. Recursos visuales: Creative Commons.`;
             executionMandates = `- **FORMATO .DOC → PDF**: Calibri 11, A4. No superar 24-30 carillas totales del curso.
@@ -785,11 +784,10 @@ NOTA: Previamente, al cierre de Módulos 1-2 y Módulos 3-4, proponer actividade
 4. MAPA CONCEPTUAL (instrucciones para equipo de producción):
    - Tema Principal: [Especifica el tema central del curso]
    - Subtemas: [Subtema 1], [Subtema 2], [Subtema 3]
-   - Indicar: "Dibujar a mano alzada o insertar imagen del mapa conceptual con ideas principales y recorrido similar a estructura de pensamiento."
+   - Indicar: "Dibujar a mano alzada o insertar imagen del mapa conceptual con las ideas más importantes y el recorrido similar a la estructura de pensamiento."
 
-5. CRONOGRAMA / PLAN DE TRABAJO:
-   - Indicar que se completa en archivo Word aparte dentro de la carpeta del curso.
-   - Etiqueta: "CRONOGRAMA Y NOMBRE DEL CURSO" (ej: PLAN DE TRABAJO DE MARKETING PARA EMPRENDEDORES).`;
+5. EXCLUSIÓN CRÍTICA:
+   - No incluir "Cronograma de Actividades" ni "Plan de Trabajo" en este bloque.`;
                     break;
                 case 'bloque-1':
                     objectiveText = `Desarrollar los "Módulos Escritos (PDF)" NIVEL INTERMEDIO para el curso "${courseName}".`;
@@ -797,10 +795,13 @@ NOTA: Previamente, al cierre de Módulos 1-2 y Módulos 3-4, proponer actividade
    - MÓDULO 1 al 4: [Nombre del módulo] - Extensión: 2 a 3 páginas.
    - No superar 12 a 15 carillas TOTALES del curso.
 
-2. CADA MÓDULO DEBE INCLUIR:
-   a) Página de Introducción a la Clase: objetivos del módulo, contenidos y recomendaciones para el estudio.
-   b) Contenidos: explicación detallada para el armado de las placas/PDF.
-   c) Archivos de Práctica (optativo): ejercicios descargables o cuestionarios básicos para aplicar los conceptos. NO pedir entregas extensas. Pensar en actividades sumatorias a lo largo de los 4 módulos.
+2. CADA MÓDULO DEBE INCLUIR (PROFUNDIZACIÓN):
+   - Prohibido generar información superficial o escueta.
+   - Desarrollar conceptos complejos, casos de estudio, aplicaciones prácticas y marcos teóricos robustos. 
+   - Densidad informativa para un estudio autodidacta efectivo.
+   a) Página de Introducción: objetivos del módulo, contenidos y recomendaciones para el estudio.
+   b) Contenidos: desarrollo profundo y detallado para el armado de las placas/PDF.
+   c) Archivos de Práctica: ejercicios de aplicación o análisis de situaciones.
 
 3. FORMATO: Calibri 11, interlineado sencillo, A4. Cuidar imágenes: sin derechos de autor, licencia abierta o Creative Commons. Listar comentarios descriptivos para equipo de gráfica.
 
@@ -811,57 +812,60 @@ NOTA: Previamente, al cierre de Módulos 1-2 y Módulos 3-4, proponer actividade
                     break;
                 case 'bloque-2':
                     objectiveText = `Crear el "Módulo Audiovisual" (NIVEL INTERMEDIO) para "${courseName}".`;
-                    stepText = `1. CANTIDAD Y DURACIÓN:
-   - Opción A: 2 videos integradores de máximo 90 segundos cada uno.
-   - Opción B: 1 video de máximo 3 minutos.
-   - Son videos interactivos, integradores y complementarios de actividades de mayor complejidad.
+                    stepText = `1. DURACIÓN Y OBJETO:
+   - Guion de locución profesional para un video de 3 a 4 minutos de duración.
+   - Synthetizar los puntos críticos y conceptos clave de todos los módulos desarrollados.
+   - Son videos integradores y de profundización para estudio autodidacta.
 
 2. FORMATO DEL GUION:
    - Tipografía: Arial o Calibri. Tamaño: 12. Interlineado: 1.5.
-   - 1 minuto = 1 carilla (respetar extensión máxima).
-   - Pueden adjuntarse links de videos de referencia para el equipo de producción.
+   - Utilizar BLOQUES DE CITA para la locución.
+   - Incluir marcas de tiempo estimadas y sugerencia de tono (ej. corporativo, cercano o técnico).
 
-3. ESTRUCTURA DE CADA GUION:
-   a) Introducción (10 segundos): Visual + Locución de bienvenida al tema.
-   b) Presentación del Tema (15 segundos): Mostrar contexto o página/pantalla principal. Locución motivadora.
-   c) Desarrollo (25 segundos): Grabación de pantalla o visuales técnicos. Paso a paso claro.
-   d) Cierre (10 segundos): Visual de bienvenida o logo. Locución de felicitación e invitación a continuar.
-   e) Despedida (5 segundos): Logo + Locución de cierre.
+3. ESTRUCTURA DEL GUION:
+   a) Introducción (10-15 segundos): Visual + Locución de bienvenida al tema global.
+   b) Desarrollo de Puntos Críticos (2-3 minutos): Desglose de los conceptos más complejos de los módulos 1 a 4.
+   c) Síntesis y Aplicación Práctica (30-45 segundos): Resumen de cómo aplicar lo aprendido.
+   d) Cierre y Despedida (15 segundos): Invitación a la evaluación integradora.
 
 4. PAUTAS DE ESTILO:
-   - Lenguaje claro, sin jerga técnica. Subtítulos para accesibilidad.
-   - Ofrecer enlaces a tutoriales adicionales o soporte si corresponde.`;
+   - Lenguaje profesional, técnico pero accesible. Sin jerga innecesaria.
+   - Marcar claramente los momentos de "Voice-Over".`;
                     break;
                 case 'evaluacion':
-                    objectiveText = `Generar la "Evaluación Interactiva" NIVEL INTERMEDIO para "${courseName}".`;
-                    stepText = `1. CUESTIONARIO formativo e integrador del curso.
-2. CANTIDAD: Entre 8 y 10 ítems.
-3. FORMATO: Preguntas de Verdadero/Falso o Múltiple Choice.
-4. CARÁCTER: Formulario descriptivo con imágenes, integración desarrollada en "pequeñas pistas" o palabras clave que se piensen de modo sumatorio a lo largo de los módulos.
+                    objectiveText = `Generar la "Evaluación Integradora de Aprendizaje" NIVEL INTERMEDIO para "${courseName}".`;
+                    stepText = `1. CUESTIONARIO de nivel intermedio: evita memorización simple, enfócate en la aplicación y el análisis.
+2. CANTIDAD: Exactamente 10 consignas (ítems).
+3. FORMATO: Múltiple Choice con entre 4 y 5 opciones de respuesta posibles por ítem.
+4. CARÁCTER: Utilizar TABLAS profesionales para presentar las consignas y opciones.
 5. Incluir: ES OBLIGATORIO incluir la respuesta correcta y una breve aclaración pedagógica para cada ítem.`;
                     break;
                 default:
-                    objectiveText = `Generar la Estructura Completa de Secuencia Didáctica (SD) NIVEL INTERMEDIO para "${courseName}".`;
-                    stepText = `1. UNIDAD GENERAL - PRESENTACIÓN:
-   - Bienvenida (máx. 100 pal, lenguaje claro, neutro, sin lenguaje inclusivo). Recuperar nivel Básico si corresponde.
-   - Presentación del Curso (máx. 200 pal): introducción y desarrollo breve de módulos.
-   - Objetivos (4-5): "Al finalizar, serás capaz de..." Verbos: Definir, Reconocer, Identificar, Comprender, Valorar.
-   - Mapa Conceptual: Tema Principal + Subtemas 1 al 4.
-   - Cronograma: archivo Word aparte, etiquetado con nombre del curso.
+                    objectiveText = `Actuar como Experto en Diseño Instruccional Senior para generar una Secuencia Didáctica (SD) de alta calidad técnica (Nivel INTERMEDIO) para "${courseName}".`;
+                    stepText = `1. PRESENTACIÓN Y MAPA CONCEPTUAL:
+   - PRESENTACIÓN: Listar explícitamente los nombres de los 4 módulos que componen la formación.
+   - MAPA CONCEPTUAL: Construir una estructura jerárquica clara que refleje la interconexión lógica, incluyendo los nombres de los 4 módulos.
+   - EXCLUSIÓN ABSOLUTA: No incluir "Cronograma de Actividades" ni "Plan de Trabajo". La estructura debe saltar directamente al desarrollo de contenidos.
 
-2. MÓDULOS (4 escritos en .doc, PDF final):
-   - Módulo 1 al 4: 2 a 3 páginas cada uno. Total: máx. 12-15 carillas.
-   - Cada módulo: Introducción a la clase → Contenidos para PDF → Archivo de práctica (optativo).
-   - Calibri 11, imágenes sin derechos de autor. Bibliografía APA 7 al final.
+2. MÓDULOS DE CONTENIDO (4 Módulos):
+   - Queda estrictamente prohibido generar información superficial o escueta.
+   - Desarrollar cada módulo (M1 a M4) con una extensión mínima de 3 carillas.
+   - Incluir conceptos complejos, casos de estudio detallados, aplicaciones prácticas y marcos teóricos robustos.
+   - Densidad informativa suficiente para un estudio autodidacta profesional y efectivo.
 
-3. AUDIOVISUAL: 2 videos (máx 90s c/u) o 1 video (máx 3min). Guion: Arial/Calibri 12, interlineado 1.5. Estructura: Intro (10s) → Presentación (15s) → Desarrollo (25s) → Cierre (10s) → Despedida (5s).
-   - Video 1: sintetiza M1 y M2.
-   - Video 2: sintetiza M3 y M4.
+3. GUIÓN PARA VIDEO RESUMEN (VOICE-OVER):
+   - Generar un guion de locución profesional para un video de 3 a 4 minutos.
+   - El guion debe sintetizar y resumir los puntos críticos y temas más importantes de todos los módulos desarrollados.
+   - Incluir marcas de tiempo estimadas y bloques de cita para la locución.
 
-4. EVALUACIÓN: 8 a 10 ítems (V/F o Múltiple Choice). ES OBLIGATORIO incluir la respuesta correcta y una breve aclaración pedagógica para cada ítem.`;
+4. EVALUACIÓN DE APRENDIZAJE:
+   - Exactamente 10 ítems con 4 a 5 opciones de respuesta. ES OBLIGATORIO incluir la respuesta correcta y la aclaración pedagógica.
+   - Enfoque en aplicación de conocimientos y análisis de situaciones. Presentar en TABLAS.
+
+5. FLUJO OBLIGATORIO: Presentación > Mapa Conceptual > Módulos Desarrollados > Guion de Video > Evaluación.`;
             }
             knowledgeBaseAddons = `6. **Bibliografía y Citas (APA 7)**: Cita directa entre comillas (Autor, Año, p. X). Paráfrasis: citar (Autor, Año). Lista bibliográfica alfabética al final.`;
-            executionMandates = `- **FORMATO .DOC → PDF**: Calibri 11, A4. No superar 10-12 carillas totales del curso.\n- **ESTILO**: Lenguaje claro, NO INCLUSIVO, sencillo, sin modismos, en neutro.\n- **GRADUALIDAD**: Cada módulo correspond a un objetivo de aprendizaje.\n- **IMÁGENES**: Sin derechos de autor, licencia abierta o Creative Commons. Articular con equipo de gráfica.\n- **EXTENSIÓN CRÍTICA**: Módulos de 2 a 3 páginas. Se exige la MÁXIMA EXTENSIÓN posible, con alto detalle en explicaciones y ejemplos.`;
+            executionMandates = `- **FORMATO .DOC → PDF**: Calibri 11, A4. Total de 12-15 carillas profesionales.\n- **ESTILO**: Lenguaje claro, NO INCLUSIVO, sencillo, sin modismos, en neutro.\n- **GRADUALIDAD**: Cada módulo correspond a un objetivo de aprendizaje.\n- **EXCLUSIÓN CRÍTICA**: Queda TERMINANTEMENTE PROHIBIDO incluir Cronogramas o Planes de Trabajo en la SD. La SD no debe contener calendarios.\n- **IMÁGENES**: Sin derechos de autor, licencia abierta o Creative Commons.\n- **EXTENSIÓN Y PROFUNDIDAD**: Mínimo 3 páginas por módulo. Se exige la MÁXIMA EXTENSIÓN posible, con alta densidad informativa, marcos teóricos robustos y aplicaciones prácticas. Prohibido el contenido genérico o breve.`;
         } else {
             // BASIC LEVEL STRUCTURE - Lineamientos Institucionales Oficiales
             switch (block) {
@@ -912,19 +916,18 @@ NOTA: Previamente, al cierre de Módulos 1-2 y Módulos 3-4, proponer actividade
 4. NOTA: El guion debe pasar por el equipo contenidista correspondiente para su aprobación.`;
                     break;
                 case 'evaluacion':
-                    objectiveText = `Generar la "Evaluación Integradora" NIVEL BÁSICO (5 consignas) para "${courseName}".`;
-                    stepText = `1. CANTIDAD: 5 consignas en total.
-2. FORMATOS posibles: Verdadero/Falso, Múltiple Choice (4 a 5 opciones de respuesta), Sopa de letras, Crucigrama.
-3. Las consignas deben abordar los núcleos temáticos y estar alineadas con los objetivos del curso.
-4. La evaluación es una instancia de aprendizaje: apuntar a los conceptos centrales de cada módulo.
-5. ES OBLIGATORIO proporcionar la respuesta correcta y una breve explicación para cada consigna.`;
+                    objectiveText = `Generar la "Evaluación Integradora" NIVEL BÁSICO para "${courseName}".`;
+                    stepText = `1. CANTIDAD: 5 consignas (ítems) fundamentales alineadas con los objetivos básicos.
+2. FORMATOS: Múltiple Choice con 4 a 5 opciones de respuesta por ítem.
+3. CARÁCTER: Presentar en TABLAS claras y profesionales.
+4. MANDATO: ES OBLIGATORIO proporcionar la respuesta correcta y una explicación pedagógica clara para cada consigna.`;
                     break;
                 default:
                     objectiveText = `Generar la Estructura Completa de Secuencia Didáctica (SD) NIVEL BÁSICO para "${courseName}".`;
                     stepText = `1. PRESENTACIÓN: Bienvenida (VOS → NOSOTROS) + Guía SD (Nombre, Nivel, Objetivos 2-4 verbos infinitivo, Plan de Trabajo, Mapa del Curso).
 2. BLOQUE I: 2 módulos PDF (3-5 carillas, Calibri 11, A4). Estructura: Título N1, Introducción ≤50 pal, Desarrollo máx 2 subtemas, Conclusión, Bibliografía APA 7.
 3. BLOQUE II: Guion (máx 4 min). Video INTEGRADOR de los 2 módulos. Con sugerencias de imágenes.
-4. EVALUACIÓN: 5 consignas (V/F, Múltiple Choice 4-5 opciones, Sopa de letras o Crucigrama). Alineadas a objetivos. ES OBLIGATORIO incluir las respuestas correctas.`;
+4. EVALUACIÓN: 5 consignas (Múltiple Choice con 4-5 opciones) alineadas a los objetivos. ES OBLIGATORIO incluir las respuestas correctas y explicaciones en formato de TABLA.`;
             }
             executionMandates = `- **FORMATO PDF**: Calibri 11, interlineado sencillo, A4. Extensión: 3 a 5 carillas por módulo.\n- **ESTRUCTURA MODULAR**: Título N1 centrado/negrita → Introducción ≤50 pal → Desarrollo (máx 2 subtemas) → Conclusión → Bibliografía APA 7.\n- **VIÑETAS**: mayúscula inicial, punto final. Numerar solo cuando el orden es esencial.\n- **CITAS APA 7**: Directa <40 pal entre comillas; >40 pal en bloque con sangría. Paráfrasis: citar autor+año. La IA NO es fuente citable.\n- **IMÁGENES**: alta calidad, sin marcas de agua. Articular con equipo de gráfica. Numerar correlativamente.\n- **EXTENSIÓN CRÍTICA**: Se exige la MÁXIMA EXTENSIÓN posible dentro del rango de 3 a 5 carillas, evitando resúmenes y profundizando en cada punto.`;
         }
@@ -955,10 +958,10 @@ ${objectiveText}
 - **Estrategia:** Enfoque ${pedagogy} con tono ${tone}.
 
 ### KNOWLEDGE BASE (K) - Pautas Institucionales & Estrategia "Modo IA"
-1. **Redacción de Presentación**: Bienvenida (Vos -> Nosotros). Pestaña para equipo de carga. Incluye Guía SD y referencia a Mapa (espejo contenido).
-2. **Bloque I (PDF)**: Desarrollar con MÁXIMA EXTENSIÓN. ${isAdvanced ? '6 módulos de 4-5 páginas cada uno.' : isIntermediate ? '4 módulos de 2-3 páginas cada uno.' : '2 módulos de 3-5 carillas cada uno.'}
-3. **Bloque II (Video)**: ${isAdvanced ? '2 videos integradores (M1-3 y M4-6).' : isIntermediate ? '2 videos integradores (M1-2 y M3-4).' : 'Video integrador global.'} Sugerir imágenes conceptuales.
-4. **Evaluación**: ${isAdvanced ? '15 a 20 consignas con rúbricas.' : isIntermediate ? '8 a 10 consignas variadas.' : '5 consignas fundamentales.'} Proponer formatos interactivos.
+1. **Redacción de Presentación**: Bienvenida (Vos -> Nosotros). Pestaña para equipo de carga. Incluye Guía SD y referencia a Mapa (espejo contenido). ${isIntermediate ? 'MANDATO: EXCLUIR Cronograma / Plan de Trabajo de la presentación.' : ''}
+2. **Bloque I (PDF)**: Desarrollar con MÁXIMA EXTENSIÓN. ${isAdvanced ? '6 módulos de 4-5 páginas cada uno.' : isIntermediate ? '4 módulos de 2-3 páginas cada uno (densidad alta).' : '2 módulos de 3-5 carillas cada uno.'}
+3. **Bloque II (Video)**: ${isAdvanced ? '2 videos integradores (M1-3 y M4-6).' : isIntermediate ? 'Guion de video resumen (3 a 4 min).' : 'Video integrador global.'} Sugerir imágenes conceptuales.
+4. **Evaluación**: ${isAdvanced ? '15 a 20 consignas con rúbricas.' : isIntermediate ? 'Exactamente 10 consignas de aplicación/análisis.' : '5 consignas fundamentales.'} ES OBLIGATORIO incluir siempre la respuesta correcta y la aclaración pedagógica en TABLAS.
 5. **Verificación de Datos**: Comprobar información en múltiples fuentes (mínimo 3 sitios). Si hay ambigüedad, priorizar el contexto de Formando Capital Humano.
 ${knowledgeBaseAddons}
 6. **Restricciones Temáticas (EXCLUSIÓN CRÍTICA)**: Queda TERMINANTEMENTE PROHIBIDO incluir referencias, terminología o enfoques relacionados con: Justicia social, Juventudes, Lenguaje inclusivo, Educación popular o Educación comunitaria.
@@ -968,7 +971,7 @@ ${knowledgeBaseAddons}
 - **MÁXIMA EXTENSIÓN**: Escribe de forma exhaustiva. Expande cada subtema, incluye ejemplos prácticos y detalles técnicos. El objetivo es alcanzar o superar los mínimos de carillas solicitados.
 ${stepText}
 ${executionMandates}
-- **RESTRICCIÓN DE CONTENIDO**: Ignora y excluye cualquier sesgo o tema vinculado a Justicia social, Juventudes, Lenguaje inclusivo, Educación popular o Educación comunitaria.
+- **RESTRICCIÓN DE CONTENIDO**: Ignora y excluye cualquier sesgo o tema vinculado a Justicia social, Juventudes, Lenguaje inclusivo, Educación popular o Educación comunitaria. ${isIntermediate ? 'Asimismo, EXCLUYE la generación de Cronogramas, Planes de Trabajo o Calendarios.' : ''}
 - Si el contenido es insuficiente, aplica una nueva rama de búsqueda sobre los subconceptos técnicos detectados.
 - El contenido debe estar equilibrado hacia la ${tone}.
 - Títulos: N1 (Centrado), N2 (Izquierda), N3 (Izquierda+Cursiva). Negrita y Mayúsculas iniciales.
@@ -1081,11 +1084,11 @@ Utiliza un tono ${tone}. Comunicación profesional y motivadora. Recursos sugeri
                 previewText = `Desarrollar el <strong>"Bloque I: Contenidos"</strong> (${detail}) [Nivel: ${level}] para el curso <strong>"${courseName}"</strong>.`;
                 break;
             case 'bloque-2':
-                const videos = level === 'Avanzado' ? '2 videos integradores' : (level === 'Intermedio' ? '2 videos (máx 90s) o 1 video (máx 3min)' : '1 video (máx 4min)');
+                const videos = level === 'Avanzado' ? '2 videos integradores' : (level === 'Intermedio' ? 'Guion de video resumen (3-4 min)' : '1 video (máx 4min)');
                 previewText = `Crear el <strong>"Bloque II: Módulo Audiovisual"</strong> (${videos}) [Nivel: ${level}] para el curso <strong>"${courseName}"</strong>.`;
                 break;
             case 'evaluacion':
-                const items = level === 'Avanzado' ? '15-20 ítems' : (level === 'Intermedio' ? '8-10 ítems' : '5 consignas');
+                const items = level === 'Avanzado' ? '15-20 ítems' : (level === 'Intermedio' ? '10 ítems' : '5 consignas');
                 previewText = `Generar la <strong>"Evaluación Integradora"</strong> (${items}) [Nivel: ${level}] para el curso <strong>"${courseName}"</strong>.`;
                 break;
             default:
@@ -1157,17 +1160,21 @@ Utiliza un tono ${tone}. Comunicación profesional y motivadora. Recursos sugeri
 
         // Generate Videos
         html += `<div class="videos-row-course-map" style="animation-delay: ${0.1 * (modulesCount + 1)}s">`;
-        videoLabels.forEach((label, idx) => {
-            html += `
-                <div class="node video-node" style="animation-delay: ${0.1 * (modulesCount + idx + 1)}s">
-                    <i class="fas fa-video"></i> ${label}
-                </div>
-            `;
-        });
+        if (level === 'Intermedio') {
+            html += `<div class="node video-node"><i class="fas fa-video"></i> VIDEO RESUMEN (3-4 MIN)</div>`;
+        } else {
+            videoLabels.forEach((label, idx) => {
+                html += `
+                    <div class="node video-node" style="animation-delay: ${0.1 * (modulesCount + idx + 1)}s">
+                        <i class="fas fa-video"></i> ${label}
+                    </div>
+                `;
+            });
+        }
         html += `</div>`;
 
         // Generate Evaluation
-        const evalItems = level === 'Avanzado' ? '15-20 ítems' : (level === 'Intermedio' ? '8-10 ítems' : '5 consignas');
+        const evalItems = level === 'Avanzado' ? '15-20 ítems' : (level === 'Intermedio' ? '10 ítems' : '5 consignas');
         html += `
             <div class="eval-node-container" style="animation-delay: ${0.1 * (modulesCount + videoLabels.length + 1)}s">
                 <div class="node eval-node">
