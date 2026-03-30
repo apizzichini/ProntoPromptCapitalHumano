@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abordaje Integral | Pronto Prompt</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <a href="index.html" class="back-portal-link"><i class="fas fa-arrow-left"></i> Volver al Portal</a>
+
+    <main class="container">
+        <div class="main-content">
+            <header>
+                <div class="logo">
+                    <span class="logo-text">Pronto<span class="accent">Prompt</span></span>
+                </div>
+                <h1>Cursos Especiales</h1>
+                <p class="subtitle">Estructura Profesional de Abordaje Integral y Preventivo</p>
+            </header>
+
+            <div class="section-header-main">
+                <h2>Diseño de Contenido Especializado</h2>
+            </div>
+
+            <!-- Identidad -->
+            <div class="form-card">
+                <div class="card-header-flex">
+                    <h3 class="section-title"><i class="fas fa-id-card"></i> 1. Identidad y Propósito</h3>
+                    <div class="brain-selector-container">
+                        <span class="brain-label">AI:</span>
+                        <div class="brain-options">
+                            <label class="brain-chip"><input type="radio" name="ai-model" value="gemini" checked><span>Gemini</span></label>
+                            <label class="brain-chip"><input type="radio" name="ai-model" value="chatgpt"><span>GPT-4</span></label>
+                            <label class="brain-chip"><input type="radio" name="ai-model" value="perplexity"><span>Perplexity</span></label>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group full-width">
+                        <label>Comité de Expertos</label>
+                        <div class="committee-selector" id="expert-selector">
+                            <input type="checkbox" id="expert-standard" name="expert-layer" value="standard" checked>
+                            <label for="expert-standard" class="expert-chip"><i class="fas fa-user-tie"></i> Estándar</label>
+                            <input type="checkbox" id="expert-pedagogical" name="expert-layer" value="pedagogical">
+                            <label for="expert-pedagogical" class="expert-chip"><i class="fas fa-users"></i> Pedagógico</label>
+                            <input type="checkbox" id="expert-full" name="expert-layer" value="full">
+                            <label for="expert-full" class="expert-chip"><i class="fas fa-microchip"></i> Deep-Agentic</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label for="course-name">Nombre del Curso / Problemática</label>
+                        <input type="text" id="course-name" placeholder="Ej: Prevención del Suicidio en Adolescentes" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="target-audience">Población / Etapa Vital</label>
+                        <input type="text" id="target-audience" placeholder="Ej: Jóvenes de 13 a 18 años" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="organisms">Organismos Responsables</label>
+                        <input type="text" id="organisms" placeholder="Ej: Ministerio de Salud, Formando Capital Humano">
+                    </div>
+                    <div class="input-group">
+                        <label for="tech-team">Equipo Técnico</label>
+                        <input type="text" id="tech-team" placeholder="Ej: Dirección de Salud Mental y Prevención">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Estructura de 11 Puntos -->
+            <div class="form-card">
+                <h3 class="section-title"><i class="fas fa-list-ol"></i> 2. Definición de Bloques Críticos</h3>
+                <div class="input-grid">
+                    <div class="input-group full-width">
+                        <label for="problem-concept">Introducción y Propósito Pedagógico (Contexto de la problemática)</label>
+                        <textarea id="problem-concept" rows="3" placeholder="Define brevemente la problemática y por qué es multicausal..."></textarea>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Puntos a Enfatizar</label>
+                        <div class="keyword-container">
+                            <span class="keyword-tag active" data-value="Mitos vs Realidad">Mitos vs Realidad</span>
+                            <span class="keyword-tag active" data-value="Señales de Alerta">Señales de Alerta</span>
+                            <span class="keyword-tag active" data-value="Factores de Riesgo">Factores de Riesgo</span>
+                            <span class="keyword-tag active" data-value="Primera Escucha">Primera Escucha</span>
+                            <span class="keyword-tag active" data-value="Marco Normativo">Marco Normativo</span>
+                            <span class="keyword-tag active" data-value="Posvención">Posvención</span>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="model-intervention">Modelo de Intervención</label>
+                        <select id="model-intervention">
+                            <option value="triple-fase">Modelo Triple Fase (Alerta, Atención, Posvención)</option>
+                            <option value="preventivo-integral">Preventivo Integral</option>
+                            <option value="clinico-social">Clínico-Social</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <section id="result-section" class="result-card">
+                <div class="result-actions">
+                    <button id="generate-btn" class="primary-btn large">Generar Prompt de Abordaje Integral</button>
+                </div>
+                <div class="prompt-output" id="prompt-output"></div>
+                <div id="copy-container" class="copy-container hidden">
+                    <button id="copy-btn" class="primary-btn large secondary">Copiar Prompt</button>
+                </div>
+                <div id="ai-actions" class="hidden">
+                    <p class="copy-instruction">Copia el prompt y úsalo en tu IA preferida:</p>
+                </div>
+                <div id="ai-links" class="ai-links hidden">
+                    <div class="links-grid">
+                        <a href="https://chat.openai.com" target="_blank" class="ai-link-btn gpt">ChatGPT</a>
+                        <a href="https://gemini.google.com" target="_blank" class="ai-link-btn gemini">Gemini</a>
+                        <a href="https://www.perplexity.ai" target="_blank" class="ai-link-btn perplexity">Perplexity</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="script-otras.js"></script>
+</body>
+
+</html>

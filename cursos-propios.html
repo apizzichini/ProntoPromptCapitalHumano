@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos Propios | Pronto Prompt</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <a href="index.html" class="back-portal-link"><i class="fas fa-arrow-left"></i> Volver al Portal</a>
+
+    <main class="container">
+        <div class="main-content">
+            <header>
+                <div class="logo">
+                    <span class="logo-text">Pronto<span class="accent">Prompt</span></span>
+                </div>
+                <h1>Cursos Propios</h1>
+                <p class="subtitle">Generador de cursos y recursos para Formando Capital Humano</p>
+            </header>
+
+            <div class="section-header-main">
+                <h2>Diseño Instruccional (Secuencia Didáctica)</h2>
+            </div>
+
+            <div class="sparkle-container" id="sparkle-suggestion"></div>
+
+            <!-- Modal para Mapa del Curso -->
+            <div id="course-map-modal" class="course-map-modal hidden">
+                <div class="course-map-content">
+                    <div class="course-map-header">
+                        <h3><i class="fas fa-project-diagram"></i> Mapa del Curso</h3>
+                        <button id="close-course-map" class="close-btn">&times;</button>
+                    </div>
+                    <div id="course-map-tree" class="course-map-tree"></div>
+                    <p class="course-map-footer">Esta estructura se incluirá automáticamente en tu prompt para guiar a la IA.</p>
+                </div>
+            </div>
+
+            <!-- Modal para Glosario Institucional -->
+            <div id="glossary-modal" class="glossary-modal hidden">
+                <div class="glossary-content">
+                    <div class="glossary-header">
+                        <h3><i class="fas fa-book"></i> Glosario de Pautas Institucionales</h3>
+                        <button id="close-glossary" class="close-btn">&times;</button>
+                    </div>
+                    <div id="glossary-list" class="glossary-list"></div>
+                    <p class="glossary-footer">Estas recomendaciones buscan profesionalizar la comunicación y evitar sesgos o terminología no institucional.</p>
+                </div>
+            </div>
+
+            <!-- Sección 1: Identidad -->
+            <div class="form-card">
+                <div class="card-header-flex">
+                    <h3 class="section-title"><i class="fas fa-id-card"></i> 1. Identidad del Proyecto</h3>
+                    <div class="brain-selector-container">
+                        <span class="brain-label">Cerebro AI:</span>
+                        <div class="brain-options">
+                            <label class="brain-chip" title="Optimizado para Gemini">
+                                <input type="radio" name="ai-model" value="gemini" checked>
+                                <span><i class="fas fa-stars"></i> Gemini</span>
+                            </label>
+                            <label class="brain-chip" title="Optimizado para ChatGPT">
+                                <input type="radio" name="ai-model" value="chatgpt">
+                                <span><i class="fas fa-bolt"></i> GPT-4</span>
+                            </label>
+                            <label class="brain-chip" title="Optimizado para Perplexity">
+                                <input type="radio" name="ai-model" value="perplexity">
+                                <span><i class="fas fa-search"></i> Perplexity</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="input-group full-width">
+                        <label>Comité de Expertos Virtuales (Máximo 3) <span class="badge-new">PRO</span></label>
+                        <div class="committee-selector" id="expert-selector">
+                            <input type="checkbox" id="expert-standard" name="expert-layer" value="standard" checked>
+                            <label for="expert-standard" class="expert-chip" title="Rol estándar de Profesor Senior">
+                                <i class="fas fa-user-tie"></i>
+                                <div class="expert-info">
+                                    <span class="expert-name">Estándar</span>
+                                    <span class="expert-desc">Profesor Senior</span>
+                                </div>
+                            </label>
+
+                            <input type="checkbox" id="expert-pedagogical" name="expert-layer" value="pedagogical">
+                            <label for="expert-pedagogical" class="expert-chip" title="Comité: Pedagogo + Arquitecto de Contenidos">
+                                <i class="fas fa-users"></i>
+                                <div class="expert-info">
+                                    <span class="expert-name">Pedagógico</span>
+                                    <span class="expert-desc">Dúo de Diseño</span>
+                                </div>
+                            </label>
+
+                            <input type="checkbox" id="expert-full" name="expert-layer" value="full">
+                            <label for="expert-full" class="expert-chip" title="Comité: Pedagogo + Experto UX + Corrector">
+                                <i class="fas fa-microchip"></i>
+                                <div class="expert-info">
+                                    <span class="expert-name">Deep-Agentic</span>
+                                    <span class="expert-desc">Trío de Crítica</span>
+                                </div>
+                            </label>
+
+                            <input type="checkbox" id="expert-director" name="expert-layer" value="director">
+                            <label for="expert-director" class="expert-chip" title="Comité Directivo Estratégico">
+                                <i class="fas fa-chess-king"></i>
+                                <div class="expert-info">
+                                    <span class="expert-name">Director</span>
+                                    <span class="expert-desc">Estratégico</span>
+                                </div>
+                            </label>
+
+                            <input type="checkbox" id="expert-coordination" name="expert-layer" value="coordination">
+                            <label for="expert-coordination" class="expert-chip" title="Mesa de Coordinación Operativa">
+                                <i class="fas fa-sitemap"></i>
+                                <div class="expert-info">
+                                    <span class="expert-name">Coordinación</span>
+                                    <span class="expert-desc">Articulador</span>
+                                </div>
+                            </label>
+
+                            <input type="checkbox" id="expert-agentes" name="expert-layer" value="agentes">
+                            <label for="expert-agentes" class="expert-chip" title="Comunidad de Agentes de Cambio">
+                                <i class="fas fa-rocket"></i>
+                                <div class="expert-info">
+                                    <span class="expert-name">Agentes</span>
+                                    <span class="expert-desc">Innovación</span>
+                                </div>
+                            </label>
+                        </div>
+                        <div id="expert-limit-warning" class="expert-limit-warning hidden">
+                            <i class="fas fa-exclamation-circle"></i> Puedes seleccionar un máximo de 3 expertos a la vez.
+                        </div>
+                    </div>
+                </div>
+                <div class="input-grid">
+                    <div class="input-group">
+                        <div class="label-row">
+                            <label for="course-name">Nombre del Curso</label>
+                            <div class="label-actions">
+                                <button id="magic-fill" class="magic-btn" title="Autocompletar ejemplo">✨ Prueba un ejemplo</button>
+                            </div>
+                        </div>
+                        <input type="text" id="course-name" placeholder="Ej: Introducción a la IA Generativa" required>
+                        <div id="compliance-alert" class="compliance-alert hidden"></div>
+                    </div>
+                    <div class="input-group">
+                        <label for="audience">Público Objetivo</label>
+                        <select id="audience" required>
+                            <option value="">Selecciona el público...</option>
+                            <option value="beneficiarios de programas sociales">Beneficiarios de programas
+                                sociales</option>
+                            <option value="estudiantes">Estudiantes</option>
+                            <option value="población en situación de vulnerabilidad">Población en situación
+                                de vulnerabilidad</option>
+                            <option value="jóvenes en búsqueda laboral">Jóvenes en búsqueda laboral</option>
+                            <option value="emprendedores locales">Emprendedores locales</option>
+                            <option value="adultos mayores">Adultos mayores</option>
+                            <option value="ATP (Apto para Todo Público)">ATP (Apto para Todo Público) </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 2: Marco Institucional -->
+            <div class="form-card">
+                <h3 class="section-title"><i class="fas fa-university"></i> 2. Marco Institucional</h3>
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label for="eje-base">Eje Base Institucional</label>
+                        <select id="eje-base" required>
+                            <option value="">Selecciona un eje base...</option>
+                            <option value="promocion-humana">Promoción Humana</option>
+                            <option value="primera-infancia">Primera infancia y Niñez</option>
+                            <option value="adolescencia-juventud">Adolescencia y Juventud</option>
+                            <option value="adultos-mayores">Adultos Mayores</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="area-tematica">Área Temática</label>
+                        <select id="area-tematica" required disabled>
+                            <option value="">Primero selecciona un eje...</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group full-width">
+                        <label>Características / Refuerzos del Curso</label>
+                        <div id="keyword-container" class="keyword-container">
+                            <span class="keyword-tag" data-value="Innovador">Innovador</span>
+                            <span class="keyword-tag" data-value="Práctico">Práctico</span>
+                            <span class="keyword-tag" data-value="Dinámico">Dinámico</span>
+                            <span class="keyword-tag" data-value="Certificable">Certificable</span>
+                            <span class="keyword-tag" data-value="Sostenido">Sostenido</span>
+                            <span class="keyword-tag" data-value="Accesible">Accesible</span>
+                            <span class="keyword-tag" data-value="Participativo">Participativo</span>
+                            <span class="keyword-tag" data-value="Territorial">Territorial</span>
+                            <span class="keyword-tag" data-value="Basado en Proyectos">Basado en Proyectos</span>
+                            <span class="keyword-tag" data-value="Orientado al Empleo">Orientado al Empleo</span>
+                            <span class="keyword-tag" data-value="Comunitario">Comunitario</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 3: Definición Pedagógica -->
+            <div class="form-card">
+                <h3 class="section-title"><i class="fas fa-graduation-cap"></i> 3. Definición Pedagógica
+                </h3>
+                <div class="input-grid">
+                    <div class="input-group">
+                        <div class="label-row">
+                            <label for="block">Bloque a Desarrollar (SD)</label>
+                            <div id="oer-badge" class="oer-status hidden">
+                                <i class="fas fa-book-open"></i> OER Disponibles
+                            </div>
+                        </div>
+                        <select id="block" required>
+                            <option value="estructura-completa">Secuencia Completa (Presentación a Evaluación)</option>
+                            <option value="presentacion">Presentación y Guía SD</option>
+                            <option value="bloque-1">Bloque I: Módulos PDF</option>
+                            <option value="bloque-2">Bloque II: Guion Audiovisual</option>
+                            <option value="evaluacion">Evaluación Integradora</option>
+                        </select>
+                    </div>
+
+
+                    <div class="input-group">
+                        <label for="pedagogy">Enfoque Pedagógico</label>
+                        <select id="pedagogy">
+                            <option value="práctico y basado en talleres">Práctico / Taller</option>
+                            <option value="teórico y conceptual">Teórico / Analítico</option>
+                            <option value="lúdico y dinámico">Lúdico / Dinámico</option>
+                            <option value="vivencial y reflexivo">Vivencial / Reflexivo</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group full-width">
+                        <label>Tono del Curso</label>
+                        <div class="tone-selector">
+                            <input type="radio" id="tone-academic" name="tone" value="académico y formal" checked>
+                            <label for="tone-academic">Académico</label>
+                            <input type="radio" id="tone-professional" name="tone" value="profesional y ejecutivo">
+                            <label for="tone-professional">Profesional</label>
+                            <input type="radio" id="tone-technical" name="tone" value="técnico y preciso">
+                            <label for="tone-technical">Técnico</label>
+                            <input type="radio" id="tone-motivational" name="tone" value="claro, motivador y cercano">
+                            <label for="tone-motivational">Motivacional</label>
+                            <input type="radio" id="tone-agile" name="tone" value="accesible y dinámico">
+                            <label for="tone-agile">Accesible y Dinámico</label>
+                        </div>
+                    </div>
+
+                    <div class="input-group full-width">
+                        <label>Nivel del Curso (Elige uno)</label>
+                        <div class="tone-selector">
+                            <input type="radio" id="level-basic" name="level" value="Básico" checked>
+                            <label for="level-basic">Básico</label>
+                            <input type="radio" id="level-intermediate" name="level" value="Intermedio">
+                            <label for="level-intermediate">Intermedio</label>
+                            <input type="radio" id="level-advanced" name="level" value="Avanzado">
+                            <label for="level-advanced">Avanzado</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contenedor dinámico de OER -->
+                <div id="oer-container" class="oer-card hidden">
+                    <div class="oer-header">
+                        <h4><i class="fas fa-lightbulb"></i> Recursos OER Sugeridos</h4>
+                        <span class="oer-subtitle">Basado en tu área temática</span>
+                    </div>
+                    <div id="oer-list" class="oer-list">
+                        <!-- Se puebla vía JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Widget: Salud del Prompt -->
+            <div class="form-card health-widget-card">
+                <h3 class="section-title"><i class="fas fa-heartbeat"></i> Salud del Prompt</h3>
+                <div class="health-widget-layout">
+                    <!-- Radar Chart -->
+                    <div class="radar-wrapper">
+                        <svg id="radar-chart" viewBox="0 0 300 300" width="300" height="300"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <!-- Grid circles -->
+                            <circle cx="150" cy="150" r="110" fill="none" stroke="rgba(255,255,255,0.05)"
+                                stroke-width="1" />
+                            <circle cx="150" cy="150" r="82" fill="none" stroke="rgba(255,255,255,0.05)"
+                                stroke-width="1" />
+                            <circle cx="150" cy="150" r="55" fill="none" stroke="rgba(255,255,255,0.05)"
+                                stroke-width="1" />
+                            <circle cx="150" cy="150" r="27" fill="none" stroke="rgba(255,255,255,0.05)"
+                                stroke-width="1" />
+                            <!-- Axis lines will be rendered by JS -->
+                            <g id="radar-axes"></g>
+                            <!-- Data polygon -->
+                            <polygon id="radar-polygon" points="" fill="rgba(99,102,241,0.25)" stroke="#6366f1"
+                                stroke-width="2" stroke-linejoin="round" />
+                            <!-- Data points -->
+                            <g id="radar-points"></g>
+                            <!-- Labels -->
+                            <g id="radar-labels"></g>
+                        </svg>
+                    </div>
+                    <!-- Score Breakdown -->
+                    <div class="health-metrics">
+                        <div class="health-score-circle">
+                            <svg viewBox="0 0 100 100" width="120" height="120">
+                                <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,0.05)"
+                                    stroke-width="10" />
+                                <circle id="score-arc" cx="50" cy="50" r="42" fill="none" stroke="#6366f1"
+                                    stroke-width="10" stroke-linecap="round" stroke-dasharray="264"
+                                    stroke-dashoffset="264" transform="rotate(-90 50 50)"
+                                    style="transition: stroke-dashoffset 0.8s cubic-bezier(0.4,0,0.2,1), stroke 0.5s ease; filter: drop-shadow(0 0 8px #6366f1)" />
+                            </svg>
+                            <div class="score-label">
+                                <span id="score-number">0%</span>
+                                <small id="score-status">Incompleto</small>
+                            </div>
+                        </div>
+                        <div class="metrics-list">
+                            <div class="metric-item" id="metric-nombre">
+                                <span class="metric-dot inactive"></span>
+                                <span class="metric-name">Nombre del Curso</span>
+                                <span class="metric-val">—</span>
+                            </div>
+                            <div class="metric-item" id="metric-publico">
+                                <span class="metric-dot inactive"></span>
+                                <span class="metric-name">Público Objetivo</span>
+                                <span class="metric-val">—</span>
+                            </div>
+                            <div class="metric-item" id="metric-eje">
+                                <span class="metric-dot inactive"></span>
+                                <span class="metric-name">Eje Institucional</span>
+                                <span class="metric-val">—</span>
+                            </div>
+                            <div class="metric-item" id="metric-area">
+                                <span class="metric-dot inactive"></span>
+                                <span class="metric-name">Área Temática</span>
+                                <span class="metric-val">—</span>
+                            </div>
+                            <div class="metric-item" id="metric-bloque">
+                                <span class="metric-dot inactive"></span>
+                                <span class="metric-name">Bloque SD</span>
+                                <span class="metric-val">—</span>
+                            </div>
+                            <div class="metric-item" id="metric-keywords">
+                                <span class="metric-dot inactive"></span>
+                                <span class="metric-name">Palabras Clave</span>
+                                <span class="metric-val">—</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="preview-container" class="preview-card">
+                <span class="preview-label">Vista Previa del Objetivo:</span>
+                <p id="objective-preview">Completa los campos para previsualizar el objetivo...</p>
+                <div class="preview-actions">
+                    <button id="view-course-map-btn" class="magic-btn secondary-magic"><i class="fas fa-sitemap"></i> Ver Estructura del Curso (Mapa del Curso)</button>
+                </div>
+            </div>
+
+            <section id="result-section" class="result-card">
+                <div class="result-actions">
+                    <button id="generate-btn" class="primary-btn large">Generar Prompt Estructurado</button>
+                </div>
+
+                <div class="prompt-output" id="prompt-output"></div>
+
+                <div id="copy-container" class="copy-container hidden">
+                    <button id="copy-btn" class="primary-btn large secondary">Copiar Prompt</button>
+                </div>
+
+                <div id="ai-actions" class="hidden">
+                    <p class="copy-instruction">Copia el prompt de arriba y elige una de las siguientes IAs para
+                        comenzar a trabajar:</p>
+                </div>
+
+                <div id="ai-links" class="ai-links hidden">
+                    <p>Abrir y Pegar en:</p>
+                    <div class="links-grid">
+                        <a href="https://chat.openai.com" target="_blank" class="ai-link-btn gpt">ChatGPT</a>
+                        <a href="https://gemini.google.com" target="_blank" id="copy-gemini-btn"
+                            class="ai-link-btn gemini">Gemini</a>
+                        <a href="https://www.perplexity.ai" target="_blank"
+                            class="ai-link-btn perplexity">Perplexity</a>
+                    </div>
+                </div>
+            </section>
+    </main>
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
