@@ -30,107 +30,306 @@
                 <p class="subtitle">Estructura Profesional de Abordaje Integral y Preventivo</p>
             </header>
 
-            <div class="section-header-main">
-                <h2>Diseño de Contenido Especializado</h2>
+            <!-- ====== TAB NAVIGATION ====== -->
+            <div class="tab-navigation" id="tab-navigation">
+                <button class="tab-btn active" data-tab="manual-tab">
+                    <i class="fas fa-edit"></i>
+                    <span>Diseño Manual</span>
+                </button>
+                <button class="tab-btn" data-tab="notebooklm-tab">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <span>NotebookLM + PDF</span>
+                    <span class="tab-badge">Nuevo</span>
+                </button>
             </div>
 
-            <!-- Identidad -->
-            <div class="form-card">
-                <div class="card-header-flex">
-                    <h3 class="section-title"><i class="fas fa-id-card"></i> 1. Identidad y Propósito</h3>
-                    <div class="brain-selector-container">
-                        <span class="brain-label">AI:</span>
-                        <div class="brain-options">
-                            <label class="brain-chip"><input type="radio" name="ai-model" value="gemini" checked><span>Gemini</span></label>
-                            <label class="brain-chip"><input type="radio" name="ai-model" value="chatgpt"><span>GPT-4</span></label>
-                            <label class="brain-chip"><input type="radio" name="ai-model" value="perplexity"><span>Perplexity</span></label>
+            <!-- ====== TAB 1: MANUAL (EXISTING) ====== -->
+            <div class="tab-content active" id="manual-tab">
+                <div class="section-header-main">
+                    <h2>Diseño de Contenido Especializado</h2>
+                </div>
+
+                <!-- Identidad -->
+                <div class="form-card">
+                    <div class="card-header-flex">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2.5rem; flex-wrap: wrap;">
+                            <h3 class="section-title" style="margin-bottom: 0; border-bottom: none; padding-bottom: 0;"><i class="fas fa-id-card"></i> 1. Identidad y Propósito</h3>
+                            <button id="fill-example-manual-btn" class="magic-btn"><i class="fas fa-lightbulb"></i> Ver Ejemplo</button>
                         </div>
+                        <div class="brain-selector-container">
+                            <span class="brain-label">AI:</span>
+                            <div class="brain-options">
+                                <label class="brain-chip"><input type="radio" name="ai-model" value="gemini" checked><span>Gemini</span></label>
+                                <label class="brain-chip"><input type="radio" name="ai-model" value="chatgpt"><span>GPT-4</span></label>
+                                <label class="brain-chip"><input type="radio" name="ai-model" value="perplexity"><span>Perplexity</span></label>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group full-width">
+                            <label>Comité de Expertos</label>
+                            <div class="committee-selector" id="expert-selector">
+                                <input type="checkbox" id="expert-standard" name="expert-layer" value="standard" checked>
+                                <label for="expert-standard" class="expert-chip"><i class="fas fa-user-tie"></i> Estándar</label>
+                                <input type="checkbox" id="expert-pedagogical" name="expert-layer" value="pedagogical">
+                                <label for="expert-pedagogical" class="expert-chip"><i class="fas fa-users"></i> Pedagógico</label>
+                                <input type="checkbox" id="expert-full" name="expert-layer" value="full">
+                                <label for="expert-full" class="expert-chip"><i class="fas fa-microchip"></i> Deep-Agentic</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label for="course-name">Nombre del Curso / Problemática</label>
+                            <input type="text" id="course-name" placeholder="Ej: Prevención del Suicidio en Adolescentes" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="target-audience">Población / Etapa Vital</label>
+                            <input type="text" id="target-audience" placeholder="Ej: Jóvenes de 13 a 18 años" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="organisms">Organismos Responsables</label>
+                            <input type="text" id="organisms" placeholder="Ej: Ministerio de Salud, Formando Capital Humano">
+                        </div>
+                        <div class="input-group">
+                            <label for="tech-team">Equipo Técnico</label>
+                            <input type="text" id="tech-team" placeholder="Ej: Dirección de Salud Mental y Prevención">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Estructura de 11 Puntos -->
+                <div class="form-card">
+                    <h3 class="section-title"><i class="fas fa-list-ol"></i> 2. Definición de Bloques Críticos</h3>
+                    <div class="input-grid">
+                        <div class="input-group full-width">
+                            <label for="problem-concept">Introducción y Propósito Pedagógico (Contexto de la problemática)</label>
+                            <textarea id="problem-concept" rows="3" placeholder="Define brevemente la problemática y por qué es multicausal..."></textarea>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label>Puntos a Enfatizar</label>
+                            <div class="keyword-container">
+                                <span class="keyword-tag active" data-value="Mitos vs Realidad">Mitos vs Realidad</span>
+                                <span class="keyword-tag active" data-value="Señales de Alerta">Señales de Alerta</span>
+                                <span class="keyword-tag active" data-value="Factores de Riesgo">Factores de Riesgo</span>
+                                <span class="keyword-tag active" data-value="Primera Escucha">Primera Escucha</span>
+                                <span class="keyword-tag active" data-value="Marco Normativo">Marco Normativo</span>
+                                <span class="keyword-tag active" data-value="Posvención">Posvención</span>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="model-intervention">Modelo de Intervención</label>
+                            <select id="model-intervention">
+                                <option value="triple-fase">Modelo Triple Fase (Alerta, Atención, Posvención)</option>
+                                <option value="preventivo-integral">Preventivo Integral</option>
+                                <option value="clinico-social">Clínico-Social</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <section id="result-section" class="result-card">
+                    <div class="result-actions">
+                        <button id="generate-btn" class="primary-btn large">Generar Prompt de Abordaje Integral</button>
+                    </div>
+                    <div class="prompt-output" id="prompt-output"></div>
+                    <div id="copy-container" class="copy-container hidden">
+                        <button id="copy-btn" class="primary-btn large secondary">Copiar Prompt</button>
+                    </div>
+                    <div id="ai-actions" class="hidden">
+                        <p class="copy-instruction">Copia el prompt y úsalo en tu IA preferida:</p>
+                    </div>
+                    <div id="ai-links" class="ai-links hidden">
+                        <div class="links-grid">
+                            <a href="https://chat.openai.com" target="_blank" class="ai-link-btn gpt">ChatGPT</a>
+                            <a href="https://gemini.google.com" target="_blank" class="ai-link-btn gemini">Gemini</a>
+                            <a href="https://www.perplexity.ai" target="_blank" class="ai-link-btn perplexity">Perplexity</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- ====== TAB 2: NOTEBOOKLM INTEGRATION ====== -->
+            <div class="tab-content" id="notebooklm-tab">
+                <div class="section-header-main">
+                    <h2><i class="fas fa-brain nlm-icon-gradient"></i> Integración con NotebookLM</h2>
+                    <p class="subtitle" style="margin-top:0.5rem;">Transforma cualquier PDF o documento en un curso profesional usando Google NotebookLM como asistente de IA.</p>
+                </div>
+
+                <!-- Workflow Visual -->
+                <div class="nlm-workflow-banner">
+                    <div class="nlm-workflow-steps">
+                        <div class="nlm-step active" data-step="1">
+                            <div class="nlm-step-icon"><i class="fas fa-file-upload"></i></div>
+                            <div class="nlm-step-label">Paso 1</div>
+                            <div class="nlm-step-desc">Configurar y subir tu archivo</div>
+                        </div>
+                        <div class="nlm-step-connector"><i class="fas fa-chevron-right"></i></div>
+                        <div class="nlm-step" data-step="2">
+                            <div class="nlm-step-icon"><i class="fas fa-search-plus"></i></div>
+                            <div class="nlm-step-label">Paso 2</div>
+                            <div class="nlm-step-desc">Prompt de análisis del material</div>
+                        </div>
+                        <div class="nlm-step-connector"><i class="fas fa-chevron-right"></i></div>
+                        <div class="nlm-step" data-step="3">
+                            <div class="nlm-step-icon"><i class="fas fa-graduation-cap"></i></div>
+                            <div class="nlm-step-label">Paso 3</div>
+                            <div class="nlm-step-desc">Prompt de generación del curso</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- INFO: Formatos soportados -->
+                <div class="nlm-info-card">
+                    <div class="nlm-info-header">
+                        <i class="fas fa-info-circle"></i>
+                        <h4>Formatos soportados por NotebookLM</h4>
+                    </div>
+                    <div class="nlm-formats-grid">
+                        <div class="nlm-format-group">
+                            <span class="nlm-format-icon"><i class="fas fa-file-alt"></i></span>
+                            <div>
+                                <strong>Documentos</strong>
+                                <span>PDF, DOCX, TXT, MD, ePub, Google Docs/Slides/Sheets</span>
+                            </div>
+                        </div>
+                        <div class="nlm-format-group">
+                            <span class="nlm-format-icon"><i class="fas fa-headphones"></i></span>
+                            <div>
+                                <strong>Audio</strong>
+                                <span>MP3, WAV, M4A, AAC, OGG (con voz)</span>
+                            </div>
+                        </div>
+                        <div class="nlm-format-group">
+                            <span class="nlm-format-icon"><i class="fas fa-image"></i></span>
+                            <div>
+                                <strong>Imágenes</strong>
+                                <span>JPG, PNG, GIF, WebP, HEIC, BMP</span>
+                            </div>
+                        </div>
+                        <div class="nlm-format-group">
+                            <span class="nlm-format-icon"><i class="fas fa-globe"></i></span>
+                            <div>
+                                <strong>Web</strong>
+                                <span>URLs de sitios web, URLs de YouTube (con subtítulos)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nlm-limits-note">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Máx. 50 fuentes por notebook · 500.000 palabras o 200MB por archivo · No acepta archivos protegidos/cifrados</span>
+                    </div>
+                </div>
+
+                <!-- PASO 1: Configuración -->
+                <div class="form-card nlm-form-card" id="nlm-step-1-card">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2.5rem; flex-wrap: wrap;">
+                        <h3 class="section-title" style="margin-bottom: 0; border-bottom: none; padding-bottom: 0;"><i class="fas fa-cog"></i> Paso 1 — Configuración del Proyecto</h3>
+                        <button id="fill-example-nlm-btn" class="magic-btn"><i class="fas fa-lightbulb"></i> Ver Ejemplo</button>
                     </div>
                     
-                    <div class="input-group full-width">
-                        <label>Comité de Expertos</label>
-                        <div class="committee-selector" id="expert-selector">
-                            <input type="checkbox" id="expert-standard" name="expert-layer" value="standard" checked>
-                            <label for="expert-standard" class="expert-chip"><i class="fas fa-user-tie"></i> Estándar</label>
-                            <input type="checkbox" id="expert-pedagogical" name="expert-layer" value="pedagogical">
-                            <label for="expert-pedagogical" class="expert-chip"><i class="fas fa-users"></i> Pedagógico</label>
-                            <input type="checkbox" id="expert-full" name="expert-layer" value="full">
-                            <label for="expert-full" class="expert-chip"><i class="fas fa-microchip"></i> Deep-Agentic</label>
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label for="nlm-doc-type">¿Qué tipo de archivo vas a subir?</label>
+                            <select id="nlm-doc-type">
+                                <option value="pdf-curso">📄 PDF de un curso / capacitación existente</option>
+                                <option value="pdf-manual">📘 Manual o guía técnica</option>
+                                <option value="pdf-investigacion">📑 Paper / Investigación académica</option>
+                                <option value="presentacion">📊 Presentación (Google Slides / PPTX)</option>
+                                <option value="audio-clase">🎙️ Audio de una clase grabada</option>
+                                <option value="video-youtube">🎬 URL de YouTube con clase/charla</option>
+                                <option value="web-articulo">🌐 URL de artículo web</option>
+                                <option value="varios-archivos">📚 Múltiples archivos combinados</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="nlm-tema">Temática principal del material</label>
+                            <input type="text" id="nlm-tema" placeholder="Ej: Inteligencia Artificial aplicada a la educación">
+                        </div>
+                        <div class="input-group">
+                            <label for="nlm-nivel">Nivel del curso a generar</label>
+                            <select id="nlm-nivel">
+                                <option value="introductorio">🟢 Introductorio / Básico</option>
+                                <option value="intermedio">🟡 Intermedio</option>
+                                <option value="avanzado">🔴 Avanzado / Especialización</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="nlm-audiencia">Audiencia destino del nuevo curso</label>
+                            <input type="text" id="nlm-audiencia" placeholder="Ej: Docentes universitarios, Profesionales de salud">
+                        </div>
+                        <div class="input-group">
+                            <label for="nlm-duracion">Duración estimada del curso</label>
+                            <select id="nlm-duracion">
+                                <option value="micro">⚡ Micro-curso (2-4 horas)</option>
+                                <option value="corto">📗 Corto (8-16 horas)</option>
+                                <option value="medio" selected>📘 Medio (20-40 horas)</option>
+                                <option value="extenso">📕 Extenso (40+ horas / cuatrimestral)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="nlm-institucion">Institución / Organismo</label>
+                            <input type="text" id="nlm-institucion" placeholder="Ej: Formando Capital Humano, UNTREF">
+                        </div>
+                        <div class="input-group full-width">
+                            <label for="nlm-notas">Notas adicionales o requerimientos especiales</label>
+                            <textarea id="nlm-notas" rows="2" placeholder="Ej: Quiero que incluya actividades prácticas, evaluaciones, y un glosario técnico..."></textarea>
                         </div>
                     </div>
                 </div>
 
-                <div class="input-grid">
-                    <div class="input-group">
-                        <label for="course-name">Nombre del Curso / Problemática</label>
-                        <input type="text" id="course-name" placeholder="Ej: Prevención del Suicidio en Adolescentes" required>
+                <!-- Resultado: Prompt de Análisis (Paso 2) -->
+                <section class="result-card nlm-result-card" id="nlm-result-section">
+                    <div class="result-actions">
+                        <button id="nlm-generate-btn" class="primary-btn large nlm-primary-btn">
+                            <i class="fas fa-magic"></i> Generar Prompts para NotebookLM
+                        </button>
                     </div>
-                    <div class="input-group">
-                        <label for="target-audience">Población / Etapa Vital</label>
-                        <input type="text" id="target-audience" placeholder="Ej: Jóvenes de 13 a 18 años" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="organisms">Organismos Responsables</label>
-                        <input type="text" id="organisms" placeholder="Ej: Ministerio de Salud, Formando Capital Humano">
-                    </div>
-                    <div class="input-group">
-                        <label for="tech-team">Equipo Técnico</label>
-                        <input type="text" id="tech-team" placeholder="Ej: Dirección de Salud Mental y Prevención">
-                    </div>
-                </div>
-            </div>
 
-            <!-- Estructura de 11 Puntos -->
-            <div class="form-card">
-                <h3 class="section-title"><i class="fas fa-list-ol"></i> 2. Definición de Bloques Críticos</h3>
-                <div class="input-grid">
-                    <div class="input-group full-width">
-                        <label for="problem-concept">Introducción y Propósito Pedagógico (Contexto de la problemática)</label>
-                        <textarea id="problem-concept" rows="3" placeholder="Define brevemente la problemática y por qué es multicausal..."></textarea>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label>Puntos a Enfatizar</label>
-                        <div class="keyword-container">
-                            <span class="keyword-tag active" data-value="Mitos vs Realidad">Mitos vs Realidad</span>
-                            <span class="keyword-tag active" data-value="Señales de Alerta">Señales de Alerta</span>
-                            <span class="keyword-tag active" data-value="Factores de Riesgo">Factores de Riesgo</span>
-                            <span class="keyword-tag active" data-value="Primera Escucha">Primera Escucha</span>
-                            <span class="keyword-tag active" data-value="Marco Normativo">Marco Normativo</span>
-                            <span class="keyword-tag active" data-value="Posvención">Posvención</span>
+                    <!-- Prompt 1: Análisis -->
+                    <div id="nlm-prompt-1-container" class="nlm-prompt-block hidden">
+                        <div class="nlm-prompt-header">
+                            <div class="nlm-prompt-number">1</div>
+                            <div>
+                                <h4>Prompt de Análisis del Material</h4>
+                                <p>Copia este prompt y pégalo en NotebookLM <strong>junto con tu archivo</strong>. NotebookLM analizará el contenido y te dará un resumen estructurado.</p>
+                            </div>
+                        </div>
+                        <div class="prompt-output nlm-prompt-output" id="nlm-prompt-1-output"></div>
+                        <div class="nlm-copy-row">
+                            <button id="nlm-copy-btn-1" class="primary-btn secondary nlm-copy-btn"><i class="fas fa-copy"></i> Copiar Prompt 1</button>
+                            <a href="https://notebooklm.google.com/" target="_blank" class="primary-btn nlm-open-btn"><i class="fas fa-external-link-alt"></i> Abrir NotebookLM</a>
                         </div>
                     </div>
 
-                    <div class="input-group">
-                        <label for="model-intervention">Modelo de Intervención</label>
-                        <select id="model-intervention">
-                            <option value="triple-fase">Modelo Triple Fase (Alerta, Atención, Posvención)</option>
-                            <option value="preventivo-integral">Preventivo Integral</option>
-                            <option value="clinico-social">Clínico-Social</option>
-                        </select>
+                    <!-- Divider -->
+                    <div id="nlm-divider" class="nlm-step-divider hidden">
+                        <div class="nlm-divider-line"></div>
+                        <div class="nlm-divider-icon"><i class="fas fa-arrow-down"></i></div>
+                        <div class="nlm-divider-text">Una vez que NotebookLM procesó tu archivo, usá el siguiente prompt</div>
+                        <div class="nlm-divider-line"></div>
                     </div>
-                </div>
-            </div>
 
-            <section id="result-section" class="result-card">
-                <div class="result-actions">
-                    <button id="generate-btn" class="primary-btn large">Generar Prompt de Abordaje Integral</button>
-                </div>
-                <div class="prompt-output" id="prompt-output"></div>
-                <div id="copy-container" class="copy-container hidden">
-                    <button id="copy-btn" class="primary-btn large secondary">Copiar Prompt</button>
-                </div>
-                <div id="ai-actions" class="hidden">
-                    <p class="copy-instruction">Copia el prompt y úsalo en tu IA preferida:</p>
-                </div>
-                <div id="ai-links" class="ai-links hidden">
-                    <div class="links-grid">
-                        <a href="https://chat.openai.com" target="_blank" class="ai-link-btn gpt">ChatGPT</a>
-                        <a href="https://gemini.google.com" target="_blank" class="ai-link-btn gemini">Gemini</a>
-                        <a href="https://www.perplexity.ai" target="_blank" class="ai-link-btn perplexity">Perplexity</a>
+                    <!-- Prompt 2: Generación del Curso -->
+                    <div id="nlm-prompt-2-container" class="nlm-prompt-block hidden">
+                        <div class="nlm-prompt-header">
+                            <div class="nlm-prompt-number">2</div>
+                            <div>
+                                <h4>Prompt de Generación del Curso</h4>
+                                <p>Pega este prompt <strong>en la misma conversación</strong> de NotebookLM donde subiste tu archivo. Generará un curso completo basado en el material analizado.</p>
+                            </div>
+                        </div>
+                        <div class="prompt-output nlm-prompt-output" id="nlm-prompt-2-output"></div>
+                        <div class="nlm-copy-row">
+                            <button id="nlm-copy-btn-2" class="primary-btn secondary nlm-copy-btn"><i class="fas fa-copy"></i> Copiar Prompt 2</button>
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
+            <!-- ====== END TABS ====== -->
+
         </div>
     </main>
 
