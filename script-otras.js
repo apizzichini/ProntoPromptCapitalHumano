@@ -1,458 +1,281 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // ===========================
-    // TAB NAVIGATION
-    // ===========================
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
+    const appContainer = document.getElementById('rocket-app-container');
 
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const targetId = btn.dataset.tab;
-            tabBtns.forEach(b => b.classList.remove('active'));
-            tabContents.forEach(tc => tc.classList.remove('active'));
-            btn.classList.add('active');
-            document.getElementById(targetId).classList.add('active');
-        });
-    });
+    // ==========================================
+    // CONFIGURACIÓN Y CONSTANTES
+    // ==========================================
+    const SECUENCIA_MODELO = `1. PORTADA E IDENTIFICACIÓN: Nombre del curso, Institución, Modalidad y Carga horaria.
+2. FUNDAMENTACIÓN Y PROPÓSITO: Justificación pedagógica basada en evidencia y competencias a desarrollar.
+3. OBJETIVOS: Un objetivo general claro y al menos 5 específicos medibles (Taxonomía de Bloom).
+4. PERFIL DEL DESTINATARIO: Descripción de la audiencia específica y su perfil de egreso.
+5. CONTENIDOS MODULARES: Desarrollo exhaustivo de cada unidad, con actividades prácticas de aplicación real.
+6. MAPA CONCEPTUAL: Estructura lógica y visual de las conexiones entre temas.
+7. METODOLOGÍA: Enfoque pedagógico activo y estrategias de enseñanza-aprendizaje.
+8. CRONOGRAMA SUGERIDO: Planificación temporal por módulos e hitos de aprendizaje.
+9. SISTEMA DE EVALUACIÓN: Criterios claros, instrumentos (diagnóstica, formativa y sumativa) y rúbricas.
+10. GUIÓN DE VIDEO INTRODUCTORIO: Narrativa para la presentación del curso y motivación del alumno.
+11. BIBLIOGRAFÍA Y RECURSOS: Fuentes curadas en formato APA 7 y herramientas digitales sugeridas.`;
 
-    // ===========================
-    // ORIGINAL MANUAL FUNCTIONALITY
-    // ===========================
-    const generateBtn = document.getElementById('generate-btn');
-    const copyBtn = document.getElementById('copy-btn');
-    const resultSection = document.getElementById('result-section');
-    const promptOutput = document.getElementById('prompt-output');
+    const PROMPT_ANALISIS_PASO_1 = `### PASO 1: EXTRACCIÓN Y MAPEO PEDAGÓGICO (PARA NOTEBOOKLM) ###
 
-    let isTyping = false;
+[ROLE]: Actúa como Analista Senior de Diseño Instruccional del Ministerio de Capital Humano.
 
-    const typeWriter = (text, element, speed = 5, callback = null) => {
-        isTyping = true;
+[OBJETIVO]: Realizar un ANÁLISIS DE CRUCE (Triangulación) técnico y pedagógico de alta granularidad entre tres ejes: el Contenido Fuente, el Protocolo Institucional y la Secuencia Didáctica Modelo.
+
+[INSTRUCCIONES DE EJECUCIÓN CRÍTICAS]:
+1. **AUDITORÍA DE NIVEL Y EXTENSIÓN**: Antes de extraer, analiza el volumen y complejidad del contenido original. Determina si, basándose en la densidad técnica, el curso debe categorizarse como NIVEL BÁSICO, INTERMEDIO o AVANZADO de "Formando Capital Humano". Proyecta la transposición para mantener la fidelidad total a la extensión original (traslada toda la carga técnica sin pérdidas).
+2. **IDENTIFICACIÓN DE NÚCLEOS (TRIANGULACIÓN)**: Cruza el material original con el "Protocolo de Transposición" para seleccionar lo relevante. Mapea inmediatamente cada nodo dentro de los BLOQUES y MÓDULOS de la "Secuencia Didáctica Modelo" (11 puntos). Es fundamental que el informe respete la jerarquía exacta de la secuencia modelo para lograr una estructura perfecta.
+3. **FILTRADO PROFESIONAL Y SOBERANÍA**: Aplica los criterios del "Protocolo de Transposición". Asegura la alineación con la Soberanía Tecnológica nacional y la pertinencia laboral del nivel detectado.
+4. **MAPEO ESTRUCTURAL DE ALTA RESOLUCIÓN**: Distribuye CADA NODO extraído:
+   - FASE DE INICIO: Disparadores, sensibilización y saberes previos.
+   - FASE DE DESARROLLO: Contenido núcleo, profundidad teórica y nodos de práctica técnica detallada.
+   - FASE DE CIERRE: Evaluación de competencias e integración laboral.
+
+[DETALLES DE SALIDA]:
+- Genera un **Informe Técnico de Estructura de Alta Resolución** que incluya la **Categorización de Nivel** detectada.
+- NO REDACTES EL CURSO.
+- Formato: Listas jerárquicas vinculadas directamente a los módulos de la secuencia modelo.`;
+
+    // ==========================================
+    // FUNCIONES DE UTILIDAD
+    // ==========================================
+    const typeWriter = (text, element, speed = 2, callback = null) => {
         element.textContent = '';
         element.classList.add('typing');
         let i = 0;
-
         function type() {
             if (i < text.length) {
-                const chunk = text.substring(i, i + 3);
-                element.textContent += chunk;
-                i += 3;
+                element.textContent += text.substring(i, i + 5);
+                i += 5;
                 setTimeout(type, speed);
                 element.scrollTop = element.scrollHeight;
             } else {
                 element.classList.remove('typing');
-                isTyping = false;
                 if (callback) callback();
             }
         }
         type();
     };
 
-    // ===========================
-    // AUTO-FILL EJEMPLO MANUAL
-    // ===========================
-    const fillManualBtn = document.getElementById('fill-example-manual-btn');
-    if (fillManualBtn) {
-        fillManualBtn.addEventListener('click', () => {
-            document.getElementById('course-name').value = 'Intervención en Crisis y Primeros Auxilios Psicológicos (PAP)';
-            document.getElementById('target-audience').value = 'Agentes de Salud y Preventores Comunitarios';
-            document.getElementById('organisms').value = 'Dirección de Salud Comunitaria';
-            document.getElementById('tech-team').value = 'Equipo de Salud Mental';
-            document.getElementById('problem-concept').value = 'El impacto emocional ante situaciones de desastre o trauma agudo requiere de herramientas de contención inmediatas. La falta de intervención temprana agrava el estrés postraumático.';
-            document.getElementById('model-intervention').value = 'triple-fase';
-            
-            // Check some experts
-            document.getElementById('expert-pedagogical').checked = true;
-        });
-    }
-
-    const modelGuidelines = {
-        'gemini': `[OPTIMIZACIÓN GEMINI]: Aprovecha la amplia ventana de contexto. Genera respuestas estructuradas y detalladas. Prioriza la claridad conceptual y la integración de todos los componentes del manual de abordaje.`,
-        'chatgpt': `[OPTIMIZACIÓN GPT-4]: Utiliza un razonamiento paso a paso (Chain of Thought). Estructura la salida con Markdown riguroso. Asegura que cada sección cumpla con los lineamientos preventivos establecidos.`,
-        'perplexity': `[OPTIMIZACIÓN PERPLEXITY]: Prioriza la investigación en tiempo real y la citación de fuentes actualizadas. Busca datos estadísticos y referencias bibliográficas recientes sobre la problemática.`
-    };
-
-    const expertLayers = {
-        'standard': `[MODO: PROFESOR SENIOR]: Actúa como un experto docente con años de experiencia en la temática. Tu enfoque es la claridad pedagógica y la estructura lógica.`,
-        'pedagogical': `[MODO: COMITÉ PEDAGÓGICO]: Simula un diálogo interno entre:\n1. UN PEDAGOGO: Enfocado en la transposición didáctica.\n2. UN ARQUITECTO DE CONTENIDOS: Enfocado en la jerarquía y el ritmo.`,
-        'full': `[MODO: DEEP-AGENTIC ADVISORY]: Simula un comité de alto nivel compuesto por:\n1. EXPERTO PEDAGÓGICO: Valida la didáctica.\n2. DISEÑADOR UX EDUCATIVO: Asegura el engagement.\n3. CORRECTOR DE ESTILO INSTITUCIONAL: Garantiza que el tono sea impecable.`,
-        'director': `[MODO: COMITÉ DIRECTIVO]: Actúa como una mesa de Directores Estratégicos. Tu enfoque es la Visión Institucional y el Impacto Social.`,
-        'coordination': `[MODO: MESA DE COORDINACIÓN]: Simula la articulación entre Coordinadores de área. Tu enfoque es la factibilidad operativa y estandarización.`,
-        'agentes': `[MODO: AGENTES DE CAMBIO]: Actúa como un colectivo de Agentes de Innovación enfocado en la transformación social.`
-    };
-
-    generateBtn.addEventListener('click', () => {
-        if (isTyping) return;
-
-        const courseName = document.getElementById('course-name').value || '[Nombre del Curso]';
-        const organisms = document.getElementById('organisms').value || 'Organismos Institucionales';
-        const techTeam = document.getElementById('tech-team').value || 'Equipo Técnico de Desarrollo';
-        const problemConcept = document.getElementById('problem-concept').value || '';
-        const targetAudience = document.getElementById('target-audience').value || '';
-        
-        const selectedModel = document.querySelector('input[name="ai-model"]:checked')?.value || 'gemini';
-        const modelGuideline = modelGuidelines[selectedModel] || '';
-
-        const selectedExperts = Array.from(document.querySelectorAll('input[name="expert-layer"]:checked')).map(cb => cb.value);
-        let expertLayer = '';
-        if (selectedExperts.length === 0) {
-            expertLayer = expertLayers['standard'];
-        } else {
-            const combinedInstructions = selectedExperts.map(val => expertLayers[val]).join('\n\n');
-            expertLayer = `[COMITÉ MULTI-AGENTE APLICADO]\nSimula un consenso entre los siguientes roles expertos:\n\n${combinedInstructions}`;
-        }
-
-        const prompt = `${modelGuideline}
-
-### SYSTEM ROLE (R)
-${expertLayer}
-Tu objetivo es generar un manual de abordaje integral y formación profesional siguiendo una estructura de 11 puntos clave.
-
-### OBJECTIVE (O)
-Generar un contenido exhaustivo para el curso "${courseName}" enfocado en el abordaje integral y preventivo.
-
-### CONTEXT & PARAMETERS (C)
-- **Curso:** ${courseName}
-- **Institución:** Formando Capital Humano.
-- **Problemática:** ${problemConcept}
-- **Población Destino:** ${targetAudience}
-
-### EXECUTION STEPS (E) - ESTRUCTURA OBLIGATORIA (11 PUNTOS)
-
-Por favor, desarrolla el contenido siguiendo estrictamente esta estructura:
-
-1. **PORTADA E IDENTIFICACIÓN INSTITUCIONAL**: Incluir nombre del curso, organismos responsables (${organisms}) y el equipo técnico (${techTeam}).
-2. **INTRODUCCIÓN Y PROPÓSITO PEDAGÓGICO**: Definir la complejidad de la temática y el objetivo formativo. Establecer que la problemática es multicausal y requiere un abordaje integral.
-3. **MARCO CONCEPTUAL (LA BASE TEÓRICA)**: Explorar la etapa vital involucrada y sus desafíos específicos. Definir al sujeto de estudio, sus riesgos y desafíos actuales (entorno digital, incertidumbre).
-4. **EVIDENCIA EPIDEMIOLÓGICA Y DATOS**: Dimensionar el problema mediante estadísticas. Incluir tendencias por género o edad.
-5. **DESMITIFICACIÓN Y CREENCIAS (MITOS VS. REALIDAD)**: Desarrollar una TABLA COMPARATIVA que contraste "Creencias Populares" con "Evidencia Científica/Realidad".
-6. **PROCESO DE INTERVENCIÓN (FASES DEL MODELO)**: Dividir en tres momentos cronológicos: Alerta Temprana, Atención/Seguimiento y Posvención (o reparación).
-7. **FACTORES DE RIESGO Y PROTECCIÓN (ANÁLISIS PLURIFACTORIAL)**: Categorizar en:
-   - Predisponentes/Vulnerabilidad (Largo plazo).
-   - Precipitantes (Corto plazo).
-   - Protectores (Soportes afectivos y redes).
-8. **SEÑALES DE ALERTA E INDICADORES (DETECCIÓN)**: Detallar manifestaciones verbales y no verbales, cambios de humor, aislamiento y crisis.
-9. **GUÍA PRÁCTICA DE ACCIÓN (HERRAMIENTAS DE COMUNICACIÓN)**: Incluir técnicas de "Primera Escucha": Escucha activa, empatía y validación emocional sin juzgar.
-10. **MARCO NORMATIVO Y CORRESPONSABILIDAD**: Encuadrar en leyes nacionales e internacionales relevantes (Salud Mental, Derechos). Definir el rol del Sistema de Protección Integral.
-11. **RECURSOS DE EMERGENCIA Y BIBLIOGRAFÍA**: Incluir líneas de atención gratuitas y una lista de referencias bibliográficas sólidas en Normas APA 7.
-
-### TONE & STYLE (T)
-Tono claro, profesional, empático y preventivo. Evitar sensacionalismos. Utilizar un lenguaje accesible pero técnicamente riguroso.`;
-
-        // Update UI
-        const aiActions = document.getElementById('ai-actions');
-        const aiLinks = document.getElementById('ai-links');
-        const copyContainer = document.getElementById('copy-container');
-
-        copyContainer.classList.add('hidden');
-        aiActions.classList.add('hidden');
-        aiLinks.classList.add('hidden');
-
-        typeWriter(prompt, promptOutput, 5, () => {
-            copyContainer.classList.remove('hidden');
-            aiActions.classList.remove('hidden');
-            aiLinks.classList.remove('hidden');
-            resultSection.scrollIntoView({ behavior: 'smooth' });
-        });
-    });
-
-    copyBtn.addEventListener('click', () => {
-        navigator.clipboard.writeText(promptOutput.textContent).then(() => {
-            const originalText = copyBtn.textContent;
-            copyBtn.textContent = '¡Copiado!';
-            setTimeout(() => copyBtn.textContent = originalText, 1500);
-        });
-    });
-
-
-    // ===========================
-    // NOTEBOOKLM INTEGRATION
-    // ===========================
-    const nlmGenerateBtn = document.getElementById('nlm-generate-btn');
-    const nlmCopyBtn1 = document.getElementById('nlm-copy-btn-1');
-    const nlmCopyBtn2 = document.getElementById('nlm-copy-btn-2');
-
-    // ===========================
-    // AUTO-FILL EJEMPLO NOTEBOOKLM
-    // ===========================
-    const fillNlmBtn = document.getElementById('fill-example-nlm-btn');
-    if (fillNlmBtn) {
-        fillNlmBtn.addEventListener('click', () => {
-            document.getElementById('nlm-doc-type').value = 'pdf-investigacion';
-            document.getElementById('nlm-tema').value = 'Prevención del Ciberacoso y Grooming';
-            document.getElementById('nlm-nivel').value = 'avanzado';
-            document.getElementById('nlm-audiencia').value = 'Equipos Directivos y Gabinetes Psicopedagógicos';
-            document.getElementById('nlm-duracion').value = 'corto';
-            document.getElementById('nlm-institucion').value = 'Ministerio de Educación';
-            document.getElementById('nlm-notas').value = 'Necesito que el curso incluya protocolos de actuación específicos, un glosario de términos digitales (phishing, malware) y foco en la contención emocional.';
-        });
-    }
-
-    const docTypeLabels = {
-        'pdf-curso': 'un PDF de un curso o capacitación existente',
-        'pdf-manual': 'un manual o guía técnica en PDF',
-        'pdf-investigacion': 'un paper o investigación académica en PDF',
-        'presentacion': 'una presentación (Google Slides / PPTX)',
-        'audio-clase': 'un audio de una clase grabada',
-        'video-youtube': 'un video de YouTube con una clase/charla',
-        'web-articulo': 'un artículo web (URL)',
-        'varios-archivos': 'múltiples archivos combinados'
-    };
-
-    const nivelLabels = {
-        'introductorio': 'Introductorio / Básico',
-        'intermedio': 'Intermedio',
-        'avanzado': 'Avanzado / Especialización'
-    };
-
-    const duracionLabels = {
-        'micro': 'Micro-curso (2-4 horas)',
-        'corto': 'Curso corto (8-16 horas)',
-        'medio': 'Curso medio (20-40 horas)',
-        'extenso': 'Curso extenso (40+ horas / cuatrimestral)'
-    };
-
-    const duracionModulos = {
-        'micro': '2 a 3 módulos compactos',
-        'corto': '4 a 6 módulos',
-        'medio': '6 a 10 módulos',
-        'extenso': '10 a 16 módulos (organizados en unidades temáticas)'
-    };
-
-    // Update workflow step indicators
-    function updateWorkflowSteps(activeStep) {
-        document.querySelectorAll('.nlm-step').forEach(step => {
-            const stepNum = parseInt(step.dataset.step);
-            step.classList.remove('active', 'completed');
-            if (stepNum < activeStep) step.classList.add('completed');
-            if (stepNum === activeStep) step.classList.add('active');
-        });
-    }
-
-    nlmGenerateBtn.addEventListener('click', () => {
-        if (isTyping) return;
-
-        const docType = document.getElementById('nlm-doc-type').value;
-        const tema = document.getElementById('nlm-tema').value || '[temática del material]';
-        const nivel = document.getElementById('nlm-nivel').value;
-        const audiencia = document.getElementById('nlm-audiencia').value || '[audiencia destino]';
-        const duracion = document.getElementById('nlm-duracion').value;
-        const institucion = document.getElementById('nlm-institucion').value || 'Formando Capital Humano';
-        const notas = document.getElementById('nlm-notas').value;
-
-        const docLabel = docTypeLabels[docType];
-        const nivelLabel = nivelLabels[nivel];
-        const duracionLabel = duracionLabels[duracion];
-        const modulosLabel = duracionModulos[duracion];
-
-        // Is it a multi-file scenario?
-        const isMulti = docType === 'varios-archivos';
-        const fileInstruction = isMulti 
-            ? 'He subido múltiples archivos como fuentes en este notebook.' 
-            : `He subido ${docLabel} como fuente en este notebook.`;
-
-        // Build Prompt 1: Analysis prompt
-        const prompt1 = `### INSTRUCCIÓN PARA NOTEBOOKLM — ANÁLISIS DE MATERIAL FUENTE
-
-${fileInstruction}
-
-**Tu tarea es analizar exhaustivamente todo el contenido de ${isMulti ? 'las fuentes subidas' : 'la fuente subida'} y generar un informe estructurado que incluya:**
-
-1. **IDENTIFICACIÓN DEL MATERIAL**
-   - Título o tema principal detectado
-   - Tipo de documento (curso, manual, paper, presentación, etc.)
-   - Extensión aproximada y profundidad del contenido
-   - Autor/es o institución (si está disponible)
-
-2. **RESUMEN EJECUTIVO**
-   - Síntesis en 3-5 párrafos del contenido completo
-   - Objetivo principal del material original
-   - Enfoque metodológico o pedagógico detectado
-
-3. **MAPA DE CONTENIDOS**
-   - Lista completa de temas y subtemas abordados (en orden de aparición)
-   - Jerarquía de conceptos (principales → secundarios → complementarios)
-   - Palabras clave y términos técnicos más relevantes
-
-4. **ANÁLISIS PEDAGÓGICO**
-   - Nivel de profundidad actual del material (básico, intermedio, avanzado)
-   - Fortalezas del contenido para la enseñanza
-   - Vacíos o áreas que necesitarían complementarse
-   - Actividades o evaluaciones incluidas (si las hay)
-
-5. **RECURSOS Y REFERENCIAS**
-   - Bibliografía o fuentes citadas en el material
-   - Recursos multimedia mencionados
-   - Enlaces o referencias externas
-
-6. **RECOMENDACIONES PARA TRANSFORMACIÓN EN CURSO**
-   - Qué partes del material son directamente aprovechables
-   - Qué temas necesitarían mayor desarrollo
-   - Sugerencias de estructura para un curso de nivel ${nivelLabel}
-   - Posibles módulos o unidades temáticas derivables
-
-**CONFIGURACIÓN:**
-- Temática principal: "${tema}"
-- Audiencia destino del futuro curso: ${audiencia}
-- Nivel objetivo: ${nivelLabel}
-- Institución: ${institucion}
-
-Por favor, sé lo más exhaustivo y detallado posible en tu análisis. Este informe será la base para generar un curso profesional completo.`;
-
-        // Build Prompt 2: Course generation prompt
-        let notasSection = '';
-        if (notas && notas.trim() !== '') {
-            notasSection = `\n\n**REQUERIMIENTOS ESPECIALES DEL DOCENTE:**\n${notas}`;
-        }
-
-        const prompt2 = `### INSTRUCCIÓN PARA NOTEBOOKLM — GENERACIÓN DE CURSO PROFESIONAL
-
-Basándote en el análisis que acabas de realizar del material fuente subido a este notebook, necesito que generes un **curso profesional completo** con la siguiente estructura y especificaciones:
-
----
-
-## PARÁMETROS DEL CURSO
-
-| Parámetro | Valor |
-|-----------|-------|
-| **Temática** | ${tema} |
-| **Nivel** | ${nivelLabel} |
-| **Audiencia** | ${audiencia} |
-| **Duración estimada** | ${duracionLabel} |
-| **Cantidad de módulos** | ${modulosLabel} |
-| **Institución** | ${institucion} |
-| **Material base** | El contenido analizado previamente en este notebook |
-
----
-
-## ESTRUCTURA OBLIGATORIA DEL CURSO
-
-Genera el curso completo siguiendo **exactamente** esta estructura:
-
-### 1. PORTADA E IDENTIFICACIÓN
-- Nombre del curso (proponer un título profesional y atractivo basado en el material)
-- Institución: ${institucion}
-- Modalidad sugerida (virtual, presencial, híbrida)
-- Carga horaria: ${duracionLabel}
-
-### 2. FUNDAMENTACIÓN Y PROPÓSITO
-- Justificación de por qué este curso es relevante (basada en el material analizado)
-- Propósito pedagógico general
-- Competencias que se busca desarrollar (mínimo 5)
-
-### 3. OBJETIVOS
-- 1 Objetivo General
-- Mínimo 5 Objetivos Específicos (deben ser medibles y usar verbos de la Taxonomía de Bloom según el nivel ${nivelLabel})
-
-### 4. PERFIL DEL DESTINATARIO
-- Descripción detallada de la audiencia: ${audiencia}
-- Conocimientos previos necesarios
-- Perfil de egreso (qué sabrá hacer al finalizar)
-
-### 5. CONTENIDOS MODULARES (${modulosLabel})
-Para CADA MÓDULO generar:
-- **Título del módulo**
-- **Objetivos específicos del módulo** (2-3)
-- **Contenidos teóricos** (desarrollados en detalle, extraídos y ampliados del material fuente)
-- **Actividades prácticas** (mínimo 2 por módulo):
-  - Actividad individual
-  - Actividad grupal o colaborativa
-- **Recursos complementarios** (lecturas, videos, herramientas)
-- **Autoevaluación del módulo** (3-5 preguntas)
-
-### 6. MAPA CONCEPTUAL GENERAL
-- Describir textualmente un mapa conceptual que conecte todos los módulos y sus relaciones
-
-### 7. METODOLOGÍA
-- Enfoque pedagógico (constructivismo, aprendizaje basado en problemas, etc.)
-- Estrategias didácticas específicas
-- Uso de tecnología educativa
-
-### 8. CRONOGRAMA SUGERIDO
-- Distribución temporal de los módulos
-- Hitos y entregas clave
-- Momentos de evaluación
-
-### 9. SISTEMA DE EVALUACIÓN
-- Criterios de evaluación
-- Instrumentos:
-  - Evaluación diagnóstica (al inicio)
-  - Evaluaciones formativas (durante el proceso)
-  - Evaluación sumativa / integradora final
-- Rúbrica de evaluación del proyecto final
-- Escala de calificación
-
-### 10. GUIÓN DE VIDEO INTRODUCTORIO
-- Guión completo de 2-3 minutos para un video de presentación del curso
-- Incluir: bienvenida, recorrido del curso, motivación y cierre
-
-### 11. BIBLIOGRAFÍA Y RECURSOS
-- Referencias bibliográficas en formato APA 7 (incluir las del material fuente + complementarias)
-- Recursos web recomendados
-- Herramientas digitales sugeridas
-
----
-
-## DIRECTIVAS DE CALIDAD
-
-- **CRÍTICO**: Todo el contenido debe estar basado y ser coherente con el material fuente analizado en este notebook.
-- Amplía y enriquece el contenido original, no lo copies textualmente.
-- Adapta el nivel de complejidad a: ${nivelLabel}.
-- Usa un tono profesional, claro y pedagógicamente sólido.
-- Incluye ejemplos prácticos y casos de estudio relevantes.
-- Asegúrate de que las actividades sean viables y aplicables.
-- Utiliza terminología técnica adecuada al campo de "${tema}".${notasSection}
-
----
-
-Por favor, genera el curso completo y detallado. No omitas ninguna sección. Cada módulo debe tener contenido sustancial desarrollado, no solo títulos o bullets.`;
-
-        // Show containers
-        const container1 = document.getElementById('nlm-prompt-1-container');
-        const container2 = document.getElementById('nlm-prompt-2-container');
-        const divider = document.getElementById('nlm-divider');
-        const output1 = document.getElementById('nlm-prompt-1-output');
-        const output2 = document.getElementById('nlm-prompt-2-output');
-
-        container1.classList.remove('hidden');
-        container2.classList.add('hidden');
-        divider.classList.add('hidden');
-
-        updateWorkflowSteps(2);
-
-        // Type prompt 1, then show prompt 2
-        typeWriter(prompt1, output1, 3, () => {
-            divider.classList.remove('hidden');
-            container2.classList.remove('hidden');
-            updateWorkflowSteps(3);
-
+    const copyToClipboard = (text, btn) => {
+        navigator.clipboard.writeText(text).then(() => {
+            const original = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> ¡Copiado!';
+            btn.classList.add('copied');
             setTimeout(() => {
-                typeWriter(prompt2, output2, 2, () => {
-                    const resultSection = document.getElementById('nlm-result-section');
-                    resultSection.scrollIntoView({ behavior: 'smooth', block: 'end' });
-                });
-            }, 600);
+                btn.innerHTML = original;
+                btn.classList.remove('copied');
+            }, 2000);
+        });
+    };
+
+    // ==========================================
+    // RENDERIZADO DEL WORKFLOW (3 PASOS)
+    // ==========================================
+    function renderWorkflow() {
+        appContainer.innerHTML = `
+            <!-- Workflow Visual Navigation -->
+            <!-- Workflow Visual Navigation -->
+            <div class="nlm-workflow-banner" style="margin-bottom: 2.5rem;">
+                <div class="nlm-workflow-steps">
+                    <div class="nlm-step" id="step-indicator-1">
+                        <div class="nlm-step-icon"><i class="fas fa-search"></i></div>
+                        <div class="nlm-step-label">Paso 1</div>
+                        <div class="nlm-step-desc">Extracción de Núcleos</div>
+                    </div>
+                    <div class="nlm-step-connector"><i class="fas fa-chevron-right"></i></div>
+                    <div class="nlm-step" id="step-indicator-2">
+                        <div class="nlm-step-icon"><i class="fas fa-sync-alt"></i></div>
+                        <div class="nlm-step-label">Paso 2</div>
+                        <div class="nlm-step-desc">Adaptación Metaprompt</div>
+                    </div>
+                    <div class="nlm-step-connector"><i class="fas fa-chevron-right"></i></div>
+                    <div class="nlm-step" id="step-indicator-3">
+                        <div class="nlm-step-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <div class="nlm-step-label">Paso 3</div>
+                        <div class="nlm-step-desc">Generación Final</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASO 1: CONTENEDOR -->
+            <div id="step-1-card" class="form-card active">
+                <div class="section-header-main" style="border:none; padding:0; margin-bottom:1.5rem;">
+                    <h3><i class="fas fa-microchip"></i> Paso 1: Mapeo Pedagógico (Cursos Externos)</h3>
+                    <p class="subtitle" style="font-size:0.9rem;">Copia este prompt para extraer la base técnica de tus archivos mediante NotebookLM.</p>
+                </div>
+                <div class="prompt-output nlm-prompt-output" id="output-step-1" style="min-height: 150px; background: rgba(0,0,0,0.2); border: 1px solid var(--accent-light);"></div>
+                <div class="nlm-copy-row" style="margin-top: 1.5rem; justify-content: flex-start;">
+                    <button id="copy-step-1-btn" class="primary-btn secondary nlm-copy-btn"><i class="fas fa-copy"></i> Copiar Prompt de Análisis</button>
+                    <a href="https://notebooklm.google.com/notebook/0d689222-c831-4e67-b91a-a63d68122821/preview" target="_blank" class="primary-btn nlm-open-btn"><i class="fas fa-external-link-alt"></i> Abrir NotebookLM</a>
+                    <button id="next-to-step-2" class="primary-btn nlm-primary-btn" style="margin-left: auto;">Ya tengo el análisis <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+            </div>
+
+            <!-- PASO 2: CONTENEDOR (Oculto al inicio) -->
+            <div id="step-2-card" class="form-card hidden">
+                <div class="section-header-main" style="border:none; padding:0; margin-bottom:1.5rem;">
+                    <h3><i class="fas fa-external-link-alt"></i> Paso 2: Transposición (Otros Espacios MCH)</h3>
+                    <p class="subtitle" style="font-size:0.9rem;">Pega aquí el <strong>Informe Técnico de Estructura</strong> que te dio NotebookLM para su transposición final.</p>
+                </div>
+                
+                <div class="input-group full-width" style="margin-bottom:1.5rem;">
+                    <label><i class="fas fa-brain"></i> Informe Técnico de Estructura (Pegar aquí)</label>
+                    <textarea id="analysis-input" rows="8" placeholder="Pega aquí el reporte detallado que generó NotebookLM..."></textarea>
+                </div>
+
+                <div class="input-group full-width" style="margin-bottom:2rem;">
+                    <label><i class="fas fa-scroll"></i> Secuencia Didáctica Modelo (Fija)</label>
+                    <textarea readonly id="model-display" rows="6" style="background-color: rgba(255,255,255,0.05); font-size:0.85rem;"></textarea>
+                </div>
+
+                <div style="display: flex; gap: 1rem;">
+                    <button id="back-to-step-1" class="primary-btn secondary"><i class="fas fa-arrow-left"></i> Atrás</button>
+                    <button id="generate-maestro-btn" class="primary-btn large nlm-primary-btn" style="flex:1;">
+                        <i class="fas fa-sync-alt"></i> Adaptar y Generar Prompt Maestro
+                    </button>
+                </div>
+            </div>
+
+            <!-- PASO 3: RESULTADO FINAL -->
+            <section id="step-3-card" class="result-card nlm-result-card hidden" style="margin-top: 2rem;">
+                <div class="nlm-prompt-header">
+                    <div class="nlm-prompt-number"><i class="fas fa-bolt"></i></div>
+                    <div>
+                        <h4>Prompt Maestro de Generación (Paso 3)</h4>
+                        <p>Copia el prompt y úsalo en tu IA preferida para generar el curso completo:</p>
+                    </div>
+                </div>
+                
+                <div class="prompt-output nlm-prompt-output" id="output-step-3"></div>
+                
+                <div class="nlm-copy-row">
+                    <button id="copy-step-3-btn" class="primary-btn nlm-primary-btn" style="flex:1;"><i class="fas fa-copy"></i> Copiar Prompt Maestro</button>
+                    <button id="restart-btn" class="primary-btn secondary" style="border: 1px dashed var(--accent);"><i class="fas fa-undo"></i> Iniciar Nuevo</button>
+                </div>
+
+                <div class="ai-links">
+                    <p class="copy-instruction" style="text-align: left; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-muted);">Accesos rápidos a Modelos de IA:</p>
+                    <div class="links-grid">
+                        <a href="https://chatgpt.com" target="_blank" class="ai-link-btn gpt">ChatGPT</a>
+                        <a href="https://claude.ai" target="_blank" class="ai-link-btn claude">Claude</a>
+                        <a href="https://perplexity.ai" target="_blank" class="ai-link-btn perplexity">Perplexity</a>
+                        <a href="https://chatgpt.com/g/g-68b1ee82a1b481918c46ce0a2b0123aa-edugpt" target="_blank" class="ai-link-btn gpt-edu"><i class="fas fa-graduation-cap"></i> GPT EDU</a>
+                    </div>
+                </div>
+            </section>
+        `;
+
+        // Inicializar Interacciones
+        initWorkflowLogic();
+    }
+
+    function initWorkflowLogic() {
+        // Elementos UI
+        const step1Output = document.getElementById('output-step-1');
+        const nextBtn = document.getElementById('next-to-step-2');
+        const backBtn = document.getElementById('back-to-step-1');
+        const generateBtn = document.getElementById('generate-maestro-btn');
+        const copy1Btn = document.getElementById('copy-step-1-btn');
+        const copy3Btn = document.getElementById('copy-step-3-btn');
+        const restartBtn = document.getElementById('restart-btn');
+        
+        const card1 = document.getElementById('step-1-card');
+        const card2 = document.getElementById('step-2-card');
+        const card3 = document.getElementById('step-3-card');
+
+        const indicator1 = document.getElementById('step-indicator-1');
+        const indicator2 = document.getElementById('step-indicator-2');
+        const indicator3 = document.getElementById('step-indicator-3');
+
+        const modelDisplay = document.getElementById('model-display');
+        modelDisplay.value = SECUENCIA_MODELO;
+
+        // Mostrar Paso 1
+        indicator1.classList.add('active');
+        typeWriter(PROMPT_ANALISIS_PASO_1, step1Output);
+
+        // Eventos
+        copy1Btn.addEventListener('click', () => copyToClipboard(PROMPT_ANALISIS_PASO_1, copy1Btn));
+
+        nextBtn.addEventListener('click', () => {
+            card1.classList.add('hidden');
+            card1.classList.remove('active');
+            card2.classList.remove('hidden');
+            card2.classList.add('active');
+            
+            indicator1.classList.replace('active', 'completed');
+            indicator2.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // Scroll to result
-        document.getElementById('nlm-result-section').scrollIntoView({ behavior: 'smooth' });
-    });
+        backBtn.addEventListener('click', () => {
+            card2.classList.add('hidden');
+            card2.classList.remove('active');
+            card1.classList.remove('hidden');
+            card1.classList.add('active');
 
-    // Copy buttons for NLM
-    function setupNlmCopy(btn, outputId) {
-        btn.addEventListener('click', () => {
-            const text = document.getElementById(outputId).textContent;
-            navigator.clipboard.writeText(text).then(() => {
-                const original = btn.innerHTML;
-                btn.innerHTML = '<i class="fas fa-check"></i> ¡Copiado!';
-                btn.classList.add('copied');
-                setTimeout(() => {
-                    btn.innerHTML = original;
-                    btn.classList.remove('copied');
-                }, 2000);
+            indicator2.classList.remove('active');
+            indicator1.classList.replace('completed', 'active');
+        });
+
+        generateBtn.addEventListener('click', () => {
+            const analysis = document.getElementById('analysis-input').value.trim();
+            if (!analysis) {
+                alert('Por favor, pega el Informe Técnico de Estructura para continuar.');
+                return;
+            }
+
+            const promptMaestro = `### SISTEMA DE CURSOS EXTERNOS: GENERACIÓN DE CONTENIDOS MCH ###
+
+[ROLE]: Arquitecto de Transposición - Ministerio de Capital Humano.
+
+[OBJETIVO]: Ejecutar la TRANSICIÓN PEDAGÓGICA de contenidos externos para ser integrados en los espacios formativos del MCH.
+
+[INSUMO: INFORME TÉCNICO DE ESTRUCTURA]:
+"""
+${analysis}
+"""
+
+[SECUENCIA DIDÁCTICA MODELO]:
+"""
+${SECUENCIA_MODELO}
+"""
+
+[INSTRUCCIONES DE INGENIERÍA DE ALTO IMPACTO]:
+1. **TRANSFORMACIÓN PROFUNDA**: Toma el "Informe Técnico de Estructura" y realiza la mediación pedagógica siguiendo el protocolo institucional.
+2. **HIPER-EXTENSIÓN POR MÓDULO**: Redacta el contenido completo de la secuencia didáctica. **CRÍTICO / MANDATORIO**: Cada módulo de la fase de DESARROLLO debe ser hiper-extenso y exhaustivo. Aspira a la máxima longitud que permita la ventana de salida (objetivo de **5000 palabras por módulo**). Desarrolla cada concepto hasta sus últimas consecuencias, incluye múltiples ejemplos, análisis de casos, fundamentos teóricos y guías paso a paso. No aceptaré resúmenes ni síntesis; requiero el desarrollo más voluminoso y profundo posible.
+3. **SOBERANÍA TECNOLÓGICA**: Asegura que cada fase (Inicio, Desarrollo, Cierre) tenga una actividad práctica alineada a la Soberanía Tecnológica y formación laboral.
+4. **RIGOR DOCENTE**: El tono debe ser profesional, docente y orientado a resultados de inserción laboral real.
+
+[ESTRUCTURA DE CIERRE Y MEJORA CONTINUA]:
+Al finalizar la generación del curso completo, DEBES incluir obligatoriamente una sección titulada:
+"### ✨ FEEDBACK Y OPTIMIZACIÓN DEL PROMPTING"
+En esta sección, pregúntame directamente: "¿En qué área específica te gustaría profundizar ahora?" o "¿Qué parte de la secuencia didáctica consideras que requiere un desarrollo aún más exhaustivo para enriquecer tu práctica docente?". Sugiere 3 caminos específicos para mejorar el resultado actual.
+
+[SALIDA]: Generar el curso completo en formato Markdown profesional.`;
+
+            card3.classList.remove('hidden');
+            indicator2.classList.replace('active', 'completed');
+            indicator3.classList.add('active');
+
+            typeWriter(promptMaestro, document.getElementById('output-step-3'), 3, () => {
+                document.getElementById('output-step-3').scrollIntoView({ behavior: 'smooth' });
             });
         });
+
+        copy3Btn.addEventListener('click', () => {
+            const text = document.getElementById('output-step-3').textContent;
+            copyToClipboard(text, copy3Btn);
+        });
+
+        restartBtn.addEventListener('click', () => {
+            renderWorkflow();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
     }
 
-    setupNlmCopy(nlmCopyBtn1, 'nlm-prompt-1-output');
-    setupNlmCopy(nlmCopyBtn2, 'nlm-prompt-2-output');
+    // Iniciar
+    renderWorkflow();
 });
