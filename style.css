@@ -574,6 +574,23 @@ select:focus {
     border-color: transparent;
 }
 
+.custom-keyword-input {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    max-width: 400px;
+}
+
+.custom-keyword-input input {
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+}
+
+.custom-keyword-input .magic-btn {
+    padding: 0 1.2rem;
+    font-size: 1.2rem;
+}
+
 .tone-selector {
     display: flex;
     flex-wrap: wrap;

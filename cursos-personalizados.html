@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Didácticas Personalizadas | Pronto Prompt</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <a href="index.html" class="back-portal-link"><i class="fas fa-arrow-left"></i> Volver al Portal</a>
+
+    <main class="container">
+        <div class="main-content">
+            <header>
+                <div class="logo">
+                    <span class="logo-text">Pronto<span class="accent">Prompt</span></span>
+                </div>
+                <h1>Didácticas Personalizadas</h1>
+                <p class="subtitle">Cursos adaptados a tu tiempo, dispositivo y estilo cognitivo (Método ROCKET)</p>
+            </header>
+
+            <div class="section-header-main">
+                <h2>Hoja de Ruta de Aprendizaje Soberana</h2>
+            </div>
+
+            <!-- Sección 1: Identidad -->
+            <div class="form-card">
+                <div class="card-header-flex">
+                    <h3 class="section-title"><i class="fas fa-fingerprint"></i> 1. Identidad y Tiempo</h3>
+                    <div class="brain-selector-container">
+                        <span class="brain-label">Cerebro AI:</span>
+                        <div class="brain-options">
+                            <label class="brain-chip">
+                                <input type="radio" name="ai-model" value="gemini" checked>
+                                <span><i class="fas fa-stars"></i> Gemini</span>
+                            </label>
+                            <label class="brain-chip">
+                                <input type="radio" name="ai-model" value="chatgpt">
+                                <span><i class="fas fa-bolt"></i> GPT-4</span>
+                            </label>
+                            <label class="brain-chip">
+                                <input type="radio" name="ai-model" value="perplexity">
+                                <span><i class="fas fa-search"></i> Perplexity</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-grid">
+                    <div class="input-group">
+                        <div class="label-row">
+                            <label for="course-topic">Tema de Interés (Conocimiento técnico/académico)</label>
+                            <div class="label-actions">
+                                <button id="magic-fill" class="magic-btn" title="Autocompletar ejemplo">✨ Prueba un ejemplo</button>
+                            </div>
+                        </div>
+                        <input type="text" id="course-topic" placeholder="Ej: Programación en Python, Historia del Arte..." required>
+                    </div>
+                    <div class="input-group">
+                        <label for="time-availability">Disponibilidad Temporal</label>
+                        <input type="text" id="time-availability" placeholder="Ej: 30 min/día, 2 semanas, 10 horas total..." required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 2: Perfil del Estudiante -->
+            <div class="form-card">
+                <h3 class="section-title"><i class="fas fa-user-graduate"></i> 2. Perfil del Estudiante</h3>
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label for="knowledge-level">Nivel de Conocimiento Previo</label>
+                        <select id="knowledge-level" required>
+                            <option value="Nulo (Desde cero)">Nulo (Desde cero)</option>
+                            <option value="Principiante (Bases mínimas)">Principiante (Bases mínimas)</option>
+                            <option value="Intermedio (Conozco la lógica)">Intermedio (Conozco la lógica)</option>
+                            <option value="Avanzado (Busco perfeccionamiento)">Avanzado (Busco perfeccionamiento)</option>
+                            <option value="Experto (Actualización técnica)">Experto (Actualización técnica)</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Test de Personalidad Cognitiva</label>
+                        <div class="personality-questions">
+                            <div class="input-group">
+                                <label class="small-label">¿Cómo procesas mejor la información?</label>
+                                <select id="personality-style">
+                                    <option value="Visual (Diagramas y videos)">Visual (Diagramas y videos)</option>
+                                    <option value="Auditivo (Explicaciones y debates)">Auditivo (Explicaciones y debates)</option>
+                                    <option value="Kinestésico (Haciendo y practicando)">Kinestésico (Haciendo y practicando)</option>
+                                    <option value="Lector/Escritor (Textos y notas)">Lector/Escritor (Textos y notas)</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label class="small-label">¿Cuál es tu enfoque ante un desafío?</label>
+                                <select id="personality-approach">
+                                    <option value="Metódico y paso a paso">Metódico y paso a paso</option>
+                                    <option value="Global e intuitivo">Global e intuitivo</option>
+                                    <option value="Pragmático (Resultados rápidos)">Pragmático (Resultados rápidos)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 3: Configuración de Acceso -->
+            <div class="form-card">
+                <h3 class="section-title"><i class="fas fa-sliders-h"></i> 3. Preferencias de Acceso</h3>
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label for="device">Dispositivo de Acceso</label>
+                        <select id="device" required>
+                            <option value="Mobile">Mobile (Smartphone)</option>
+                            <option value="Tablet">Tablet</option>
+                            <option value="Desktop" selected>Desktop / Laptop</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="modality">Modalidad Prioritaria</label>
+                        <select id="modality" required>
+                            <option value="Audio">Audio (Podcast / Guiones)</option>
+                            <option value="Video Tutoriales">Video Tutoriales</option>
+                            <option value="Explicaciones Conceptuales">Explicaciones Conceptuales</option>
+                            <option value="Ejercitación Práctica" selected>Ejercitación Práctica</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 4: Evaluación -->
+            <div class="form-card">
+                <h3 class="section-title"><i class="fas fa-vial"></i> 4. Herramientas Evaluativas</h3>
+                <div class="input-group full-width">
+                    <label>Selecciona las mecánicas de validación:</label>
+                    <div id="evaluation-tools" class="keyword-container">
+                        <span class="keyword-tag active" data-value="Multiple Choice">Multiple Choice</span>
+                        <span class="keyword-tag" data-value="Completar Espacios">Completar Espacios</span>
+                        <span class="keyword-tag" data-value="Mecánicas de Juego">Mecánicas de Juego</span>
+                        <span class="keyword-tag" data-value="Casos de Estudio">Casos de Estudio</span>
+                        <span class="keyword-tag" data-value="Ensayo Reflexivo">Ensayo Reflexivo</span>
+                        <span class="keyword-tag" data-value="Mapa Mental">Mapa Mental</span>
+                        <span class="keyword-tag" data-value="Proyecto Final">Proyecto Final</span>
+                        <span class="keyword-tag" data-value="Debate Simulado">Debate Simulado</span>
+                        <span class="keyword-tag" data-value="Resolución de Bugs">Resolución de Bugs</span>
+                        <span class="keyword-tag" data-value="Autoevaluación Metacognitiva">Autoevaluación Metacognitiva</span>
+                    </div>
+                </div>
+            </div>
+
+            <section id="result-section" class="result-card">
+                <div class="result-actions">
+                    <button id="generate-btn" class="primary-btn large">Generar Hoja de Ruta ROCKET</button>
+                </div>
+
+                <div class="prompt-output" id="prompt-output"></div>
+
+                <div id="copy-container" class="copy-container hidden">
+                    <button id="copy-btn" class="primary-btn large secondary">Copiar Prompt</button>
+                </div>
+
+                <div id="ai-links" class="ai-links hidden">
+                    <p>Abrir y Pegar en:</p>
+                    <div class="links-grid">
+                        <a href="https://chat.openai.com" target="_blank" class="ai-link-btn gpt">ChatGPT</a>
+                        <a href="https://gemini.google.com" target="_blank" class="ai-link-btn gemini">Gemini</a>
+                        <a href="https://www.perplexity.ai" target="_blank" class="ai-link-btn perplexity">Perplexity</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="script-personalizados.js"></script>
+</body>
+
+</html>

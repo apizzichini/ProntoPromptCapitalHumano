@@ -40,7 +40,7 @@
             <div id="course-map-modal" class="course-map-modal hidden">
                 <div class="course-map-content">
                     <div class="course-map-header">
-                        <h3><i class="fas fa-project-diagram"></i> Mapa del Curso</h3>
+                        <h3><i class="fas fa-project-diagram"></i> Mapa Mental</h3>
                         <button id="close-course-map" class="close-btn">&times;</button>
                     </div>
                     <div id="course-map-tree" class="course-map-tree"></div>
@@ -201,14 +201,16 @@
                             <span class="keyword-tag" data-value="Innovador">Innovador</span>
                             <span class="keyword-tag" data-value="Práctico">Práctico</span>
                             <span class="keyword-tag" data-value="Dinámico">Dinámico</span>
-                            <span class="keyword-tag" data-value="Certificable">Certificable</span>
                             <span class="keyword-tag" data-value="Sostenido">Sostenido</span>
                             <span class="keyword-tag" data-value="Accesible">Accesible</span>
                             <span class="keyword-tag" data-value="Participativo">Participativo</span>
-                            <span class="keyword-tag" data-value="Territorial">Territorial</span>
                             <span class="keyword-tag" data-value="Basado en Proyectos">Basado en Proyectos</span>
                             <span class="keyword-tag" data-value="Orientado al Empleo">Orientado al Empleo</span>
                             <span class="keyword-tag" data-value="Comunitario">Comunitario</span>
+                        </div>
+                        <div class="custom-keyword-input">
+                            <input type="text" id="custom-keyword" placeholder="Agregar característica personalizada...">
+                            <button id="add-keyword-btn" class="magic-btn"><i class="fas fa-plus"></i></button>
                         </div>
                     </div>
                 </div>
@@ -222,9 +224,6 @@
                     <div class="input-group">
                         <div class="label-row">
                             <label for="block">Bloque a Desarrollar (SD)</label>
-                            <div id="oer-badge" class="oer-status hidden">
-                                <i class="fas fa-book-open"></i> OER Disponibles
-                            </div>
                         </div>
                         <select id="block" required>
                             <option value="estructura-completa">Secuencia Completa (Presentación a Evaluación)</option>
@@ -275,16 +274,7 @@
                     </div>
                 </div>
 
-                <!-- Contenedor dinámico de OER -->
-                <div id="oer-container" class="oer-card hidden">
-                    <div class="oer-header">
-                        <h4><i class="fas fa-lightbulb"></i> Recursos OER Sugeridos</h4>
-                        <span class="oer-subtitle">Basado en tu área temática</span>
-                    </div>
-                    <div id="oer-list" class="oer-list">
-                        <!-- Se puebla vía JS -->
-                    </div>
-                </div>
+
             </div>
 
             <!-- Widget: Salud del Prompt -->
@@ -371,7 +361,7 @@
                 <span class="preview-label">Vista Previa del Objetivo:</span>
                 <p id="objective-preview">Completa los campos para previsualizar el objetivo...</p>
                 <div class="preview-actions">
-                    <button id="view-course-map-btn" class="magic-btn secondary-magic"><i class="fas fa-sitemap"></i> Ver Estructura del Curso (Mapa del Curso)</button>
+                    <button id="view-course-map-btn" class="magic-btn secondary-magic"><i class="fas fa-sitemap"></i> Ver Estructura del Curso (Mapa Mental)</button>
                 </div>
             </div>
 

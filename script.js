@@ -39,11 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const keywordsByArea = {
-        'transversal': ['Innovador', 'Práctico', 'Dinámico', 'Certificable', 'Sostenido', 'Accesible', 'Participativo', 'Territorial', 'Comunitario'],
+        'transversal': ['Innovador', 'Práctico', 'Dinámico', 'Sostenido', 'Accesible', 'Participativo', 'Comunitario'],
         'Desarrollo Personal': ['Autonomía', 'Bienestar emocional', 'Identidad', 'Autogestión', 'Habilidades blandas'],
         'Habilidades Digitales + IA': ['Alfabetización digital', 'Herramientas IA', 'Productividad', 'Ciudadanía digital', 'Prompt engineering'],
         'Nuevos Aprendizajes': ['Aprendizaje activo', 'Metacognición', 'Adaptabilidad', 'Curiosidad', 'Aprendizaje autónomo'],
-        'Habilidades para Emprender': ['Emprendimiento social', 'Autogestión económica', 'Modelo de negocios', 'Marketing digital'],
+        'Habilidades para Emprender': ['Autogestión económica', 'Marketing digital'],
         'Etapas del Desarrollo': ['Desarrollo integral', 'Vínculo afectivo', 'Crianza positiva', 'Enfoque de derechos', 'Acompañamiento familiar'],
         'Cuidados': ['Cuidado comunitario', 'Redes de apoyo', 'Crianza saludable', 'Corresponsabilidad', 'Salud y bienestar']
     };
@@ -164,31 +164,16 @@ INSTRUCCIÓN CRÍTICA: Cada sección de la respuesta debe ser revisada por los t
             keywordContainer.appendChild(span);
         });
 
-        // Update OER Suggestions
-        updateOERSuggestions(area);
+        // OER logic removed for Cursos Propios
     };
 
     const oerContainer = document.getElementById('oer-container');
     const oerList = document.getElementById('oer-list');
     const oerBadge = document.getElementById('oer-badge');
 
+    // OER Suggestions disabled for this module
     function updateOERSuggestions(area) {
-        const resources = oerResources[area] || [];
-        
-        if (resources.length > 0) {
-            oerContainer.classList.remove('hidden');
-            oerBadge.classList.remove('hidden');
-            
-            oerList.innerHTML = resources.map(res => `
-                <a href="${res.url}" target="_blank" class="oer-item">
-                    <span class="oer-item-title">${res.title}</span>
-                    <span class="oer-item-source"><i class="fas fa-external-link-alt"></i> ${res.source}</span>
-                </a>
-            `).join('');
-        } else {
-            oerContainer.classList.add('hidden');
-            oerBadge.classList.add('hidden');
-        }
+        return;
     }
 
     // Hierarchical Dropdown Logic
@@ -215,6 +200,29 @@ INSTRUCCIÓN CRÍTICA: Cada sección de la respuesta debe ser revisada por los t
     areaTematicaSelect.addEventListener('change', () => {
         updateKeywords(areaTematicaSelect.value);
     });
+
+    // Custom Keywords Logic
+    const addKeywordBtn = document.getElementById('add-keyword-btn');
+    const customKeywordInput = document.getElementById('custom-keyword');
+
+    if (addKeywordBtn) {
+        addKeywordBtn.addEventListener('click', () => {
+            const val = customKeywordInput.value.trim();
+            if (val) {
+                const span = document.createElement('span');
+                span.className = 'keyword-tag active';
+                span.setAttribute('data-value', val);
+                span.textContent = val;
+                span.addEventListener('click', () => {
+                    span.classList.toggle('active');
+                    updateHealthScore();
+                });
+                keywordContainer.appendChild(span);
+                customKeywordInput.value = '';
+                updateHealthScore();
+            }
+        });
+    }
 
     // Initial keyword load
     updateKeywords('transversal');
@@ -674,8 +682,8 @@ INSTRUCCIÓN CRÍTICA: Cada sección de la respuesta debe ser revisada por los t
                 case 'bloque-1':
                     objectiveText = `Desarrollar los "Módulos Escritos (PDF)" NIVEL AVANZADO para el curso "${courseName}".`;
                     stepText = `1. ESTRUCTURA: 6 módulos escritos en .doc (el equipo de gráfica convertirá a PDF).
-   - MÓDULO 1 al 6: [Nombre del módulo] - Extensión: 4 a 5 páginas cada uno.
-   - No superar 24 a 30 carillas TOTALES del curso.
+   - MÓDULO 1 al 6: [Nombre del módulo] - Extensión: 5.000 palabras (aprox. 12 páginas A4).
+   - No superar las 30 páginas TOTALES del curso.
 
 2. PASO A PASO PARA CADA MÓDULO:
    a) Página de Introducción a la Clase: objetivos del módulo, contenidos y recomendaciones para el estudio.
@@ -744,7 +752,7 @@ INSTRUCCIÓN CRÍTICA: Cada sección de la respuesta debe ser revisada por los t
    - Cronograma: archivo Word aparte etiquetado con nombre del curso.
 
 2. MÓDULOS (6 escritos en .doc, PDF final):
-   - Módulos 1 al 6: 4 a 5 páginas cada uno. Total: máx. 24-30 carillas.
+   - Módulos 1 al 6: 5.000 palabras cada uno. Total: máx. 30 páginas A4.
    - Cada módulo: Introducción → Contenidos para PDF → Video integrador → Práctica sumatoria.
    - Actividades parciales: 2-3 ejercicios al cierre M1+M2+M3 y al cierre M4+M5+M6 (sin devolución).
    - Calibri 11, imágenes Creative Commons. Bibliografía APA 7 al final.
@@ -755,12 +763,12 @@ INSTRUCCIÓN CRÍTICA: Cada sección de la respuesta debe ser revisada por los t
 4. EVALUACIÓN FINAL: 15-20 ítems (Múltiple Choice con 4-5 opciones) integradores. ES OBLIGATORIO incluir la respuesta correcta y una aclaración pedagógica para cada ítem en formato de TABLA.`;
             }
             knowledgeBaseAddons = `6. **Bibliografía y Citas (APA 7)**: Cita directa entre comillas (Autor, Año, p. X). Paráfrasis: citar (Autor, Año). Lista bibliográfica alfabética al final. Recursos visuales: Creative Commons.`;
-            executionMandates = `- **FORMATO .DOC → PDF**: Calibri 11, A4. No superar 24-30 carillas totales del curso.
-- **ESTILO**: Lenguaje claro, NO INCLUSIVO, sencillo, sin modismos, en neutro.
+            executionMandates = `- **CONFIGURACIÓN TÉCNICA POR MÓDULO**: 5.000 Palabras | 30.000 Caracteres | 7.000 Tokens | 12 páginas A4.
+- **ESTILO DE REDACCIÓN**: Escritura natural, cohesiva y fluida. Queda PROHIBIDO el uso de viñetas, listas o numeraciones para el desarrollo de contenidos. Se busca una narrativa académica tradicional de alta densidad.
 - **GRADUALIDAD**: Cada módulo se corresponde con un objetivo de aprendizaje.
 - **ACTIVIDADES PARCIALES**: 2-3 ejercicios al cierre de M1+M2+M3 y M4+M5+M6 (sin devolución).
 - **IMÁGENES Y VIDEOS**: Sin derechos de autor, Creative Commons. Articular con equipo de gráfica y producción.
-- **EXTENSIÓN CRÍTICA**: Módulos de 4 a 5 páginas. Se exige la MÁXIMA EXTENSIÓN posible, desarrollando cada concepto con profundidad pedagógica experta y profesional.`;
+- **EXTENSIÓN CRÍTICA**: Cada módulo debe desarrollarse con una densidad de 5.000 palabras. Se exige la MÁXIMA EXTENSIÓN posible, desarrollando cada concepto con profundidad pedagógica experta y profesional.`;
         } else if (isIntermediate) {
             // INTERMEDIATE LEVEL STRUCTURE - Lineamientos Institucionales Oficiales
             switch (block) {
@@ -792,8 +800,8 @@ INSTRUCCIÓN CRÍTICA: Cada sección de la respuesta debe ser revisada por los t
                 case 'bloque-1':
                     objectiveText = `Desarrollar los "Módulos Escritos (PDF)" NIVEL INTERMEDIO para el curso "${courseName}".`;
                     stepText = `1. ESTRUCTURA: 4 módulos escritos en .doc (el equipo de gráfica convertirá a PDF).
-   - MÓDULO 1 al 4: [Nombre del módulo] - Extensión: 2 a 3 páginas.
-   - No superar 12 a 15 carillas TOTALES del curso.
+   - MÓDULO 1 al 4: [Nombre del módulo] - Extensión: 5.000 palabras (aprox. 12 páginas A4).
+   - Total del curso: 20.000 palabras (aprox. 48 páginas A4).
 
 2. CADA MÓDULO DEBE INCLUIR (PROFUNDIZACIÓN):
    - Prohibido generar información superficial o escueta.
@@ -849,7 +857,7 @@ INSTRUCCIÓN CRÍTICA: Cada sección de la respuesta debe ser revisada por los t
 
 2. MÓDULOS DE CONTENIDO (4 Módulos):
    - Queda estrictamente prohibido generar información superficial o escueta.
-   - Desarrollar cada módulo (M1 a M4) con una extensión mínima de 3 carillas.
+   - Desarrollar cada módulo (M1 a M4) con una extensión mínima de 5.000 palabras.
    - Incluir conceptos complejos, casos de estudio detallados, aplicaciones prácticas y marcos teóricos robustos.
    - Densidad informativa suficiente para un estudio autodidacta profesional y efectivo.
 
@@ -865,7 +873,7 @@ INSTRUCCIÓN CRÍTICA: Cada sección de la respuesta debe ser revisada por los t
 5. FLUJO OBLIGATORIO: Presentación > Mapa Conceptual > Módulos Desarrollados > Guion de Video > Evaluación.`;
             }
             knowledgeBaseAddons = `6. **Bibliografía y Citas (APA 7)**: Cita directa entre comillas (Autor, Año, p. X). Paráfrasis: citar (Autor, Año). Lista bibliográfica alfabética al final.`;
-            executionMandates = `- **FORMATO .DOC → PDF**: Calibri 11, A4. Total de 12-15 carillas profesionales.\n- **ESTILO**: Lenguaje claro, NO INCLUSIVO, sencillo, sin modismos, en neutro.\n- **GRADUALIDAD**: Cada módulo correspond a un objetivo de aprendizaje.\n- **EXCLUSIÓN CRÍTICA**: Queda TERMINANTEMENTE PROHIBIDO incluir Cronogramas o Planes de Trabajo en la SD. La SD no debe contener calendarios.\n- **IMÁGENES**: Sin derechos de autor, licencia abierta o Creative Commons.\n- **EXTENSIÓN Y PROFUNDIDAD**: Mínimo 3 páginas por módulo. Se exige la MÁXIMA EXTENSIÓN posible, con alta densidad informativa, marcos teóricos robustos y aplicaciones prácticas. Prohibido el contenido genérico o breve.`;
+            executionMandates = `- **CONFIGURACIÓN TÉCNICA POR MÓDULO**: 5.000 Palabras | 30.000 Caracteres | 7.000 Tokens | 12 páginas A4.\n- **ESTILO DE REDACCIÓN**: Escritura natural, fluida y académica tradicional. PROHIBIDO el uso de viñetas o listas numeradas en el desarrollo. Todo el contenido debe ser narrativo y cohesivo.\n- **GRADUALIDAD**: Cada módulo correspond a un objetivo de aprendizaje.\n- **EXCLUSIÓN CRÍTICA**: Queda TERMINANTEMENTE PROHIBIDO incluir Cronogramas o Planes de Trabajo en la SD. La SD no debe contener calendarios.\n- **IMÁGENES**: Sin derechos de autor, licencia abierta o Creative Commons.\n- **EXTENSIÓN Y PROFUNDIDAD**: Mínimo 5.000 palabras por módulo. Se exige la MÁXIMA EXTENSIÓN posible, con alta densidad informativa, marcos teóricos robustos y aplicaciones prácticas. Prohibido el contenido genérico o breve.`;
         } else {
             // BASIC LEVEL STRUCTURE - Lineamientos Institucionales Oficiales
             switch (block) {
@@ -885,7 +893,7 @@ INSTRUCCIÓN CRÍTICA: Cada sección de la respuesta debe ser revisada por los t
                 case 'bloque-1':
                     objectiveText = `Desarrollar el "Bloque I: Módulos Escritos (PDF)" NIVEL BÁSICO para el curso "${courseName}".`;
                     stepText = `1. CANTIDAD: 1 o 2 módulos escritos en PDF. Se puede agregar un 3er módulo si el tema lo requiere.
-2. EXTENSIÓN: Entre 3 y 5 carillas por módulo (incluyendo imágenes, gráficos, tablas).
+2. EXTENSIÓN: 5.000 palabras por módulo (aprox. 12 páginas A4 incluyendo imágenes, gráficos, tablas).
 3. FORMATO: Calibri 11, Interlineado sencillo, página A4.
 
 4. ESTRUCTURA DE CADA MÓDULO:
@@ -929,7 +937,7 @@ INSTRUCCIÓN CRÍTICA: Cada sección de la respuesta debe ser revisada por los t
 3. BLOQUE II: Guion (máx 4 min). Video INTEGRADOR de los 2 módulos. Con sugerencias de imágenes.
 4. EVALUACIÓN: 5 consignas (Múltiple Choice con 4-5 opciones) alineadas a los objetivos. ES OBLIGATORIO incluir las respuestas correctas y explicaciones en formato de TABLA.`;
             }
-            executionMandates = `- **FORMATO PDF**: Calibri 11, interlineado sencillo, A4. Extensión: 3 a 5 carillas por módulo.\n- **ESTRUCTURA MODULAR**: Título N1 centrado/negrita → Introducción ≤50 pal → Desarrollo (máx 2 subtemas) → Conclusión → Bibliografía APA 7.\n- **VIÑETAS**: mayúscula inicial, punto final. Numerar solo cuando el orden es esencial.\n- **CITAS APA 7**: Directa <40 pal entre comillas; >40 pal en bloque con sangría. Paráfrasis: citar autor+año. La IA NO es fuente citable.\n- **IMÁGENES**: alta calidad, sin marcas de agua. Articular con equipo de gráfica. Numerar correlativamente.\n- **EXTENSIÓN CRÍTICA**: Se exige la MÁXIMA EXTENSIÓN posible dentro del rango de 3 a 5 carillas, evitando resúmenes y profundizando en cada punto.`;
+            executionMandates = `- **CONFIGURACIÓN TÉCNICA POR MÓDULO**: 5.000 Palabras | 30.000 Caracteres | 7.000 Tokens | 12 páginas A4.\n- **ESTRUCTURA MODULAR**: Título N1 centrado/negrita → Introducción ≤50 pal → Desarrollo (explosión de contenido narrativa) → Conclusión → Bibliografía APA 7.\n- **ESTILO DE REDACCIÓN**: Escritura natural, tradicional y pedagógica. NO utilizar viñetas ni listas. El desarrollo debe ser un texto fluido de alta densidad.\n- **CITAS APA 7**: Directa <40 pal entre comillas; >40 pal en bloque con sangría. Paráfrasis: citar autor+año. La IA NO es fuente citable.\n- **IMÁGENES**: alta calidad, sin marcas de agua. Articular con equipo de gráfica. Numerar correlativamente.\n- **EXTENSIÓN CRÍTICA**: Se exige la MÁXIMA EXTENSIÓN posible (5.000 palabras por módulo), evitando resúmenes y profundizando en cada punto.`;
         }
 
         const activeKeywords = Array.from(document.querySelectorAll('.keyword-tag.active')).map(tag => tag.getAttribute('data-value'));
@@ -942,49 +950,52 @@ INSTRUCCIÓN CRÍTICA: Cada sección de la respuesta debe ser revisada por los t
         const prompt = `${modelGuideline}
 
 ### SYSTEM ROLE (R)
+Actúa como un Senior Prompt Engineer y Arquitecto Instruccional de Educación 4.0.
 ${expertLayer}
-Tu objetivo es transformar conceptos en recursos de nivel profesional siguiendo la Secuencia Didáctica (SD) institucional y las pautas de redacción oficiales. Es IMPERATIVO que el contenido sea lo más extenso y detallado posible, cumpliendo estrictamente con cada instrucción y pauta establecida.
+Tu objetivo es transformar conceptos en recursos de nivel profesional siguiendo la Secuencia Didáctica (SD) institucional. Operaremos bajo un sistema de **Generación por Etapas** para garantizar la altísima densidad pedagógica requerida.
 
-### OBJECTIVE (O)
+### CONTEXTO (Context)
+Estamos trabajando exclusivamente en el módulo de "Cursos Propios". La restricción técnica es que el contenido debe ser de altísima densidad (mínimo 5.000 palabras por módulo). Para evitar la degradación de calidad o resúmenes prematuros, el flujo de trabajo será iterativo y modular.
+
+### OBJETIVO (Objective)
+Actuar como un motor de expansión que trabaje módulo por módulo (o sección por sección), asegurando la máxima extensión y profundidad técnica en cada entrega. No entregues el curso completo de una vez; enfócate en la perfección de la etapa actual.
 ${objectiveText}
 
-### CONTEXT & PARAMETERS (C)
-- **Generado por:** Tutor Docente Profesional de Capital Humano (Coordinación de Alimentar).
-- **Curso:** ${courseName}
-- **Nivel:** ${activeLevel}
-- **Referencia Institucional:** Formando Capital Humano.
-- **Área Temática:** ${areaTematica}
-- **Beneficiarios:** ${audience}
-- **Estrategia:** Enfoque ${pedagogy} con tono ${tone}.
+### CONFIGURACIÓN DE CASCADA DE CONTENIDO (Enriquecimiento Técnico)
+Debes seguir rigurosamente esta lógica de "Cascada de Contenido":
 
-### KNOWLEDGE BASE (K) - Pautas Institucionales & Estrategia "Modo IA"
-1. **Redacción de Presentación**: Bienvenida (Vos -> Nosotros). Pestaña para equipo de carga. Incluye Guía SD y referencia a Mapa (espejo contenido). ${isIntermediate ? 'MANDATO: EXCLUIR Cronograma / Plan de Trabajo de la presentación.' : ''}
-2. **Bloque I (PDF)**: Desarrollar con MÁXIMA EXTENSIÓN. ${isAdvanced ? '6 módulos de 4-5 páginas cada uno.' : isIntermediate ? '4 módulos de 2-3 páginas cada uno (densidad alta).' : '2 módulos de 3-5 carillas cada uno.'}
-3. **Bloque II (Video)**: ${isAdvanced ? '2 videos integradores (M1-3 y M4-6).' : isIntermediate ? 'Guion de video resumen (3 a 4 min).' : 'Video integrador global.'} Sugerir imágenes conceptuales.
-4. **Evaluación**: ${isAdvanced ? '15 a 20 consignas con rúbricas.' : isIntermediate ? 'Exactamente 10 consignas de aplicación/análisis.' : '5 consignas fundamentales.'} ES OBLIGATORIO incluir siempre la respuesta correcta y la aclaración pedagógica en TABLAS.
-5. **Verificación de Datos**: Comprobar información en múltiples fuentes (mínimo 3 sitios). Si hay ambigüedad, priorizar el contexto de Formando Capital Humano.
-${knowledgeBaseAddons}
-6. **Restricciones Temáticas (EXCLUSIÓN CRÍTICA)**: Queda TERMINANTEMENTE PROHIBIDO incluir referencias, terminología o enfoques relacionados con: Justicia social, Juventudes, Lenguaje inclusivo, Educación popular o Educación comunitaria.
+1. **Fase de Estructuración (Índice de Densidad)**: Antes de redactar, debes proponer un **Índice de Densidad** detallado para los ${isAdvanced ? '6 módulos' : isIntermediate ? '4 módulos' : '2 módulos'} definidos para este nivel (${activeLevel.toUpperCase()}). 
+   - Por cada módulo, debes desglosar de 10 a 15 sub-apartados técnicos. 
+   - Esta estructura debe ser la "percha" pedagógica que garantice alcanzar la meta de las 5.000 palabras por módulo sin redundancias.
+2. **Fase de Expansión Modular**: Una vez aprobada la estructura técnica del índice, debes indicar: "He diseñado el índice de densidad para los ${isAdvanced ? '6' : isIntermediate ? '4' : '2'} módulos. Por favor, dime qué módulo (o sección específica) quieres que desarrolle con máxima extensión (5.000 palabras) ahora".
+3. **Mandato de No-Resumen**: Queda PROHIBIDO el uso de frases conclusivas prematuras o resúmenes. Si el contenido no alcanza la densidad necesaria, debes autogenerar una "Rama de Búsqueda Técnica" para profundizar en conceptos específicos.
+4. **Bloque 1 (PDF)**: Se descompone en Entregas Individuales. Cada respuesta de salida debe ocuparse de UN módulo a la vez para mantener la potencia informativa de 5.000 palabras.
+5. **Explosión de Contenido**: El "Desarrollo" de cada módulo debe ser una explosión de información dividida en al menos 3 partes sustanciales para asegurar el hilo pedagógico y la profundidad técnica universitaria.
 
-### EXECUTION STEPS (E)
-- **MANDATO DE CUMPLIMIENTO**: Es OBLIGATORIO seguir todos los "Tips" y lineamientos de este prompt. La falta de cumplimiento en la extensión o el formato será considerada un fallo en la tarea.
-- **MÁXIMA EXTENSIÓN**: Escribe de forma exhaustiva. Expande cada subtema, incluye ejemplos prácticos y detalles técnicos. El objetivo es alcanzar o superar los mínimos de carillas solicitados.
+### INSTRUCCIONES DE CONFIGURACIÓN Y RESTRICCIONES (Knowledge & Constraints)
+1. **Invariabilidad de la Secuencia Didáctica**: Mantener Inicio, Desarrollo y Cierre. El desarrollo debe ser la "Explosión de Contenido" mencionada.
+2. **Definición Pedagógica**: Todo el material debe ser original. PROHIBIDO el uso de OER.
+3. **Estructura Visual**: Utilizar Mapa Mental (jerarquía visualmente ramificada).
+4. **Redacción de Presentación**: Bienvenida (Vos -> Nosotros). ${isIntermediate ? 'EXCLUIR Cronograma / Plan de Trabajo.' : ''}
+5. **Evaluación**: ES OBLIGATORIO incluir siempre la respuesta correcta y la aclaración pedagógica en TABLAS.
+6. **Restricciones Temáticas**: EXCLUSIÓN CRÍTICA de Justicia social, Juventudes, Lenguaje inclusivo, Educación popular o Educación comunitaria.
+
+### EJECUCIÓN Y POTENCIA (Execution & Density)
+- **CONFIGURACIÓN TÉCNICA OBLIGATORIA**:
+  - Medida Por Módulo: 5.000 palabras (aprox. 30.000 caracteres | 7.000 tokens | 12 páginas A4).
+  - Total del Curso: 10.000 palabras (aprox. 60.000 caracteres | 14.000 tokens | 24 páginas A4).
+- **MANDATO DE CUMPLIMIENTO**: Fuerza al modelo a detallar cada concepto utilizando un lenguaje rico y técnico. **Cada módulo desarrollado debe alcanzar la meta de 5.000 palabras.**
+- **MAPA MENTAL**: Entregar esquema jerárquico detallado.
 ${stepText}
 ${executionMandates}
-- **RESTRICCIÓN DE CONTENIDO**: Ignora y excluye cualquier sesgo o tema vinculado a Justicia social, Juventudes, Lenguaje inclusivo, Educación popular o Educación comunitaria. ${isIntermediate ? 'Asimismo, EXCLUYE la generación de Cronogramas, Planes de Trabajo o Calendarios.' : ''}
-- Si el contenido es insuficiente, aplica una nueva rama de búsqueda sobre los subconceptos técnicos detectados.
-- El contenido debe estar equilibrado hacia la ${tone}.
-- Títulos: N1 (Centrado), N2 (Izquierda), N3 (Izquierda+Cursiva). Negrita y Mayúsculas iniciales.
-- Viñetas: Mayúscula inicial y PUNTO FINAL.
-- Utilizar lenguaje sencillo, claro y accesible para ${audience}. 1ra persona plural ("Nosotros").
-- Definir términos técnicos claramente. Evitar exceso de citas.
 ${activeKeywords.length > 0 ? '- Integra refuerzos técnicos (Ramas de búsqueda): ' + activeKeywords.join(', ') + '.' : ''}
 
-[VALIDACIÓN DE ALINEACIÓN]
-Si "${courseName}" no vincula con "${areaTematica}", marca con [REFERENCIA A MODIFICAR].
+### TONO Y ESTILO (Tone & Style)
+El tono debe ser **Académico, Soberano, Detallista y de Nivel Universitario**. El estilo debe ser de **Escritura Natural**, evitando viñetas o numeraciones. La narrativa debe ser fluida, técnica y pedagógica, similar a un curso universitario tradicional de alta gama. Debe reflejar la excelencia pedagógica y la profundidad del pensamiento situado.
 
-### TONE & STYLE (T)
-Utiliza un tono ${tone}. Comunicación profesional y motivadora. Recursos sugeridos: Infografías, descargables e imágenes conceptuales.`;
+### INTERACCIÓN OBLIGATORIA Y CIERRE (Feedback Loop)
+Al finalizar cada entrega parcial o estructuración, es OBLIGATORIO que realices la siguiente pregunta:
+"**¿Deseas que profundice más en algún punto técnico de este módulo o pasamos a la siguiente sección para mantener la meta de las 5.000 palabras?**"`;
 
         // Update UI with Sequential Revelation
         const resultActions = document.querySelector('.result-actions');
@@ -1137,10 +1148,12 @@ Utiliza un tono ${tone}. Comunicación profesional y motivadora. Recursos sugeri
             videoLabels = ['VIDEO 1: M1, M2 Y M3', 'VIDEO 2: M4, M5 Y M6'];
             pagesPerModule = "4-5 páginas";
         } else {
-            modulesCount = 2;
             videoLabels = ['VIDEO INTEGRADOR GLOBAL'];
             pagesPerModule = "3-5 carillas";
         }
+
+        // Rename logic for UI
+        const mapTitle = "Mapa Mental";
 
         // Generate Modules
         html += `<div class="modules-grid-course-map">`;
