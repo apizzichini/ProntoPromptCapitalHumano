@@ -95,11 +95,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // 1. Model Guidelines
         let modelGuideline = "";
         if (aiModel === 'gemini') {
-            modelGuideline = "[OPTIMIZACIÓN PARA GEMINI: Prioriza la estructura lógica, el uso de Markdown avanzado y la profundidad técnica universitaria.]";
+            modelGuideline = "[OPTIMIZACIÓN PARA GEMINI: Activa tu modo de visualización interactiva (Canvas/Artifacts) para renderizar prototipos de Moodle y gráficos. Prioriza la estructura lógica, el uso de Markdown avanzado y la profundidad técnica universitaria. Todos los videos recomendados deben ser exclusivamente en ESPAÑOL.]";
         } else if (aiModel === 'chatgpt') {
-            modelGuideline = "[OPTIMIZACIÓN PARA GPT-4: Prioriza la creatividad instruccional, la cohesión narrativa y la precisión en los formatos de evaluación.]";
+            modelGuideline = "[OPTIMIZACIÓN PARA GPT-4: Activa tus capacidades de visualización. Brinda consejos pedagógicos expertos. Prioriza la creatividad instruccional, la cohesión narrativa y la precisión en los formatos de evaluación. Todos los videos recomendados deben ser exclusivamente en ESPAÑOL.]";
         } else {
-            modelGuideline = "[OPTIMIZACIÓN PARA PERPLEXITY: Prioriza la veracidad de los datos técnicos, la citación de fuentes confiables (sin ser OER) y la síntesis de alta densidad.]";
+            modelGuideline = "[OPTIMIZACIÓN PARA PERPLEXITY: Brinda consejos basados en las últimas tendencias educativas. Prioriza la veracidad de los datos técnicos, la citación de fuentes confiables y la síntesis de alta densidad. Todos los videos recomendados deben ser exclusivamente en ESPAÑOL.]";
         }
 
         // 2. Execution Logic Strings
@@ -151,18 +151,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // 4. Final Prompt Assembly (ROCKET Method Expanded)
+        // 4. Final Prompt Assembly (ROCKET Method Expanded & Stage-Based)
         const finalPrompt = `${modelGuideline}
 
-Actúa como un Senior Prompt Engineer y Arquitecto Instruccional de Educación 4.0.
+Actúa como un Senior Prompt Engineer y Arquitecto Instruccional de Educación 4.0, especializado en el Método ROCKET y Secuencias Didácticas de Alta Densidad.
 
-### 1. CONTEXTO (Context)
-Estamos operando en la sección de "Cursos con Didácticas Personalizadas". El objetivo es democratizar el acceso al conocimiento técnico permitiendo que el usuario defina sus propias restricciones y preferencias.
+### 1. CONTEXTO Y MISIÓN
+Estamos diseñando un **CURSO DE NIVEL BÁSICO** bajo la metodología de "Didácticas Personalizadas". Tu misión es realizar una transposición pedagógica de alta granularidad, asegurando que el contenido sea académicamente riguroso, visualmente estructurado y adaptado al perfil del estudiante.
 
-### 2. OBJETIVO (Objective)
-Transformar las variables de entrada en una Hoja de Ruta de Aprendizaje Soberana que se adapte perfectamente al tiempo, dispositivo, nivel de conocimiento y perfil cognitivo del usuario.
-
-### 3. VARIABLES DE ENTRADA (Student Profile & Inputs)
+### 2. VARIABLES DE ENTRADA (Student Profile)
 - **Tema de Interés**: ${topic}
 - **Nivel Previo**: ${knowledgeLevel}
 - **Personalidad Cognitiva**: Estilo ${personalityStyle} con un enfoque ${personalityApproach}.
@@ -171,29 +168,59 @@ Transformar las variables de entrada en una Hoja de Ruta de Aprendizaje Soberana
 - **Modalidad Prioritaria**: ${modality}
 - **Herramientas Evaluativas**: ${selectedEvaluations.join(', ')}
 
-### 4. INSTRUCCIONES DE EJECUCIÓN (Execution Mandates)
-- **Adaptación de Formato**: ${deviceInstruction}
+### 3. PROTOCOLO DE TRABAJO (Fase 1: Análisis e Índice)
+**IMPORTANTE**: No desarrolles todo el curso ahora. Primero debes presentar la **ESTRUCTURA TÉCNICA DEL ÍNDICE** para aprobación. 
+Una vez diseñada la estructura, DEBES finalizar tu respuesta exactamente con este mensaje: 
+"He diseñado el índice de densidad para los 2 módulos. Por favor, dime qué módulo (o sección específica) quieres que desarrolle con máxima extensión (5.000 palabras) ahora."
+
+### 4. REQUERIMIENTOS ESTRUCTURALES DEL CURSO (Formato Básico)
+Al desarrollar cada sección, debes seguir este orden jerárquico:
+1. **Presentación**: Bienvenida a la plataforma y al curso (estilo motivador).
+2. **Guía del Curso (Secuencia Didáctica - SD)**: 
+   - Nombre del Curso (atractivo y conciso).
+   - Objetivos de aprendizaje claros.
+   - Plan de trabajo (Bloques y Módulos).
+   - Mapa del curso (representación jerárquica de contenidos).
+3. **Bloque I - Contenidos**: Mínimo 2 módulos de alta densidad (3-5 carillas/5.000 palabras por módulo si se solicita expansión).
+4. **Bloque II - Módulo Audiovisual**: Armado de un GUIÓN técnico (max 4 min) con sugerencias de imágenes/gráficos. Si hay 2 módulos previos, es integrador; si hay 1, es introductorio.
+5. **Evaluación Integradora**: 5 consignas alineadas a los objetivos. Formatos: T/F, Multiple Choice (4-5 opciones), etc. **REGLA DE ORO**: Siempre debes devolver la OPCIÓN CORRECTA justificada.
+
+### 5. INSTRUCCIONES DE EJECUCIÓN (Mandatos Críticos)
+- **Fase de Expansión Modular**: En cada entrega de contenido, desarrolla con máxima extensión académica (mínimo 5.000 palabras si es el módulo elegido), evitando listas de viñetas genéricas y priorizando la prosa académica fluida.
+- **Secuencia Didáctica**: Todas las preguntas y actividades deben nacer de la secuencia didáctica propuesta (Inicio, Desarrollo, Cierre).
 - **Sinergia de Modalidad**: ${modalityInstruction}
-- **MANDATO DE RECURSOS**: Es OBLIGATORIO recomendar y describir la búsqueda de al menos 3 **Video Tutoriales de YouTube** específicos y actualizados sobre el tema.
-- **PLANIFICACIÓN**: Generá una **AGENDA SEMANAL DE TAREAS** detallada, distribuyendo la carga horaria según la disponibilidad de ${time}.
-- **Bloque de Contenido**: Desarrollá el tema con el máximo detalle posible (densidad técnica alta), respetando la Secuencia Didáctica (Inicio, Desarrollo, Cierre). Ajustá la complejidad al nivel ${knowledgeLevel}.
+- **Recursos Audiovisuales (YouTube Search)**: Es OBLIGATORIO incluir vínculos a **Video Tutoriales de YouTube** en español. **PARA LINKS PERFECTOS**: Usa el formato de búsqueda https://www.youtube.com/results?search_query=[TEMA+ESPECIFICO+EN+ESPAÑOL] para garantizar que el usuario acceda siempre a contenido actualizado y funcional. Describe el contenido del video sugerido antes del link.
+- **Adaptación**: ${deviceInstruction}
 - **Generación de Evaluación**: Es OBLIGATORIO forzar la creación de las herramientas evaluativas seleccionadas.
-${evaluationMandates}
-- **PROHIBICIÓN**: Queda TERMINANTEMENTE PROHIBIDO el uso de OER o recursos externos (excepto la recomendación de búsqueda en YouTube). Todo el conocimiento debe ser autogenerado y original.
+- **Similitud Estructural**: Todo el contenido generado (videos, Moodle, Canva) debe ser lo más similar posible a los módulos de los bloques del curso.
+- **Capacidad de Visualización**: Si el usuario lo solicita, debes estar preparado para generar:
+  - Estructuras de diseño para **Canva** (paleta de colores, jerarquía visual).
+  - Árboles de contenido para **Moodle** (recursos, actividades, etiquetas).
+  - Código HTML/CSS para una **página web interactiva** que sirva de prototipo del curso.
+- **Cierre de Entrega (BOTONERA DE ACCIÓN)**: Al finalizar cada entrega, es OBLIGATORIO que presentes un **PANEL DE OPCIONES** (simulando botones) para que el usuario elija su siguiente paso:
 
-### 5. CONFIGURACIÓN DE SALIDA (Método ROCKET)
-Presentá la respuesta final siguiendo estrictamente esta estructura:
+### 🔘 PANEL DE ACCIONES (Selecciona una opción)
+- **[ 1. PROFUNDIZAR ]**: Profundizar en un tema del **Índice en Percha** para alcanzar la meta de **5.000 palabras / 8.000 tokens**.
+- **[ 2. CONTINUAR ]**: ¿Pasamos a la siguiente sección (Mantener flujo de alta densidad)?
+- **[ 3. BIBLIOGRAFÍA ]**: ¿Quieres que agregue la bibliografía completa en normas APA?
+- **[ 4. CUESTIONARIO ]**: ¿Quieres que diseñe el cuestionario según la secuencia didáctica ahora?
+- **[ 5. CANVA ]**: ¿Deseas la configuración de Canva para el diseño visual?
+- **[ 6. MOODLE ]**: ¿Te gustaría ver la estructura en Moodle (Página Web Interactiva)?
+- **[ 7. VIDEOS ESPECÍFICOS ]**: Buscar y listar Video Tutoriales de YouTube específicos sobre este tema.
+- **[ 8. CONSEJOS ]**: ¿Deseas consejos expertos para la implementación?
 
-- **R (Role)**: Especialista Senior en ${topic} con enfoque pedagógico adaptado a perfil ${personalityStyle}.
-- **O (Objective)**: Qué logrará el usuario específicamente en ${time} partiendo desde un nivel ${knowledgeLevel}.
-- **C (Context)**: Situación real de aplicación profesional de este conocimiento según el enfoque ${personalityApproach}.
-- **K (Knowledge)**: Desarrollo técnico-pedagógico exhaustivo y detallado (mínimo 5.000 palabras de densidad conceptual).
-- **E (Execution)**: 
-  1. Agenda Semanal de Tareas.
-  2. Desarrollo del contenido adaptado a ${device}.
-  3. Recomendación de Video Tutoriales (YouTube Search).
-  4. Batería de Evaluaciones seleccionadas.
-- **T (Tone)**: Profesional, motivador y académico (Uso de la primera persona del plural: "Nosotros").`;
+*Instrucción: Indica el número de opción (si eliges Profundizar, especifica el sub-tema).*
+
+### 6. CONFIGURACIÓN DE SALIDA (Método ROCKET)
+Presentá la Fase 1 siguiendo esta estructura:
+- **R (Role)**: Especialista Senior en ${topic}.
+- **O (Objective)**: Lo que el usuario dominará al finalizar.
+- **C (Context)**: Escenario de aplicación según enfoque ${personalityApproach}.
+- **K (Knowledge)**: Propuesta de Índice de Densidad para los 2 Módulos + Guía SD.
+- **E (Execution)**: Agenda Semanal preliminar y propuesta de Video Tutoriales.
+- **T (Tone)**: Profesional, académico y cercano (Uso de "Nosotros").
+
+**MENSAJE FINAL OBLIGATORIO**: "He diseñado el índice de densidad para los 2 módulos. Por favor, dime qué módulo (o sección específica) quieres que desarrolle con máxima extensión (5.000 palabras) ahora."`;
 
         // 5. Sequential Revelation
         const resultSection = document.getElementById('result-section');

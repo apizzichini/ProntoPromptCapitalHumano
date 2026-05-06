@@ -94,9 +94,9 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const modelGuidelines = {
-        'gemini': `[OPTIMIZACIÓN GEMINI]: Aprovecha la amplia ventana de contexto. Genera respuestas estructuradas y detalladas. Prioriza la claridad conceptual y la integración de todos los componentes de la SD.`,
-        'chatgpt': `[OPTIMIZACIÓN GPT-4]: Utiliza un razonamiento paso a paso (Chain of Thought). Estructura la salida con Markdown riguroso. Asegura que cada sección cumpla con los límites de palabras establecidos.`,
-        'perplexity': `[OPTIMIZACIÓN PERPLEXITY]: Prioriza la investigación en tiempo real y la citación de fuentes actualizadas. Busca datos estadísticos y referencias bibliográficas recientes en la web para enriquecer el contenido.`
+        'gemini': `[OPTIMIZACIÓN PARA GEMINI: Activa tu modo de visualización interactiva (Canvas/Artifacts) para renderizar prototipos de Moodle y gráficos. Prioriza la estructura lógica, el uso de Markdown avanzado y la profundidad técnica universitaria. Incluye siempre recursos multimedia (videos) exclusivamente en español.]`,
+        'chatgpt': `[OPTIMIZACIÓN PARA GPT-4: Activa tus capacidades de visualización. Brinda consejos pedagógicos expertos. Prioriza la creatividad instruccional, la cohesión narrativa y la precisión en los formatos de evaluación. Incluye siempre recursos multimedia (videos) exclusivamente en español.]`,
+        'perplexity': `[OPTIMIZACIÓN PARA PERPLEXITY: Brinda consejos basados en las últimas tendencias educativas. Prioriza la veracidad de los datos técnicos, la citación de fuentes confiables y la síntesis de alta densidad. Incluye siempre recursos multimedia (videos) exclusivamente en español.]`
     };
 
     const expertLayers = {
@@ -767,8 +767,11 @@ INSTRUCCIÓN CRÍTICA: Cada sección de la respuesta debe ser revisada por los t
 - **ESTILO DE REDACCIÓN**: Escritura natural, cohesiva y fluida. Queda PROHIBIDO el uso de viñetas, listas o numeraciones para el desarrollo de contenidos. Se busca una narrativa académica tradicional de alta densidad.
 - **GRADUALIDAD**: Cada módulo se corresponde con un objetivo de aprendizaje.
 - **ACTIVIDADES PARCIALES**: 2-3 ejercicios al cierre de M1+M2+M3 y M4+M5+M6 (sin devolución).
-- **IMÁGENES Y VIDEOS**: Sin derechos de autor, Creative Commons. Articular con equipo de gráfica y producción.
-- **EXTENSIÓN CRÍTICA**: Cada módulo debe desarrollarse con una densidad de 5.000 palabras. Se exige la MÁXIMA EXTENSIÓN posible, desarrollando cada concepto con profundidad pedagógica experta y profesional.`;
+- **Recursos Audiovisuales (YouTube Search)**: Es OBLIGATORIO incluir vínculos a **Video Tutoriales de YouTube** en español. **PARA LINKS PERFECTOS**: Usa el formato de búsqueda https://www.youtube.com/results?search_query=[TEMA+ESPECIFICO+EN+ESPAÑOL] para garantizar que el usuario acceda siempre a contenido actualizado y funcional. Describe el contenido del video sugerido antes del link.
+- **EXTENSIÓN CRÍTICA**: Cada módulo debe desarrollarse con una densidad de 5.000 palabras. Se exige la MÁXIMA EXTENSIÓN posible, desarrollando cada concepto con profundidad pedagógica experta y profesional.
+- **BIBLIOGRAFÍA**: Al final de cada entrega, pregunta si se desea la bibliografía en normas APA.
+- **EVALUACIÓN**: Todas las preguntas deben basarse estrictamente en la secuencia didáctica y devolver siempre la opción correcta.
+- **SIMILITUD ESTRUCTURAL**: Todo el contenido generado (incluyendo videos y mockups de Moodle/Canva) debe ser lo más similar posible a la estructura de módulos y bloques del curso.`;
         } else if (isIntermediate) {
             // INTERMEDIATE LEVEL STRUCTURE - Lineamientos Institucionales Oficiales
             switch (block) {
@@ -873,7 +876,11 @@ INSTRUCCIÓN CRÍTICA: Cada sección de la respuesta debe ser revisada por los t
 5. FLUJO OBLIGATORIO: Presentación > Mapa Conceptual > Módulos Desarrollados > Guion de Video > Evaluación.`;
             }
             knowledgeBaseAddons = `6. **Bibliografía y Citas (APA 7)**: Cita directa entre comillas (Autor, Año, p. X). Paráfrasis: citar (Autor, Año). Lista bibliográfica alfabética al final.`;
-            executionMandates = `- **CONFIGURACIÓN TÉCNICA POR MÓDULO**: 5.000 Palabras | 30.000 Caracteres | 7.000 Tokens | 12 páginas A4.\n- **ESTILO DE REDACCIÓN**: Escritura natural, fluida y académica tradicional. PROHIBIDO el uso de viñetas o listas numeradas en el desarrollo. Todo el contenido debe ser narrativo y cohesivo.\n- **GRADUALIDAD**: Cada módulo correspond a un objetivo de aprendizaje.\n- **EXCLUSIÓN CRÍTICA**: Queda TERMINANTEMENTE PROHIBIDO incluir Cronogramas o Planes de Trabajo en la SD. La SD no debe contener calendarios.\n- **IMÁGENES**: Sin derechos de autor, licencia abierta o Creative Commons.\n- **EXTENSIÓN Y PROFUNDIDAD**: Mínimo 5.000 palabras por módulo. Se exige la MÁXIMA EXTENSIÓN posible, con alta densidad informativa, marcos teóricos robustos y aplicaciones prácticas. Prohibido el contenido genérico o breve.`;
+            executionMandates = `- **CONFIGURACIÓN TÉCNICA POR MÓDULO**: 5.000 Palabras | 30.000 Caracteres | 7.000 Tokens | 12 páginas A4.\n- **ESTILO DE REDACCIÓN**: Escritura natural, fluida y académica tradicional. PROHIBIDO el uso de viñetas o listas numeradas en el desarrollo. Todo el contenido debe ser narrativo y cohesivo.\n- **GRADUALIDAD**: Cada módulo correspond a un objetivo de aprendizaje.\n- **IMÁGENES Y VIDEOS**: Sin derechos de autor, licencia abierta o Creative Commons. Es OBLIGATORIO incluir vínculos a **Video Tutoriales de YouTube** en español. **VÍNCULOS PERFECTOS**: Utiliza el formato de búsqueda https://www.youtube.com/results?search_query=[TERMINO+DE+BUSQUEDA] para asegurar que el usuario siempre encuentre el video exacto.
+- **EXTENSIÓN Y PROFUNDIDAD**: Mínimo 5.000 palabras por módulo. Se exige la MÁXIMA EXTENSIÓN posible, con alta densidad informativa, marcos teóricos robustos y aplicaciones prácticas. Prohibido el contenido genérico o breve.
+- **BIBLIOGRAFÍA**: Al final de cada entrega, pregunta si se desea la bibliografía en normas APA.
+- **EVALUACIÓN**: Todas las preguntas deben basarse estrictamente en la secuencia didáctica y devolver siempre la opción correcta.
+- **SIMILITUD ESTRUCTURAL**: Todo el contenido generado debe ser lo más similar posible a la estructura de módulos y bloques del curso.`;
         } else {
             // BASIC LEVEL STRUCTURE - Lineamientos Institucionales Oficiales
             switch (block) {
@@ -937,7 +944,11 @@ INSTRUCCIÓN CRÍTICA: Cada sección de la respuesta debe ser revisada por los t
 3. BLOQUE II: Guion (máx 4 min). Video INTEGRADOR de los 2 módulos. Con sugerencias de imágenes.
 4. EVALUACIÓN: 5 consignas (Múltiple Choice con 4-5 opciones) alineadas a los objetivos. ES OBLIGATORIO incluir las respuestas correctas y explicaciones en formato de TABLA.`;
             }
-            executionMandates = `- **CONFIGURACIÓN TÉCNICA POR MÓDULO**: 5.000 Palabras | 30.000 Caracteres | 7.000 Tokens | 12 páginas A4.\n- **ESTRUCTURA MODULAR**: Título N1 centrado/negrita → Introducción ≤50 pal → Desarrollo (explosión de contenido narrativa) → Conclusión → Bibliografía APA 7.\n- **ESTILO DE REDACCIÓN**: Escritura natural, tradicional y pedagógica. NO utilizar viñetas ni listas. El desarrollo debe ser un texto fluido de alta densidad.\n- **CITAS APA 7**: Directa <40 pal entre comillas; >40 pal en bloque con sangría. Paráfrasis: citar autor+año. La IA NO es fuente citable.\n- **IMÁGENES**: alta calidad, sin marcas de agua. Articular con equipo de gráfica. Numerar correlativamente.\n- **EXTENSIÓN CRÍTICA**: Se exige la MÁXIMA EXTENSIÓN posible (5.000 palabras por módulo), evitando resúmenes y profundizando en cada punto.`;
+            executionMandates = `- **CONFIGURACIÓN TÉCNICA POR MÓDULO**: 5.000 Palabras | 30.000 Caracteres | 7.000 Tokens | 12 páginas A4.\n- **ESTRUCTURA MODULAR**: Título N1 centrado/negrita → Introducción ≤50 pal → Desarrollo (explosión de contenido narrativa) → Conclusión → Bibliografía APA 7.\n- **ESTILO DE REDACCIÓN**: Escritura natural, tradicional y pedagógica. NO utilizar viñetas ni listas. El desarrollo debe ser un texto fluido de alta densidad.\n- **CITAS APA 7**: Directa <40 pal entre comillas; >40 pal en bloque con sangría. Paráfrasis: citar autor+año. La IA NO es fuente citable.\n- **IMÁGENES Y VIDEOS**: alta calidad, sin marcas de agua. Articular con equipo de gráfica. Numerar correlativamente. Es OBLIGATORIO incluir vínculos a **Video Tutoriales de YouTube** en español. **VÍNCULOS GARANTIZADOS**: Usa el formato https://www.youtube.com/results?search_query=[TEMA+EN+ESPAÑOL] para evitar links caídos.
+- **EXTENSIÓN CRÍTICA**: Se exige la MÁXIMA EXTENSIÓN posible (5.000 palabras por módulo), evitando resúmenes y profundizando en cada punto.
+- **BIBLIOGRAFÍA**: Al final de cada entrega, pregunta si se desea la bibliografía en normas APA.
+- **EVALUACIÓN**: Todas las preguntas deben basarse estrictamente en la secuencia didáctica y devolver siempre la opción correcta.
+- **SIMILITUD ESTRUCTURAL**: Todo el contenido generado debe ser lo más similar posible a la estructura de módulos y bloques del curso.`;
         }
 
         const activeKeywords = Array.from(document.querySelectorAll('.keyword-tag.active')).map(tag => tag.getAttribute('data-value'));
@@ -992,10 +1003,27 @@ ${activeKeywords.length > 0 ? '- Integra refuerzos técnicos (Ramas de búsqueda
 
 ### TONO Y ESTILO (Tone & Style)
 El tono debe ser **Académico, Soberano, Detallista y de Nivel Universitario**. El estilo debe ser de **Escritura Natural**, evitando viñetas o numeraciones. La narrativa debe ser fluida, técnica y pedagógica, similar a un curso universitario tradicional de alta gama. Debe reflejar la excelencia pedagógica y la profundidad del pensamiento situado.
+### CAPACIDAD DE EXPANSIÓN Y VISUALIZACIÓN
+Si el usuario lo solicita en el loop de feedback, estás plenamente capacitado para:
+- Diseñar la configuración estética y funcional para **Canva**.
+- Esquematizar la estructura técnica para el aula virtual en **Moodle**.
+- Generar prototipos en **HTML interactivo** para previsualizar el curso.
+- Brindar consejos de expertos sobre didáctica y tecnología educativa.
 
-### INTERACCIÓN OBLIGATORIA Y CIERRE (Feedback Loop)
-Al finalizar cada entrega parcial o estructuración, es OBLIGATORIO que realices la siguiente pregunta:
-"**¿Deseas que profundice más en algún punto técnico de este módulo o pasamos a la siguiente sección para mantener la meta de las 5.000 palabras?**"`;
+### INTERACCIÓN OBLIGATORIA (Botonera de Acción)
+Al finalizar cada entrega parcial o estructuración, es OBLIGATORIO que presentes un **PANEL DE ACCIONES** visualmente diferenciado para que el usuario elija cómo proceder:
+
+### 🔘 PANEL DE ACCIONES (Elige tu siguiente paso)
+- **[ 1. PROFUNDIZAR ]**: Profundizar en un tema específico del **Índice en Percha** anterior para alcanzar la meta de **5.000 palabras / 8.000 tokens**.
+- **[ 2. CONTINUAR ]**: Pasar a la siguiente sección (Mantener flujo de alta densidad).
+- **[ 3. BIBLIOGRAFÍA ]**: Agregar bibliografía completa en normas APA.
+- **[ 4. CUESTIONARIO ]**: Diseñar cuestionario según secuencia didáctica.
+- **[ 5. CANVA ]**: Obtener configuración de diseño para Canva.
+- **[ 6. MOODLE ]**: Ver estructura en Moodle (Página Web Interactiva).
+- **[ 7. VIDEOS ESPECÍFICOS ]**: Buscar y listar Video Tutoriales de YouTube específicos sobre este tema.
+- **[ 8. CONSEJOS ]**: Recibir consejos expertos para la implementación.
+
+*Por favor, indica el número o nombre de la opción (y si eliges Profundizar, especifica qué sub-tema del índice).*`;
 
         // Update UI with Sequential Revelation
         const resultActions = document.querySelector('.result-actions');
