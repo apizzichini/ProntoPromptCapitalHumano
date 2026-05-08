@@ -79,6 +79,10 @@
                                 <input type="radio" name="ai-model" value="perplexity">
                                 <span><i class="fas fa-search"></i> Perplexity</span>
                             </label>
+                            <label class="brain-chip" title="Optimizado para GPT EDU">
+                                <input type="radio" name="ai-model" value="gptedu">
+                                <span><i class="fas fa-university"></i> GPT EDU</span>
+                            </label>
                         </div>
                     </div>
 
@@ -220,18 +224,31 @@
             <div class="form-card">
                 <h3 class="section-title"><i class="fas fa-graduation-cap"></i> 3. Definición Pedagógica
                 </h3>
-                <div class="input-grid">
-                    <div class="input-group">
-                        <div class="label-row">
-                            <label for="block">Bloque a Desarrollar (SD)</label>
+                    <!-- Botonera Interactiva (AHORA MULTI-SELECCIÓN) -->
+                    <div class="input-group full-width">
+                        <label>Selecciona las Etapas a Desarrollar (Puedes elegir varias)</label>
+                        <div id="botonera-dinamica" class="botonera-grid">
+                            <div class="botonera-option active" data-value="presentacion" title="Paso 1">
+                                <i class="fas fa-clipboard-check"></i>
+                                <span>Presentación / Guía SD</span>
+                            </div>
+                            <div class="botonera-option" data-value="bloque-1" title="Paso 2">
+                                <i class="fas fa-edit"></i>
+                                <span>Bloque I: Desarrollar Módulo</span>
+                            </div>
+                            <div class="botonera-option" data-value="bloque-2" title="Paso 3">
+                                <i class="fas fa-play-circle"></i>
+                                <span>Diseñar Bloque II</span>
+                            </div>
+                            <div class="botonera-option" data-value="evaluacion" title="Paso 4">
+                                <i class="fas fa-check-double"></i>
+                                <span>Generar Evaluación</span>
+                            </div>
+                            <div class="botonera-option" data-value="estructura-completa" title="Completo">
+                                <i class="fas fa-rocket"></i>
+                                <span>Secuencia Completa</span>
+                            </div>
                         </div>
-                        <select id="block" required>
-                            <option value="estructura-completa">Secuencia Completa (Presentación a Evaluación)</option>
-                            <option value="presentacion">Presentación y Guía SD</option>
-                            <option value="bloque-1">Bloque I: Módulos PDF</option>
-                            <option value="bloque-2">Bloque II: Guion Audiovisual</option>
-                            <option value="evaluacion">Evaluación Integradora</option>
-                        </select>
                     </div>
 
 
@@ -389,6 +406,8 @@
                             class="ai-link-btn gemini">Gemini</a>
                         <a href="https://www.perplexity.ai" target="_blank"
                             class="ai-link-btn perplexity">Perplexity</a>
+                        <a href="https://chatgpt.com/g/g-68b1ee82a1b481918c46ce0a2b0123aa-edu-gpt" target="_blank" id="copy-gptedu-btn"
+                            class="ai-link-btn gpt-edu">GPT EDU</a>
                     </div>
                 </div>
             </section>

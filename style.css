@@ -591,6 +591,58 @@ select:focus {
     font-size: 1.2rem;
 }
 
+.botonera-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.botonera-option {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    text-align: center;
+}
+
+.botonera-option i {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+}
+
+.botonera-option span {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.botonera-option:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: var(--primary);
+    transform: translateY(-3px);
+}
+
+.botonera-option.active {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(99, 102, 241, 0.05));
+    border-color: var(--primary);
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.15);
+}
+
+.botonera-option.active i {
+    color: var(--primary);
+}
+
+.botonera-option.active span {
+    color: #fff;
+}
+
 .tone-selector {
     display: flex;
     flex-wrap: wrap;

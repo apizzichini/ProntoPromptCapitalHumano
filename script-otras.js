@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <a href="https://chatgpt.com" target="_blank" class="ai-link-btn gpt">ChatGPT</a>
                         <a href="https://claude.ai" target="_blank" class="ai-link-btn claude">Claude</a>
                         <a href="https://perplexity.ai" target="_blank" class="ai-link-btn perplexity">Perplexity</a>
-                        <a href="https://chatgpt.com/g/g-68b1ee82a1b481918c46ce0a2b0123aa-edugpt" target="_blank" class="ai-link-btn gpt-edu"><i class="fas fa-graduation-cap"></i> GPT EDU</a>
+                        <a href="https://chatgpt.com/g/g-68b1ee82a1b481918c46ce0a2b0123aa-edu-gpt" target="_blank" id="copy-gptedu-btn" class="ai-link-btn gpt-edu"><i class="fas fa-graduation-cap"></i> GPT EDU</a>
                     </div>
                 </div>
             </section>
@@ -274,6 +274,18 @@ En esta sección, pregúntame directamente: "¿En qué área específica te gust
             renderWorkflow();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
+
+        const copyGptEduBtn = document.getElementById('copy-gptedu-btn');
+        if (copyGptEduBtn) {
+            copyGptEduBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const text = document.getElementById('output-step-3').textContent;
+                copyToClipboard(text, copyGptEduBtn);
+                setTimeout(() => {
+                    window.open('https://chatgpt.com/g/g-68b1ee82a1b481918c46ce0a2b0123aa-edu-gpt', '_blank');
+                }, 1000);
+            });
+        }
     }
 
     // Iniciar

@@ -98,8 +98,10 @@ document.addEventListener('DOMContentLoaded', () => {
             modelGuideline = "[OPTIMIZACIÓN PARA GEMINI: Activa tu modo de visualización interactiva (Canvas/Artifacts) para renderizar prototipos de Moodle y gráficos. Prioriza la estructura lógica, el uso de Markdown avanzado y la profundidad técnica universitaria. Todos los videos recomendados deben ser exclusivamente en ESPAÑOL.]";
         } else if (aiModel === 'chatgpt') {
             modelGuideline = "[OPTIMIZACIÓN PARA GPT-4: Activa tus capacidades de visualización. Brinda consejos pedagógicos expertos. Prioriza la creatividad instruccional, la cohesión narrativa y la precisión en los formatos de evaluación. Todos los videos recomendados deben ser exclusivamente en ESPAÑOL.]";
-        } else {
+        } else if (aiModel === 'perplexity') {
             modelGuideline = "[OPTIMIZACIÓN PARA PERPLEXITY: Brinda consejos basados en las últimas tendencias educativas. Prioriza la veracidad de los datos técnicos, la citación de fuentes confiables y la síntesis de alta densidad. Todos los videos recomendados deben ser exclusivamente en ESPAÑOL.]";
+        } else {
+            modelGuideline = "[OPTIMIZACIÓN PARA GPT EDU: Actúa como un tutor pedagógico experto alineado a los estándares del Ministerio de Capital Humano. Prioriza la transposición didáctica de alta granularidad, la estructura modular y la evaluación con feedback constructivo. Todos los recursos deben estar en español.]";
         }
 
         // 2. Execution Logic Strings
@@ -251,4 +253,20 @@ Presentá la Fase 1 siguiendo esta estructura:
             }, 2000);
         });
     });
+
+    const copyGptEduBtn = document.getElementById('copy-gptedu-btn');
+    if (copyGptEduBtn) {
+        copyGptEduBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const text = promptOutput.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = copyGptEduBtn.innerText;
+                copyGptEduBtn.innerText = '¡Copiado!';
+                setTimeout(() => {
+                    copyGptEduBtn.innerText = originalText;
+                    window.open('https://chatgpt.com/g/g-68b1ee82a1b481918c46ce0a2b0123aa-edu-gpt', '_blank');
+                }, 1000);
+            });
+        });
+    }
 });
