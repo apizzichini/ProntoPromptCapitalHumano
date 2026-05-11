@@ -60,13 +60,13 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const keywordsByArea = {
-        'transversal': ['Innovador', 'Práctico', 'Dinámico', 'Sostenido', 'Accesible', 'Participativo', 'Comunitario'],
+        'transversal': ['Innovador', 'Práctico', 'Dinámico', 'Sostenido', 'Accesible', 'Participativo'],
         'Desarrollo Personal': ['Autonomía', 'Bienestar emocional', 'Identidad', 'Autogestión', 'Habilidades blandas'],
         'Habilidades Digitales + IA': ['Alfabetización digital', 'Herramientas IA', 'Productividad', 'Ciudadanía digital', 'Prompt engineering'],
         'Nuevos Aprendizajes': ['Aprendizaje activo', 'Metacognición', 'Adaptabilidad', 'Curiosidad', 'Aprendizaje autónomo'],
         'Habilidades para Emprender': ['Autogestión económica', 'Marketing digital'],
         'Etapas del Desarrollo': ['Desarrollo integral', 'Vínculo afectivo', 'Crianza positiva', 'Enfoque de derechos', 'Acompañamiento familiar'],
-        'Cuidados': ['Cuidado comunitario', 'Redes de apoyo', 'Crianza saludable', 'Corresponsabilidad', 'Salud y bienestar']
+        'Cuidados': ['Cuidado', 'Redes de apoyo', 'Crianza saludable', 'Corresponsabilidad', 'Salud y bienestar']
     };
 
     const forbiddenTerms = {
@@ -443,7 +443,7 @@ INSTRUCCIÓN CRÍTICA: Cada sección de la respuesta debe ser revisada por los t
                         break;
                     case 'evaluacion':
                         obj = `Generar la "Evaluación Integradora" NIVEL AVANZADO para "${courseName}".`;
-                        step = `1. CANTIDAD: 10 consignas de alta complejidad.\n2. FORMATO: Tablas con opciones, respuesta correcta y fundamentación académica.`;
+                        step = `1. CANTIDAD: 10 consignas de alta complejidad.\n2. FORMATO: Evaluaciones de respuesta múltiples choice, single choice o verdadero/falso. Presentar en tablas con opciones, respuesta correcta y fundamentación académica.`;
                         break;
                     default:
                         obj = `Generar la Secuencia Completa (NIVEL AVANZADO) para "${courseName}".`;
@@ -465,7 +465,7 @@ INSTRUCCIÓN CRÍTICA: Cada sección de la respuesta debe ser revisada por los t
                         break;
                     case 'evaluacion':
                         obj = `Generar la "Evaluación Integradora" NIVEL INTERMEDIO para "${courseName}".`;
-                        step = `1. CANTIDAD: 10 preguntas de nivel intermedio.\n2. FORMATO: Tabla con feedback pedagógico.`;
+                        step = `1. CANTIDAD: 10 preguntas de nivel intermedio.\n2. FORMATO: Evaluaciones de respuesta múltiples choice, single choice o verdadero/falso. Presentar en tabla con feedback pedagógico.`;
                         break;
                     default:
                         obj = `Generar la Secuencia Completa (NIVEL INTERMEDIO) para "${courseName}".`;
@@ -487,7 +487,7 @@ INSTRUCCIÓN CRÍTICA: Cada sección de la respuesta debe ser revisada por los t
                         break;
                     case 'evaluacion':
                         obj = `Generar la "Evaluación Integradora" NIVEL BÁSICO para "${courseName}".`;
-                        step = `1. CANTIDAD: 5 consignas fundamentales.\n2. FORMATO: Tabla con respuesta y aclaración.`;
+                        step = `1. CANTIDAD: 5 consignas fundamentales.\n2. FORMATO: Evaluaciones de respuesta múltiples choice, single choice o verdadero/falso. Presentar en tabla con respuesta y aclaración.`;
                         break;
                     default:
                         obj = `Generar la Secuencia Completa (NIVEL BÁSICO) para "${courseName}".`;
@@ -506,16 +506,16 @@ INSTRUCCIÓN CRÍTICA: Cada sección de la respuesta debe ser revisada por los t
         const prompt = `${modelGuideline}
 
 ### PROMPT MAESTRO: PROTOCOLO DE INGENIERÍA INSTRUCCIONAL 5.0 (PREMIUM)
-[CONFIGURACIÓN CRÍTICA: Activa visualización interactiva (Canvas/Artifacts). Prioriza Markdown avanzado, profundidad técnica universitaria y recursos en español. Carga mínima: 5.000 palabras por módulo.]
+[CONFIGURACIÓN CRÍTICA: Activa visualización interactiva (Canvas/Artifacts). Prioriza Markdown avanzado, profundidad técnica para TODO PÚBLICO (No Universitario), enfoque en formación laboral y recursos en español. MANDATO DE DENSIDAD EXTREMA: Meta de 10.000 palabras por tema seleccionado. MANDATO DE ITERACIÓN PERMANENTE: Tras cada respuesta, DEBES preguntar: "¿Qué tema específico de la estructura del índice deseas que desarrolle o profundice ahora para alcanzar las 10.000 palabras académicas?" y mostrar el PANEL DE ACCIONES.]
 
 1. SYSTEM ROLE (CONSENSO MULTI-AGENTE)
 Actúa como un Senior Prompt Engineer coordinando un comité experto:
 ${expertLayer}
 
 2. ARQUITECTURA DE NIVELES (Carga Técnica)
-- **BÁSICO**: (Introductorio/Cotidiano). Bloque I Nivel Basico: 1 o 2 módulos escritos (incluyendo imágenes, gráficos, tablas, etc.). | Bloque II: 1 video | Eval: 5 preguntas.
-- **INTERMEDIO**: (Categorías/Herramientas). Bloque I Nivel intermedio: 3 o 4 módulos escritos (incluyendo imágenes, gráficos, tablas, etc.). | Bloque II: 1-2 videos | Eval: 10 preguntas.
-- **AVANZADO**: (Análisis Crítico/Especialización). Bloque I Nivel avanzado: 5 o 6 módulos escritos (incluyendo imágenes, gráficos, tablas, etc. Esta cantidad puede adaptarse en función del tema). | Bloque II: 2-3 videos técnicos | Eval: 10 preguntas.
+- **BÁSICO**: (Introductorio/Cotidiano). Bloque I Nivel Basico: 1 o 2 módulos escritos (incluyendo imágenes, gráficos, tablas, etc.). | Bloque II: 1 video | Eval: 5 preguntas (MCQ/TF).
+- **INTERMEDIO**: (Categorías/Herramientas). Bloque I Nivel intermedio: 3 o 4 módulos escritos (incluyendo imágenes, gráficos, tablas, etc.). | Bloque II: 1-2 videos | Eval: 10 preguntas (MCQ/TF).
+- **AVANZADO**: (Análisis Crítico/Especialización). Bloque I Nivel avanzado: 5 o 6 módulos escritos (incluyendo imágenes, gráficos, tablas, etc. Esta cantidad puede adaptarse en función del tema). | Bloque II: 2-3 videos técnicos | Eval: 10 preguntas (MCQ/TF).
 
 3. FLUJO DE INTERACCIÓN OBLIGATORIO (Doble Botonera)
 FASE 1: Apertura de Estructura (Inicio del Curso)
@@ -534,15 +534,16 @@ Generar para TODOS los niveles:
 📍 CONTROL DE ESTRUCTURA:
 Al finalizar la Fase 1, presenta obligatoriamente este panel y **DETÉN la generación**. Debes pedir explícitamente al usuario que elija qué temas y sub-temas del índice propuesto desea expandir para alcanzar la meta de 5.000 palabras por módulo:
 
-**[A] APROBAR ÍNDICE**: Comenzar el desarrollo completo (Explosión de Contenido — 5.000 palabras / 8.000 tokens). Pregunta al usuario: *"¿Qué temas y sub-temas específicos de esta estructura debo elegir para expandir y desarrollar las 5.000 palabras del módulo?"*.
+**[A] APROBAR ÍNDICE**: Comenzar el desarrollo completo (Explosión de Contenido — 5.000 palabras / 8.000 tokens). Pregunta al usuario: *"¿Qué tema específico de la estructura del índice deseas que desarrolle o profundice ahora para alcanzar las 5.000 palabras académicas?"*.
 **[B] MODIFICAR TEMAS**: Agregar o quitar sub-apartados de la estructura del curso.
 **[C] CAMBIAR ENFOQUE**: Ajustar profundidad, perfil destinatario o tono académico.
+**[D] INTEGRAR RECURSO PROPIO**: Pregunta al usuario si desea proporcionar el contenido de un PDF, texto o recurso multimedia específico para que sea el eje central del desarrollo y evitar alucinaciones de la IA.
 
 FASE 2: Explosión Modular (Desarrollo)
-- **ESTILO LITERARIO HUMANO**: La redacción debe ser lo más humana y orgánica posible, con una prosa fluida y un estilo narrativo idéntico al de un libro de texto académico de alta gama.
-- **PROHIBICIÓN TOTAL DE VIÑETAS**: Queda **estrictamente prohibido** el uso de listas, viñetas, guiones o puntos en el desarrollo de los módulos. Todo el contenido debe presentarse en párrafos seguidos, extensos y conectados lógicamente.
-- **INTRODUCCIÓN OBLIGATORIA**: Cada módulo desarrollado debe comenzar con exactamente **dos párrafos** de introducción técnica.
+- **PROHIBICIÓN TOTAL DE VIÑETAS Y MINIMIZACIÓN DE ENCABEZADOS**: Queda **estrictamente prohibido** el uso de listas, viñetas, guiones o puntos. Asimismo, debes **minimizar el uso de subtítulos y apartados**, priorizando una **prosa de largo aliento** con párrafos extensos, densos y conectados narrativamente como en una obra literaria o tratado técnico. Todo el contenido debe fluir de forma continua hasta alcanzar las 10.000 palabras.
+- **INTRODUCCIÓN OBLIGATORIA**: Cada módulo desarrollado debe comenzar con exactamente **dos párrafos** de introducción técnica (mínimo 50 palabras en total).
 - **DESARROLLO**: Queda PROHIBIDO resumir. Si el texto es breve, inicia una **"Rama de Búsqueda Técnica"** para profundizar en marcos teóricos y casos de estudio.
+- **RECURSOS VISUALES**: En cada tema desarrollado, aclara explícitamente qué imágenes, gráficos o recursos visuales sugeridos podrían acompañar el contenido para facilitar su comprensión.
 
 ### OBJETIVO ACTUAL (Objective)
 ${objectives.join(' + ')}
@@ -552,8 +553,8 @@ ${steps.join('\n\n')}
 
 ### MANDATOS CRÍTICOS (Execution)
 - **ESTILO DE LIBRO**: Escritura natural, narrativa académica y pedagógica continua. **NO utilizar viñetas ni listas genéricas bajo ninguna circunstancia.**
-- **EXPLOSIÓN DE CONTENIDO**: Meta de 5.000 Palabras | 30.000 Caracteres | 8.000 Tokens por módulo.
-- **EVALUACIÓN POR NIVEL**: Básico (5 preguntas) | Intermedio (10 preguntas) | Avanzado (10 preguntas). Siempre en formato tabla con justificación pedagógica.
+- **EXPLOSIÓN DE CONTENIDO**: Meta de **10.000 palabras por tema seleccionado** (usar múltiples entregas si es necesario). Nivel de lenguaje: **Todo Público (No Universitario)**, con una **prosa humana y orgánica**, estilo docente, profesional y orientado a la inserción laboral.
+- **EVALUACIÓN POR NIVEL**: Básico (5 preguntas) | Intermedio (10 preguntas) | Avanzado (10 preguntas). **Obligatorio: Formato Multiple Choice, Single Choice o Verdadero/Falso.** Siempre en formato tabla con justificación pedagógica.
 - **YOUTUBE (Vínculos Perfectos)**: Es OBLIGATORIO incluir vínculos usando: https://www.youtube.com/results?search_query=[TEMA+ESPECIFICO+ESPAÑOL].
 - **RESTRICCIONES**: Prohibido el uso de lenguaje inclusivo, temas de justicia social, educación popular o militancia. Tono soberano y académico tradicional.
 ${activeKeywords.length > 0 ? '- **REFUERZOS TÉCNICOS (Rama de Búsqueda)**: Integra conceptos de: ' + activeKeywords.join(', ') + '.' : ''}
@@ -562,10 +563,10 @@ ${activeKeywords.length > 0 ? '- **REFUERZOS TÉCNICOS (Rama de Búsqueda)**: In
 Al finalizar cada entrega de contenido, presenta OBLIGATORIAMENTE el siguiente panel:
 
 🔘 **PANEL DE ACCIONES (Elige tu siguiente paso)**
-*"¿Qué tema específico de la estructura del índice deseas que desarrolle o profundice ahora para alcanzar las 5.000 palabras académicas?"*
+*"¿Qué tema específico de la estructura del índice deseas que desarrolle o profundice ahora para alcanzar las 10.000 palabras académicas?"*
 
 **[1. PROFUNDIZAR]**
-Expandir el Módulo actual completo hasta alcanzar las 5.000 palabras académicas (Usar Rama de Búsqueda Técnica).
+Expandir el tema seleccionado hasta alcanzar las 10.000 palabras / 150.000 tokens. **INSTRUCCIÓN CRÍTICA**: No resumas ni reinicies el contenido; toma lo desarrollado anteriormente y agrégale nuevos sub-temas, ejemplos y marcos técnicos para ampliar su extensión de forma aditiva y continua.
 
 **[2. CONTINUAR]**
 Desarrollar el siguiente Módulo completo de la estructura (Especificar título).
@@ -574,13 +575,24 @@ Desarrollar el siguiente Módulo completo de la estructura (Especificar título)
 Diseñar el Bloque II completo con storyboard, escenas, locución técnica y vínculos a YouTube.
 
 **[4. EVALUACIÓN]**
-Generar evaluación completa con respuestas, rúbrica y retroalimentación pedagógica.
+Generar evaluación completa (Multiple Choice o Verdadero/Falso) con respuestas, rúbrica y retroalimentación pedagógica.
 
 **[5. PROTOTIPO]**
 Crear versión para Moodle (HTML/Etiquetas), Canva o HTML institucional.
 
 **[6. BIBLIOGRAFÍA]**
-Generar bibliografía completa en formato APA 7ma Edición.`;
+Generar bibliografía completa en formato APA 7ma Edición, **ordenada alfabéticamente**.
+
+**[7. INTEGRAR RECURSO PROPIO]**
+¿Deseas proporcionar el contenido de un PDF, texto o recurso multimedia específico para que sea el eje central del desarrollo de la siguiente sección y evitar alucinaciones?
+
+**[8. RESUMEN DE ITERACIÓN]**
+Generar un resumen ejecutivo de todo lo trabajado en esta sesión, alineado a la secuencia didáctica y al nivel seleccionado.
+
+**[9. FINALIZAR / DESPEDIDA]**
+Si ya has completado el curso, genera una despedida cordial y profesional.
+
+📍 **INSTRUCCIÓN RECURSIVA**: Al finalizar CUALQUIERA de las acciones anteriores, debes volver a presentar OBLIGATORIAMENTE este **PANEL DE ACCIONES** para permitir la iteración infinita y la mejora continua del curso, hasta que el usuario decida finalizar la sesión.`;
 
         // Update UI with Sequential Revelation
         const resultActions = document.querySelector('.result-actions');
