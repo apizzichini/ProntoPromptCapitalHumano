@@ -542,7 +542,7 @@ Al finalizar la Fase 1, presenta obligatoriamente este panel y **DETÉN la gener
 FASE 2: Explosión Modular (Desarrollo)
 - **PROHIBICIÓN TOTAL DE VIÑETAS Y MINIMIZACIÓN DE ENCABEZADOS**: Queda **estrictamente prohibido** el uso de listas, viñetas, guiones o puntos. Asimismo, debes **minimizar el uso de subtítulos y apartados**, priorizando una **prosa de largo aliento** con párrafos extensos, densos y conectados narrativamente como en una obra literaria o tratado técnico. Todo el contenido debe fluir de forma continua hasta alcanzar las 10.000 palabras.
 - **INTRODUCCIÓN OBLIGATORIA**: Cada módulo desarrollado debe comenzar con exactamente **dos párrafos** de introducción técnica (mínimo 50 palabras en total).
-- **DESARROLLO**: Queda PROHIBIDO resumir. Si el texto es breve, inicia una **"Rama de Búsqueda Técnica"** para profundizar en marcos teóricos y casos de estudio.
+- **DESARROLLO**: Queda PROHIBIDO resumir. Si el texto es breve, inicia una **"Rama de Búsqueda Técnica"** para profundizar en marcos teóricos y casos de estudio. **Es OBLIGATORIO incluir citas en formato APA dentro del texto a lo largo de todo el desarrollo.**
 - **RECURSOS VISUALES**: En cada tema desarrollado, aclara explícitamente qué imágenes, gráficos o recursos visuales sugeridos podrían acompañar el contenido para facilitar su comprensión.
 
 ### OBJETIVO ACTUAL (Objective)
@@ -552,7 +552,7 @@ ${objectives.join(' + ')}
 ${steps.join('\n\n')}
 
 ### MANDATOS CRÍTICOS (Execution)
-- **ESTILO DE LIBRO**: Escritura natural, narrativa académica y pedagógica continua. **NO utilizar viñetas ni listas genéricas bajo ninguna circunstancia.**
+- **ESTILO DE LIBRO**: Escritura natural, narrativa académica y pedagógica continua. **NO utilizar viñetas ni listas genéricas bajo ninguna circunstancia.** **Es OBLIGATORIO incluir citas en formato APA a lo largo de todo el texto.**
 - **EXPLOSIÓN DE CONTENIDO**: Meta de **10.000 palabras por tema seleccionado** (usar múltiples entregas si es necesario). Nivel de lenguaje: **Todo Público (No Universitario)**, con una **prosa humana y orgánica**, estilo docente, profesional y orientado a la inserción laboral.
 - **EVALUACIÓN POR NIVEL**: Básico (5 preguntas) | Intermedio (10 preguntas) | Avanzado (10 preguntas). **Obligatorio: Formato Multiple Choice, Single Choice o Verdadero/Falso.** Siempre en formato tabla con justificación pedagógica.
 - **YOUTUBE (Vínculos Perfectos)**: Es OBLIGATORIO incluir vínculos usando: https://www.youtube.com/results?search_query=[TEMA+ESPECIFICO+ESPAÑOL].
