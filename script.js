@@ -54,9 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const thematicAreas = {
         'promocion-humana': ['Desarrollo Personal', 'Habilidades Digitales + IA', 'Nuevos Aprendizajes', 'Habilidades para Emprender'],
-        'primera-infancia': ['Etapas del Desarrollo', 'Cuidados', 'Habilidades Digitales + IA', 'Nuevos Aprendizajes'],
-        'adolescencia-juventud': ['Etapas del Desarrollo', 'Cuidados', 'Habilidades Digitales + IA', 'Nuevos Aprendizajes', 'Habilidades para Emprender'],
-        'adultos-mayores': ['Desarrollo Personal', 'Cuidados', 'Habilidades Digitales + IA', 'Nuevos Aprendizajes', 'Habilidades para Emprender']
+        'primera-infancia': ['Desarrollo Personal', 'Habilidades Digitales + IA', 'Nuevos Aprendizajes', 'Habilidades para Emprender'],
+        'adolescencia-juventud': ['Desarrollo Personal', 'Habilidades Digitales + IA', 'Nuevos Aprendizajes', 'Habilidades para Emprender'],
+        'adultos-mayores': ['Desarrollo Personal', 'Habilidades Digitales + IA', 'Nuevos Aprendizajes', 'Habilidades para Emprender']
     };
 
     const keywordsByArea = {
