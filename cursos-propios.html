@@ -67,8 +67,12 @@
                     <div class="brain-selector-container">
                         <span class="brain-label">Cerebro AI:</span>
                         <div class="brain-options">
+                            <label class="brain-chip" title="Optimizado para GPT EDU">
+                                <input type="radio" name="ai-model" value="gptedu" checked>
+                                <span><i class="fas fa-university"></i> GPT EDU</span>
+                            </label>
                             <label class="brain-chip" title="Optimizado para Gemini">
-                                <input type="radio" name="ai-model" value="gemini" checked>
+                                <input type="radio" name="ai-model" value="gemini">
                                 <span><i class="fas fa-stars"></i> Gemini</span>
                             </label>
                             <label class="brain-chip" title="Optimizado para ChatGPT">
@@ -78,10 +82,6 @@
                             <label class="brain-chip" title="Optimizado para Perplexity">
                                 <input type="radio" name="ai-model" value="perplexity">
                                 <span><i class="fas fa-search"></i> Perplexity</span>
-                            </label>
-                            <label class="brain-chip" title="Optimizado para GPT EDU">
-                                <input type="radio" name="ai-model" value="gptedu">
-                                <span><i class="fas fa-university"></i> GPT EDU</span>
                             </label>
                         </div>
                     </div>
@@ -217,6 +217,11 @@
                             <button id="add-keyword-btn" class="magic-btn"><i class="fas fa-plus"></i></button>
                         </div>
                     </div>
+                    
+                    <div class="input-group full-width" style="margin-top: 1.5rem;">
+                        <label for="course-references">Referencias, Ideas y Ejemplos Específicos</label>
+                        <textarea id="course-references" rows="4" placeholder="Escribe aquí referencias, ideas específicas o ejemplos para reforzar el curso..." style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(15, 23, 42, 0.6); color: #f8fafc; font-family: inherit; resize: vertical;"></textarea>
+                    </div>
                 </div>
             </div>
 
@@ -228,25 +233,17 @@
                     <div class="input-group full-width">
                         <label>Selecciona las Etapas a Desarrollar (Puedes elegir varias)</label>
                         <div id="botonera-dinamica" class="botonera-grid">
-                            <div class="botonera-option active" data-value="presentacion" title="Paso 1">
-                                <i class="fas fa-clipboard-check"></i>
-                                <span>Presentación / Guía SD</span>
-                            </div>
-                            <div class="botonera-option" data-value="bloque-1" title="Paso 2">
-                                <i class="fas fa-edit"></i>
-                                <span>Bloque I: Desarrollar Módulo</span>
-                            </div>
-                            <div class="botonera-option" data-value="bloque-2" title="Paso 3">
-                                <i class="fas fa-play-circle"></i>
-                                <span>Diseñar Bloque II</span>
-                            </div>
-                            <div class="botonera-option" data-value="evaluacion" title="Paso 4">
-                                <i class="fas fa-check-double"></i>
-                                <span>Generar Evaluación</span>
-                            </div>
-                            <div class="botonera-option" data-value="estructura-completa" title="Completo">
+                            <div class="botonera-option active" data-value="estructura-completa" title="Completo">
                                 <i class="fas fa-rocket"></i>
-                                <span>Secuencia Completa</span>
+                                <span>SECUENCIA DIDACTICA COMPLETA</span>
+                            </div>
+                            <div class="botonera-option" data-value="recursos-audiovisuales" title="Audiovisuales">
+                                <i class="fas fa-video"></i>
+                                <span>RECURSOS AUDIOVISUALES</span>
+                            </div>
+                            <div class="botonera-option" data-value="recursos-graficos" title="Gráficos">
+                                <i class="fas fa-image"></i>
+                                <span>RECURSOS GRAFICOS</span>
                             </div>
                         </div>
                     </div>
