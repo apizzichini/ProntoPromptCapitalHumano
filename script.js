@@ -554,7 +554,7 @@ Al finalizar la Fase 1, presenta obligatoriamente este panel y **DETÉN la gener
 
 FASE 2: Explosión Modular (Desarrollo)
 - **PROHIBICIÓN TOTAL DE VIÑETAS Y MINIMIZACIÓN DE ENCABEZADOS**: Queda **estrictamente prohibido** el uso de listas, viñetas, guiones o puntos. Asimismo, debes **minimizar el uso de subtítulos y apartados**, priorizando una **prosa de largo aliento** con párrafos extensos, densos y conectados narrativamente como en una obra literaria o tratado técnico. Todo el contenido debe fluir de forma continua hasta alcanzar las 10.000 palabras.
-- **INTRODUCCIÓN OBLIGATORIA**: Cada módulo desarrollado debe comenzar con exactamente **dos párrafos** de introducción técnica (mínimo 50 palabras en total).
+- **ESTRUCTURA DEL MÓDULO PRINCIPAL**: La introducción del módulo (máximo 50 palabras) debe estar precedida explícitamente por la palabra "Introducción" y debe ir antes del desarrollo de los títulos y niveles del curso. Los temas, subtemas o niveles de los títulos NO llevan introducción ni conclusión. Al final de todo el contenido iterativo del módulo, debe integrarse la conclusión, precedida explícitamente por la palabra "Conclusión".
 - **DESARROLLO**: Queda PROHIBIDO resumir. Si el texto es breve, inicia una **"Rama de Búsqueda Técnica"** para profundizar en marcos teóricos y casos de estudio. **Es OBLIGATORIO incluir citas en formato APA dentro del texto a lo largo de todo el desarrollo.**
 - **RECURSOS VISUALES**: En cada tema desarrollado, aclara explícitamente qué imágenes, gráficos o recursos visuales sugeridos podrían acompañar el contenido para facilitar su comprensión.
 
