@@ -534,9 +534,9 @@ Párrafo 2 (Introducción al curso): Un párrafo de entre 2 y 4 renglones que pr
 - **NIVEL**: Mantener los niveles ya programados (Básico, intermedio y avanzado).
 
 ESTRUCTURA DE OBJETIVOS DE APRENDIZAJE OBLIGATORIA:
-El prompt debe arrojar obligatoriamente entre dos (2) o cuatro (4) objetivos generales, reforzados con la siguiente estructura de objetivos específicos por unidad:
+El prompt debe arrojar obligatoriamente entre dos (2) y cuatro (4) objetivos generales que abarquen todas las unidades del curso. No se deben separar por unidad.
 "I. OBJETIVOS DE APRENDIZAJE
-Son los objetivos específicos de aprendizaje del curso. Agrupados por unidad temática (se sugieren entre 2 y 5 objetivos) deben estar comprendidos todas las unidades temáticas tratadas en el curso. 
+Son los objetivos generales de aprendizaje del curso. Deben comprender todas las unidades temáticas tratadas en el curso sin separarlos por unidad.
 Al finalizar este curso, serás capaz de:
 - [Cada objetivo debe iniciar obligatoriamente con un verbo en infinitivo]"
 
