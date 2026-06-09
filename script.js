@@ -553,9 +553,9 @@ Al finalizar la Fase 1, presenta obligatoriamente este panel y **DETÉN la gener
 **[D] INTEGRAR RECURSO PROPIO**: Pregunta al usuario si desea proporcionar el contenido de un PDF, texto o recurso multimedia específico para que sea el eje central del desarrollo y evitar alucinaciones de la IA.
 
 FASE 2: Explosión Modular (Desarrollo)
-- **PROHIBICIÓN TOTAL DE VIÑETAS Y MINIMIZACIÓN DE ENCABEZADOS**: Queda **estrictamente prohibido** el uso de listas, viñetas, guiones o puntos. Asimismo, debes **minimizar el uso de subtítulos y apartados**, priorizando una **prosa de largo aliento** con párrafos extensos, densos y conectados narrativamente como en una obra literaria o tratado técnico. Todo el contenido debe fluir de forma continua hasta alcanzar las 10.000 palabras.
+- **FORMATO DE TEXTO CONTINUO Y MINIMIZACIÓN DE ENCABEZADOS**: Se debe evitar estrictamente el uso de listas, viñetas, guiones o puntos. Asimismo, debes **minimizar el uso de subtítulos y apartados**, priorizando una **prosa de largo aliento** con párrafos extensos, densos y conectados narrativamente como en una obra literaria o tratado técnico. Todo el contenido debe fluir de forma continua hasta alcanzar las 10.000 palabras.
 - **ESTRUCTURA DEL MÓDULO PRINCIPAL**: La introducción del módulo (máximo 50 palabras) debe estar precedida explícitamente por la palabra "Introducción" y debe ir antes del desarrollo de los títulos y niveles del curso. Los temas, subtemas o niveles de los títulos NO llevan introducción ni conclusión. Al final de todo el contenido iterativo del módulo, debe integrarse la conclusión, precedida explícitamente por la palabra "Conclusión".
-- **DESARROLLO**: Queda PROHIBIDO resumir. Si el texto es breve, inicia una **"Rama de Búsqueda Técnica"** para profundizar en marcos teóricos y casos de estudio. **Es OBLIGATORIO incluir siempre citas en formato APA en los párrafos donde corresponda a lo largo de todo el desarrollo de los módulos.**
+- **DESARROLLO EXHAUSTIVO**: No se debe resumir en ningún caso. Si el texto es breve, inicia una **"Rama de Búsqueda Técnica"** para profundizar en marcos teóricos y casos de estudio. **Es OBLIGATORIO incluir siempre citas en formato APA en los párrafos donde corresponda a lo largo de todo el desarrollo de los módulos.**
 - **RECURSOS VISUALES**: En cada tema desarrollado, aclara explícitamente qué imágenes, gráficos o recursos visuales sugeridos podrían acompañar el contenido para facilitar su comprensión.
 
 ### OBJETIVO ACTUAL (Objective)
@@ -564,16 +564,16 @@ ${objectives.join(' + ')}
 ### INSTRUCCIONES ESPECÍFICAS (Steps)
 ${steps.join('\n\n')}
 
-### MANDATOS CRÍTICOS (Execution)
+### INDICACIONES DE EJECUCIÓN (Execution)
 - **VOLUMEN MASIVO Y RIGOR ACADÉMICO**:
   - EXPANSIÓN MÁXIMA: Fuerza la estructura de los módulos para que sean lo más extensos posible, buscando superar las 10,000 palabras o alcanzar hasta 150,000 tokens de salida por generación de contenido (usar múltiples entregas si es necesario).
   - CITAS Y BIBLIOGRAFÍA: Cada módulo generado debe incluir obligatoriamente citas en formato APA dentro del texto y, al finalizar el desarrollo, una sección completa de BIBLIOGRAFÍA bajo el mismo estándar.
   - RECOMENDACIÓN DE IMÁGENES: Fuerza a que las propuestas de imágenes o recursos visuales incluyan directamente las imágenes renderizadas (si el modelo lo soporta) o, en su defecto, vínculos/prompts directos listos para usar en los modelos de generación de imágenes correspondientes.
 - **ESTILO DE REDACCIÓN HUMANA Y ACADÉMICA**:
-  - REDACCIÓN HUMANA Y ACADÉMICA: Queda prohibido el uso de viñetas (bullet points) para desarrollar conceptos. La escritura debe ser en prosa fluida, redactada exclusivamente en primera persona del plural ("Nosotros") o de forma impersonal ("Se determina"). Cada módulo debe cerrarse con citas y bibliografía en estricto formato APA.
+  - REDACCIÓN HUMANA Y ACADÉMICA: Evitar el uso de viñetas (bullet points) para desarrollar conceptos. La escritura debe ser en prosa fluida, redactada exclusivamente en primera persona del plural ("Nosotros") o de forma impersonal ("Se determina"). Cada módulo debe cerrarse con citas y bibliografía en estricto formato APA.
 - **EVALUACIÓN POR NIVEL**: Básico (5 preguntas) | Intermedio (10 preguntas) | Avanzado (10 preguntas). **Obligatorio: Formato Multiple Choice, Single Choice o Verdadero/Falso.** Siempre en formato tabla con justificación pedagógica.
 - **YOUTUBE (Vínculos Perfectos)**: Es OBLIGATORIO incluir vínculos usando: https://www.youtube.com/results?search_query=[TEMA+ESPECIFICO+ESPAÑOL].
-- **RESTRICCIONES**: Prohibido el uso de lenguaje inclusivo, temas de justicia social, educación popular o militancia. Tono soberano y académico tradicional.
+- **ENFOQUE INSTITUCIONAL**: Mantener un tono estrictamente académico, formal y objetivo. Utilizar un lenguaje estándar e institucional, priorizando la neutralidad técnica y evitando sesgos políticos o enfoques no convencionales.
 ${activeKeywords.length > 0 ? '- **REFUERZOS TÉCNICOS (Rama de Búsqueda)**: Integra conceptos de: ' + activeKeywords.join(', ') + '.' : ''}
 ${document.getElementById('course-references')?.value.trim() ? '- **REFERENCIAS, IDEAS Y EJEMPLOS DEL CONTENIDISTA**: ' + document.getElementById('course-references').value.trim() : ''}
 
